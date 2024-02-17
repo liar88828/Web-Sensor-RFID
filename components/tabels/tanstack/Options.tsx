@@ -1,7 +1,9 @@
+'use client'
 import {Column, Table} from "@tanstack/react-table";
 import React, {HTMLProps} from "react";
-import {ISensor} from "@/interface/type";
-import {downloadToExcel} from "@/utils/excel";
+import Link from "next/link";
+import {IPages} from "@/interface/type";
+import {Icon} from "@iconify/react/dist/iconify.js";
 
 export function Filter({
                          column,
@@ -100,7 +102,7 @@ export function DebouncedInput({
   )
 }
 
-interface IOptionTable <T>{
+interface IOptionTable<T> {
   table: Table<T>;
   rerender: React.DispatchWithoutAction;
   rowSelection: {};
@@ -229,28 +231,43 @@ export function Pagination<T>({table}: { table: Table<T> }) {
   );
 }
 
-export function Search<T>({globalFilter, setGlobalFilter, table}: {
+export function Search<T>({globalFilter, setGlobalFilter, table, excel, to}: {
   globalFilter: string,
   setGlobalFilter: React.Dispatch<React.SetStateAction<string>>,
-  table: Table<T>
+  table: Table<T>,
+  excel: (data: T[]) => void,
+  to: IPages
 }) {
-  return <div className={'flex justify-between'}>
-    <div className="space-x-2">
+  return <div className={'flex justify-start sm:items-center flex-col sm:flex-row gap-2'}>
+
+
+    <div className="space-x-2 flex no-wrap">
 
       <input
         value={globalFilter ?? ''}
         onChange={e => setGlobalFilter(String(e.target.value))}
-        className="   input input-primary"
+        className="   input input-primary w-full sm:w-fit "
         placeholder="Search all columns..."
       />
-      <button className={'btn btn-secondary'}
-        // onClick={() => downloadToExcel(table.getRowModel().rows.map(row => row.original))}
-      >Deep Search
+
+
+    </div>
+    <div className="flex gap-2 justify-between ">
+      <button className={'btn btn-accent'}>
+        <Icon icon="material-symbols:search"/>
+
+        <span className="sm:visible hidden">Deep Search</span>
       </button>
+
+      <Link className='btn btn-secondary' href={`/${to}/create`}> Create</Link>
+
+      <button className={'btn btn-primary'}
+              onClick={() => excel(table.getRowModel().rows.map(row => row.original))}>Download
+      </button>
+
+
     </div>
 
-    <button className={'btn btn-primary'}
-            onClick={() => downloadToExcel(table.getRowModel().rows.map(row => row.original))}>Download
-    </button>
+
   </div>
 }

@@ -1,2 +1,2 @@
-export type Method='POST' | 'PUT'
-export  type ISensor = { id?: number, rfid: string, kode: string, status: string, warna: string }
+export type Method = 'POST' | 'PUT'
+export  type IPages = 'anggota' | 'sensor' | 'record'

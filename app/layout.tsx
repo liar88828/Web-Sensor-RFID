@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TRQuery from "@/components/provider/ReactQuery";
 import Navbar from "@/components/Layouts/Navbar ";
+import NextAuthProvider from "@/components/provider/NextAuthProvider";
 
 const inter = Inter( { subsets: [ "latin" ] } );
 
@@ -20,15 +21,17 @@ export default function RootLayout ( {
   return (
     <html lang="en" data-theme='cupcake'>
       <body className={ inter.className }>
+      <NextAuthProvider>
         <TRQuery>
           {/* <div className="bg-red-200 p-2"> */}
 
-            <div className="min-h-screen  bg-red-200 pt-24">
+            <div className="min-h-screen  bg-red-200/40 pt-20">
             <Navbar />
               { children }
             {/* </div> */}
           </div>
         </TRQuery>
+      </NextAuthProvider>
       </body>
     </html>
   );

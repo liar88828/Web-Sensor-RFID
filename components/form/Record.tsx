@@ -1,7 +1,7 @@
 'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
-import {anggotaSchema, IAnggotaCreate, IRecordCreate, recordSchema} from "@/utils/zod/schema";
+import {anggotaSchema, IAnggotaCreate, IRecordCreate, recordSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";

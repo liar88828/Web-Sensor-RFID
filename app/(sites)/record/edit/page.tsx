@@ -1,26 +1,15 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
 import FormRecord from "@/components/form/Record";
+import PagesForm from "@/components/Layouts/PagesForm";
+import {BackLink} from "@/components/link/backLink";
 
-export default function page ()
-{
-
-  // const path = usePathname()
-  // console.log( path )
+export default function page() {
 
   return (
-    <div>
-
-      <div>
-        <div className="max-w-md flex items-center m-3">
-          <Link className='btn btn-primary' href={ '/record' } > Back </Link>
-          <h1 className="text-2xl font-bold"> Create Record </h1>
-        </div>
-      </div>
-
-
-      <FormRecord method='POST' />
-    </div>
+    <PagesForm
+      back={<BackLink href={'record'} title={'Create'}/>}
+      form={<FormRecord method='PUT'/>}
+    />
   )
 }

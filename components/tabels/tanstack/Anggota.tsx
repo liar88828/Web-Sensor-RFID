@@ -10,11 +10,12 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {makeData, newSensor} from "@/utils/faker";
+import {makeData, newAnggota} from "@/utils/faker";
 import {Filter, IndeterminateCheckbox, Pagination, Search} from "@/components/tabels/tanstack/Options";
+
 import Divider from "@/components/elements/Divider";
-import {sensorToExcel} from "@/utils/excel";
-import {ISensor} from "@/utils/validator/zod";
+import {IAnggota} from "@/utils/validator/zod";
+import {anggotaToExcel} from "@/utils/excel";
 
 // export type Person = {
 //   firstName: string
@@ -27,15 +28,15 @@ import {ISensor} from "@/utils/validator/zod";
 // }
 
 
-export function SensorTable() {
-  const [data, setData] = React.useState(() => makeData<ISensor>(newSensor, 100))
+export function AnggotaTable() {
+  const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
   // const [rowSize, setRowSize] = useState(0)
-  const columns = React.useMemo<ColumnDef<ISensor>[]>(
+  const columns = React.useMemo<ColumnDef<IAnggota>[]>(
     () => [
       {
         id: 'select',
@@ -69,8 +70,8 @@ export function SensorTable() {
         footer: props => props.column.id,
       },
       {
-        id: 'rfid',
-        accessorKey: 'rfid',
+        id: 'nama',
+        accessorKey: '',
         header: () => 'RFID',
         // accessorFn: row => row.rfid,
         cell: info => info.getValue(),
@@ -78,8 +79,8 @@ export function SensorTable() {
       },
       {
         // id: 'kode',
-        accessorKey: 'kode',
-        header: () => 'Kode',
+        accessorKey: 'no_hp',
+        header: () => 'No HP',
         // accessorFn: row => row.kode,
         cell: info => info.getValue(),
         footer: props => props.column.id,
@@ -87,8 +88,18 @@ export function SensorTable() {
       },
 
       {
-        accessorKey: 'status',
-        header: () => 'Status',
+        accessorKey: 'email',
+        header: () => 'Email',
+        footer: props => props.column.id,
+      },
+      {
+        accessorKey: 'alamat',
+        header: () => 'Alamat',
+        footer: props => props.column.id,
+      },
+      {
+        accessorKey: 'hewan',
+        header: () => 'Hewan',
         footer: props => props.column.id,
       },
       {
@@ -96,7 +107,11 @@ export function SensorTable() {
         header: () => 'Warna',
         footer: props => props.column.id,
       },
-
+      {
+        accessorKey: 'sensor',
+        header: () => 'Sensor',
+        footer: props => props.column.id,
+      },
     ],
     []
   )
@@ -120,16 +135,17 @@ export function SensorTable() {
   })
 
   return (
-    <div className="p-4   space-y-2 rounded-xl bg-base-100/60">
-      <Search<ISensor>
-        table={table}
+    <div className="p-4 space-y-2 rounded-xl bg-base-100/60">
+      <Search<IAnggota>
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
-        excel={sensorToExcel}
-        to={"sensor"}
+        excel={anggotaToExcel}
+        table={table}
+        to={'anggota'}
       />
-      <div className="      overflow-x-auto  rounded bg-base-100/90">
-        <table className={' static table table-zebra  table-xs    '}>
+
+      <div className="overflow-x-auto rounded bg-base-100/90">
+        <table className={' static table table-zebra table-xs'}>
           <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
@@ -191,7 +207,7 @@ export function SensorTable() {
         {/*Pagination*/}
         {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
-        <Pagination<ISensor> table={table}/>
+        <Pagination<IAnggota> table={table}/>
         {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
       </div>
     </div>

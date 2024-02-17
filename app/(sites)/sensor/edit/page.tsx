@@ -1,7 +1,8 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
 import FormSensor from "@/components/form/Sensor";
+import PagesForm from "@/components/Layouts/PagesForm";
+import {BackLink} from "@/components/link/backLink";
 
 export default function page() {
 
@@ -9,15 +10,9 @@ export default function page() {
   // console.log( path )
 
   return (
-    <div>
-
-      <div>
-        <div className="max-w-md flex items-center m-3">
-          <Link className='btn btn-primary' href={'/sensor'}> Back </Link>
-          <h1 className="text-2xl font-bold"> Edit Sensor </h1>
-        </div>
-      </div>
-      <FormSensor method='PUT'/>
-    </div>
+    <PagesForm
+      back={<BackLink href={'sensor'} title={'Edit'}/>}
+      form={<FormSensor method='PUT'/>}
+    />
   )
 }

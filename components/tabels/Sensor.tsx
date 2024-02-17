@@ -3,16 +3,15 @@ import React from 'react'
 
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
-import {ISensor} from "@/interface/type";
+import {ISensor} from "@/utils/validator/zod";
 
 enableCache('local');
 
 
-
-const exampleDataSensor: Required<ISensor>[] = [
+const exampleDataSensor: ISensor[] = [
 
   {
-    id: 2312312,
+    id: '2312312',
 
     rfid: 'cincin burung',
     kode: "1231231",
@@ -20,7 +19,7 @@ const exampleDataSensor: Required<ISensor>[] = [
     warna: "hijau",
   },
   {
-    id: 231231,
+    id: '231231',
     rfid: 'cincin burung',
     kode: "1231231",
     status: 'Active',
