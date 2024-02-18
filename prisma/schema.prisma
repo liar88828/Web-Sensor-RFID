@@ -57,8 +57,7 @@ model User {
   password      String?
   otp           Int?
   expiresOtp    DateTime?
-  id_anggota    Anggota   @relation(fields: [anggotaId], references: [id])
-  anggotaId     String
+  Anggota       Anggota?
 
   @@map("users")
 }
@@ -74,28 +73,29 @@ model VerificationToken {
 
 model Anggota {
   id        String   @id @default(uuid())
-  hewan     String
-  warna     String
-  User      User[]
+  hewan     String   @db.VarChar(100)
+  warna     String   @db.VarChar(10)
   id_sensor Sensor[]
+  id_user   String   @unique
+  user      User     @relation(fields: [id_user], references: [id])
 }
 
 model Sensor {
-  id        String   @id @default(uuid())
-  rfid      String
-  kode      String
-  status    String
-  warna     String
-  Anggota   Anggota? @relation(fields: [anggotaId], references: [id])
-  anggotaId String?
-  id_record Record[]
+  id         String   @id @default(uuid())
+  rfid       String   @db.VarChar(20)
+  kode       String   @db.VarChar(10)
+  status     String   @default("Invalid") @db.VarChar(10)
+  warna      String   @db.VarChar(10)
+  Anggota    Anggota? @relation(fields: [id_anggota], references: [id])
+  id_anggota String?
+  id_record  Record[]
 }
 
 model Record {
-  id       String   @id @default(uuid())
-  tanggal  DateTime @db.Date
-  jamMasuk DateTime @db.Time()
-  lokasi   String
-  Sensor   Sensor?  @relation(fields: [sensorId], references: [id])
-  sensorId String?
+  id        String   @id @default(uuid())
+  tanggal   DateTime @db.Date
+  jamMasuk  DateTime @db.Time()
+  lokasi    String
+  Sensor    Sensor?  @relation(fields: [id_sensor], references: [id])
+  id_sensor String?
 }

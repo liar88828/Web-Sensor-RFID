@@ -8,8 +8,8 @@ import {useSession} from "next-auth/react";
 
 export default function Navbar() {
   const {data: session} = useSession()
-
   const path = usePathname().split('/',)
+
   // console.log(path)
   return (
     <section className="fixed top-2 left-2 right-2">

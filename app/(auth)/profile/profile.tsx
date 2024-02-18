@@ -1,9 +1,9 @@
 'use client'
 import React from 'react';
-import About from "@/app/(sites)/anggota/detail/About";
-import FriendCard from "@/app/(sites)/anggota/detail/FriendCard";
-import ProfileCard from "@/app/(sites)/anggota/detail/ProfileCard";
-import Experience from "@/app/(sites)/anggota/detail/Experience";
+import About from "@/app/(auth)/profile/About";
+import FriendCard from "@/app/(auth)/profile/FriendCard";
+import ProfileCard from "@/app/(auth)/profile/ProfileCard";
+import Experience from "@/app/(auth)/profile/Experience";
 
 function Profile() {
   return (

@@ -1,20 +1,34 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
-import FormRecord from "@/components/form/Record";
 import FormSensor from "@/components/form/Sensor";
 import PagesForm from "@/components/Layouts/PagesForm";
 import {BackLink} from "@/components/link/backLink";
+import {useCreate} from "@/hook/useFetch";
+import {useRouter} from "next/navigation";
+import {ISensorCreate} from "@/interface/type";
+import {paginationParam} from "@/utils/nextAdd";
 
-export default function page() {
+export default function Page() {
 
-  // const path = usePathname()
-  // console.log( path )
+  const router = useRouter()
+
+  const {mutate} = useCreate("sensor")
+
+  function createSensor(data: ISensorCreate) {
+    console.log(data)
+    mutate(data, {
+      onSuccess: () => {
+        // router.push('/sensor')
+        router.push('/sensor' + paginationParam)
+
+      }
+    })
+  }
 
   return (
     <PagesForm
       back={<BackLink href={'sensor'} title={'Create'}/>}
-      form={<FormSensor method='POST'/>}
+      form={<FormSensor method='POST' fun={createSensor}/>}
     />
     // <div>
     //

@@ -2,24 +2,18 @@ import {useState} from "react";
 // import {useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
 import {useForm} from "react-hook-form";
-import {IRegister, registerSchema} from "@/utils/validator/zod";
+import {registerSchema} from "@/utils/validator/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {nextUrl} from "@/utils/nextAdd";
 import {FormBody, FormLayout} from "@/components/form/FormLayout";
 import {InputForm} from "@/components/elements/Input";
 import Link from "next/link";
+import {IRegister} from "@/interface/type";
 
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
-  //
-  // const [formValues, setFormValues] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  // });
-  //
+
   const [error, setError] = useState("");
-  // const router = useRouter();
 
   const {
     register,

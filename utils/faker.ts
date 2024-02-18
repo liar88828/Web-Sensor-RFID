@@ -18,7 +18,7 @@ export function makeData<T>(Datas: () => T, ...lens: number[]): T[] {
 export const newAnggota = (): IAnggota => {
   return {
     id: faker.number.int({max: 999999}).toString(),
-    nama: faker.animal.bird(),
+    name: faker.animal.bird(),
     no_hp: faker.number.int({max: 1000000}).toString(),
     email: faker.internet.email(),
     alamat: faker.location.city(),
@@ -47,8 +47,8 @@ export const newRecord = (): IRecord => {
   return {
     id: faker.number.int({max: 999999}).toString(),
     tanggal: faker.date.anytime(),
-    jamMasuk: faker.date.anytime(),
-    warna: faker.color.human(),
+    jamMasuk: faker.date.anytime().toString(),
+    // warna: faker.color.human(),
     lokasi: faker.location.city()
   }
 }

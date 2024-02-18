@@ -10,12 +10,14 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {makeData, newAnggota} from "@/utils/faker";
-import {Filter, IndeterminateCheckbox, Pagination, Search} from "@/components/tabels/tanstack/Options";
+import {Filter} from "@/components/tabels/tanstack/Options";
 
 import Divider from "@/components/elements/Divider";
-import {IAnggota} from "@/utils/validator/zod";
 import {anggotaToExcel} from "@/utils/excel";
+import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
+import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
+import {Search} from "@/components/tabels/tanstack/option/Search";
+import {Anggota} from "@/interface/type";
 
 // export type Person = {
 //   firstName: string
@@ -28,15 +30,15 @@ import {anggotaToExcel} from "@/utils/excel";
 // }
 
 
-export function AnggotaTable() {
-  const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
+export function AnggotaTable({data}: { data: Anggota[] }) {
+  // const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
   // const [rowSize, setRowSize] = useState(0)
-  const columns = React.useMemo<ColumnDef<IAnggota>[]>(
+  const columns = React.useMemo<ColumnDef<Anggota>[]>(
     () => [
       {
         id: 'select',
@@ -71,18 +73,18 @@ export function AnggotaTable() {
       },
       {
         id: 'nama',
-        accessorKey: '',
-        header: () => 'RFID',
-        // accessorFn: row => row.rfid,
-        cell: info => info.getValue(),
+        // accessorKey: 'name',
+        header: () => 'Nama',
+        accessorFn: row => row.user.name,
+        // cell: info => info.getValue(),
         footer: props => props.column.id,
       },
       {
         // id: 'kode',
         accessorKey: 'no_hp',
         header: () => 'No HP',
-        // accessorFn: row => row.kode,
-        cell: info => info.getValue(),
+        accessorFn: row => row.user.no_hp,
+        // cell: info => info.getValue(),
         footer: props => props.column.id,
         // header: () => <span>Last Name</span>,
       },
@@ -90,26 +92,32 @@ export function AnggotaTable() {
       {
         accessorKey: 'email',
         header: () => 'Email',
+        accessorFn: row => row.user.email,
         footer: props => props.column.id,
       },
       {
         accessorKey: 'alamat',
         header: () => 'Alamat',
+        accessorFn: row => row.user.alamat,
+
         footer: props => props.column.id,
       },
       {
         accessorKey: 'hewan',
         header: () => 'Hewan',
+        accessorFn: row => row.hewan,
         footer: props => props.column.id,
       },
       {
         accessorKey: 'warna',
         header: () => 'Warna',
+        accessorFn: row => row.warna,
         footer: props => props.column.id,
       },
       {
         accessorKey: 'sensor',
         header: () => 'Sensor',
+        accessorFn: (row) => row.id_sensor.map(data => data.kode),
         footer: props => props.column.id,
       },
     ],
@@ -135,8 +143,8 @@ export function AnggotaTable() {
   })
 
   return (
-    <div className="p-4 space-y-2 rounded-xl bg-base-100/60">
-      <Search<IAnggota>
+    <div className="p-6 space-y-2 rounded-xl bg-base-100/60">
+      <Search<Anggota>
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
         excel={anggotaToExcel}
@@ -207,7 +215,7 @@ export function AnggotaTable() {
         {/*Pagination*/}
         {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
-        <Pagination<IAnggota> table={table}/>
+        <Pagination<Anggota> table={table}/>
         {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
       </div>
     </div>

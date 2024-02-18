@@ -1,24 +1,32 @@
 import xlsx, {IJsonSheet} from "json-as-xlsx";
-import {IAnggota, IRecord, ISensor} from "@/utils/validator/zod";
 
-export function anggotaToExcel(data: IAnggota[]) {
+import {Anggota, IRecord, ISensor, IUser} from "@/interface/type";
+
+export function anggotaToExcel(data: Anggota[]) {
   // console.log(data)
   const title = 'Anggota'
-
+  console.log(data)
   let column: IJsonSheet[] = [
     {
       sheet: title,
       columns: [
         {label: "ID", value: "id",},
-        {label: "Nama", value: "nama",},
-        {label: "No HP", value: "no_hp",},
-        {label: "Email", value: "email",},
-        {label: "Alamat", value: "alamat",},
+        {label: "Nama", value: "user.name",},
+        {label: "No HP", value: "user.no_hp",},
+        {label: "Email", value: "user.email",},
+        {label: "Alamat", value: "user.alamat",},
         {label: "Hewan", value: "hewan",},
         {label: "Warna", value: "warna",},
-        {label: "Sensor", value: "sensor",},
+        {
+          label: "Sensor", value: row => {
+            // @ts-ignore
+            const data = row.id_sensor.map(d => `${d.kode}`)
+            return data.join(', ')
+          }
+        },
 
       ],
+      // @ts-ignore
       content: data,
     },
   ];
@@ -70,6 +78,32 @@ export function recordToExcel(data: IRecord[]) {
         {label: "Warna", value: "warna",},
 
       ],
+      content: data,
+    },
+  ];
+
+  let settings = {
+    fileName: title + " Data " + new Date().toLocaleDateString('id-ID', {dateStyle: "full"}),
+  };
+
+  xlsx(column, settings);
+}
+
+export function userToExcel(data: IUser[]) {
+  // console.log(data)
+  const title = 'Anggota'
+  console.log(data)
+  let column: IJsonSheet[] = [
+    {
+      sheet: title,
+      columns: [
+        {label: "ID", value: "id",},
+        {label: "Nama", value: "name",},
+        {label: "No HP", value: "no_hp",},
+        {label: "Email", value: "email",},
+        {label: "Alamat", value: "alamat",},
+             ],
+      // @ts-ignore
       content: data,
     },
   ];

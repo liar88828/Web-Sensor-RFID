@@ -10,11 +10,14 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {makeData, newSensor} from "@/utils/faker";
-import {Filter, IndeterminateCheckbox, Pagination, Search} from "@/components/tabels/tanstack/Options";
+
+import {Filter} from "@/components/tabels/tanstack/Options";
 import Divider from "@/components/elements/Divider";
 import {sensorToExcel} from "@/utils/excel";
 import {ISensor} from "@/utils/validator/zod";
+import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
+import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
+import {Search} from "@/components/tabels/tanstack/option/Search";
 
 // export type Person = {
 //   firstName: string
@@ -27,14 +30,12 @@ import {ISensor} from "@/utils/validator/zod";
 // }
 
 
-export function SensorTable() {
-  const [data, setData] = React.useState(() => makeData<ISensor>(newSensor, 100))
-  // const refreshData = () => setData(() => makeData(100))
-  // const rerender = React.useReducer(() => ({}), {})[1]
+export function SensorTable({data}: { data: ISensor[] }) {
+
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
-  // const [rowSize, setRowSize] = useState(0)
+
   const columns = React.useMemo<ColumnDef<ISensor>[]>(
     () => [
       {
@@ -116,11 +117,12 @@ export function SensorTable() {
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
+    // debugTable: true,
   })
 
   return (
-    <div className="p-4   space-y-2 rounded-xl bg-base-100/60">
+    <div className="p-6 space-y-2 rounded-xl bg-base-100/60">
+      {/* ----- Search ----- */}
       <Search<ISensor>
         table={table}
         globalFilter={globalFilter}
@@ -128,8 +130,9 @@ export function SensorTable() {
         excel={sensorToExcel}
         to={"sensor"}
       />
-      <div className="      overflow-x-auto  rounded bg-base-100/90">
-        <table className={' static table table-zebra  table-xs    '}>
+
+      <div className=" overflow-x-auto  rounded bg-base-100/90">
+        <table className={' static table table-zebra  table-xs '}>
           <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
@@ -192,7 +195,10 @@ export function SensorTable() {
         {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
         <Pagination<ISensor> table={table}/>
-        {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
+        {/*<Options<ISensor> table={table} rowSelection={rowSelection}*/}
+        {/*                  // refreshData={refreshData}*/}
+        {/*                  // rerender={rerender}*/}
+        {/*/>*/}
       </div>
     </div>
   )

@@ -11,11 +11,14 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import {makeData, newRecord} from "@/utils/faker";
-import {Filter, IndeterminateCheckbox, Pagination, Search} from "@/components/tabels/tanstack/Options";
+import {Filter} from "@/components/tabels/tanstack/Options";
 
 import Divider from "@/components/elements/Divider";
 import {IRecord} from "@/utils/validator/zod";
 import {recordToExcel} from "@/utils/excel";
+import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
+import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
+import {Search} from "@/components/tabels/tanstack/option/Search";
 
 // export type Person = {
 //   firstName: string
@@ -28,8 +31,8 @@ import {recordToExcel} from "@/utils/excel";
 // }
 
 
-export function RecordTable() {
-  const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
+export function RecordTable({data}: { data: IRecord[] }) {
+  // const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
 
@@ -92,11 +95,11 @@ export function RecordTable() {
         header: () => 'Lokasi',
         footer: props => props.column.id,
       },
-      {
-        accessorKey: 'warna',
-        header: () => 'Warna',
-        footer: props => props.column.id,
-      },
+      // {
+      //   accessorKey: 'warna',
+      //   header: () => 'Warna',
+      //   footer: props => props.column.id,
+      // },
 
     ],
     []
@@ -121,7 +124,7 @@ export function RecordTable() {
   })
 
   return (
-    <div className="p-4  space-y-2 rounded-xl bg-base-100/60">
+    <div className="p-6  space-y-2 rounded-xl bg-base-100/60">
       <Search<IRecord>
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
@@ -130,7 +133,7 @@ export function RecordTable() {
         to={'record'}
       />
 
-      <div className="      overflow-x-auto  rounded bg-base-100/90">
+      <div className=" overflow-x-auto  rounded bg-base-100/90">
         <table className={' static table table-zebra  table-xs    '}>
           <thead>
           {table.getHeaderGroups().map(headerGroup => (

@@ -1,15 +1,21 @@
 'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
-import {anggotaSchema, IAnggotaCreate, IRecordCreate, recordSchema} from "@/utils/validator/zod";
+import { recordSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {Method} from '@/interface/type'
+import {IRecord, IRecordCreate, Method} from '@/interface/type'
 
 export default function FormRecord(
-  {method}: {
+  {
+    method,
+    defaultData,
+    fun,
+  }: {
     method: Method
+    defaultData?: IRecord
+    fun: (data: IRecordCreate) => any
   }) {
   const {
     register,
@@ -17,8 +23,9 @@ export default function FormRecord(
     formState: {errors},
   } = useForm<IRecordCreate>({
     resolver: zodResolver(recordSchema),
+    defaultValues: method === 'PUT' ? defaultData : {}
   })
-  const onSubmit = (data: IRecordCreate) => console.log(data)
+  const onSubmit = (data: IRecordCreate) => fun(data)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -28,13 +35,13 @@ export default function FormRecord(
             errors={errors}
             title={'Tanggal'}
             type="date"
-            reg={register("tanggal")}/>
+            reg={register("tanggal", {valueAsDate: true})}/>
 
 
           <InputForm
             errors={errors}
             title={'Jam Masuk'}
-            type="date"
+            type="time"
             reg={register("jamMasuk")}/>
 
 
@@ -49,11 +56,11 @@ export default function FormRecord(
             reg={register("lokasi")}/>
 
 
-          <InputForm
-            errors={errors}
-            title={'Warna'}
-            type="text"
-            reg={register("warna")}/>
+          {/*<InputForm*/}
+          {/*  errors={errors}*/}
+          {/*  title={'Warna'}*/}
+          {/*  type="text"*/}
+          {/*  reg={register("warna")}/>*/}
 
 
           <FormButton>

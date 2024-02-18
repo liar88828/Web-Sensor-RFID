@@ -6,9 +6,6 @@
   <component name="CompilerWorkspaceConfiguration">
     <option name="PARALLEL_COMPILATION" value="true" />
   </component>
-  <component name="ComposerSettings">
-    <execution />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -19,7 +16,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
   <component name="RenderSettings">
     <option name="quality" value="0.0" />
   </component>

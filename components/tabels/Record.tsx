@@ -75,9 +75,9 @@ export default function RecordTabel ()
             {/* <td>{ data.sensor }</td> */ }
                 <th>
                   <div className={'flex gap-1'}>
-                    {/*<Link href={`/record/detail?id=${data.id}`}*/}
+                    {/*<Link href={`/record/profile?id=${data.id}`}*/}
                     {/*      className="btn btn-primary btn-xs">*/}
-                    {/*  <Icon icon="fluent:apps-list-detail-24-filled"/>*/}
+                    {/*  <Icon icon="fluent:apps-list-profile-24-filled"/>*/}
                     {/*</Link>*/}
 
                     <button

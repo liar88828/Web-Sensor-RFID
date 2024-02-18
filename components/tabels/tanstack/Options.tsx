@@ -1,9 +1,6 @@
 'use client'
 import {Column, Table} from "@tanstack/react-table";
-import React, {HTMLProps} from "react";
-import Link from "next/link";
-import {IPages} from "@/interface/type";
-import {Icon} from "@iconify/react/dist/iconify.js";
+import React from "react";
 
 export function Filter({
                          column,
@@ -48,29 +45,6 @@ export function Filter({
   )
 }
 
-export function IndeterminateCheckbox({
-                                        indeterminate,
-                                        className = '',
-                                        ...rest
-                                      }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!)
-
-  React.useEffect(() => {
-    if (typeof indeterminate === 'boolean') {
-      ref.current.indeterminate = !rest.checked && indeterminate
-    }
-  }, [ref, indeterminate])
-
-  return (
-    <input
-      type="checkbox"
-      ref={ref}
-      className={className + ' cursor-pointer'}
-      {...rest}
-    />
-  )
-}
-
 
 // A debounced input react component
 export function DebouncedInput({
@@ -104,12 +78,16 @@ export function DebouncedInput({
 
 interface IOptionTable<T> {
   table: Table<T>;
-  rerender: React.DispatchWithoutAction;
   rowSelection: {};
-  refreshData: () => void;
+  // rerender: React.DispatchWithoutAction;
+  // refreshData: () => void;
 }
 
-export function Options<T>({rowSelection, table, refreshData, rerender}: IOptionTable<T>) {
+export function Options<T>({
+                             rowSelection, table,
+                             // refreshData,
+                             // rerender
+                           }: IOptionTable<T>) {
 
   return (
     < >
@@ -119,20 +97,22 @@ export function Options<T>({rowSelection, table, refreshData, rerender}: IOption
         {table.getPreFilteredRowModel().rows.length} Total Rows Selected
       </div>
       <hr/>
-      <br/>
-      <div>
-        <button className="border rounded p-2 mb-2" onClick={() => rerender()}>
-          Force Rerender
-        </button>
-      </div>
-      <div>
-        <button
-          className="border rounded p-2 mb-2"
-          onClick={() => refreshData()}
-        >
-          Refresh Data
-        </button>
-      </div>
+      {/*<br/>*/}
+      {/*<div>*/}
+      {/*  <button className="border rounded p-2 mb-2"*/}
+      {/*    // onClick={() => rerender()}*/}
+      {/*  >*/}
+      {/*    Force Rerender*/}
+      {/*  </button>*/}
+      {/*</div>*/}
+      {/*<div>*/}
+      {/*  <button*/}
+      {/*    className="border rounded p-2 mb-2"*/}
+      {/*    // onClick={() => refreshData()}*/}
+      {/*  >*/}
+      {/*    Refresh Data*/}
+      {/*  </button>*/}
+      {/*</div>*/}
       <div>
         <button
           className="border rounded p-2 mb-2"
@@ -156,118 +136,3 @@ export function Options<T>({rowSelection, table, refreshData, rerender}: IOption
 
 
 export default Options;
-
-
-export function Pagination<T>({table}: { table: Table<T> }) {
-  return (
-    <div className="flex items-center gap-2 pb-5">
-      <button
-        className="border rounded p-1"
-        onClick={() => table.setPageIndex(0)}
-        disabled={!table.getCanPreviousPage()}
-      >
-        {'<<'}
-      </button>
-      <button
-        className="border rounded p-1"
-        onClick={() => table.previousPage()}
-        disabled={!table.getCanPreviousPage()}
-      >
-        {'<'}
-      </button>
-      <button
-        className="border rounded p-1"
-        onClick={() => table.nextPage()}
-        disabled={!table.getCanNextPage()}
-      >
-        {'>'}
-      </button>
-      <button
-        className="border rounded p-1"
-        onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-        disabled={!table.getCanNextPage()}
-      >
-        {'>>'}
-      </button>
-      <span className="flex items-center gap-1">
-          <div>Page</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
-            {table.getPageCount()}
-          </strong>
-        </span>
-      <span className="flex items-center gap-1">
-          | Go to page:
-          <input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              table.setPageIndex(page)
-            }}
-            className="border p-1 rounded w-16"
-          />
-        </span>
-
-      {/*<input type="number"*/}
-      {/*       className={'input input-primary'}*/}
-      {/*       placeholder={`Total Row is ${table.getPreFilteredRowModel().rows.length}`}*/}
-      {/*       onChange={e => setRowSize(Number(e.target.value))}/>*/}
-
-      <select
-        value={table.getState().pagination.pageSize}
-        onChange={e => {
-          table.setPageSize(Number(e.target.value))
-        }}
-      >
-
-        {[10, 20, 30, 40, 50, table.getPreFilteredRowModel().rows.length].map(pageSize => (
-          <option key={pageSize} value={pageSize}>
-            Show {pageSize}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
-export function Search<T>({globalFilter, setGlobalFilter, table, excel, to}: {
-  globalFilter: string,
-  setGlobalFilter: React.Dispatch<React.SetStateAction<string>>,
-  table: Table<T>,
-  excel: (data: T[]) => void,
-  to: IPages
-}) {
-  return <div className={'flex justify-start sm:items-center flex-col sm:flex-row gap-2'}>
-
-
-    <div className="space-x-2 flex no-wrap">
-
-      <input
-        value={globalFilter ?? ''}
-        onChange={e => setGlobalFilter(String(e.target.value))}
-        className="   input input-primary w-full sm:w-fit "
-        placeholder="Search all columns..."
-      />
-
-
-    </div>
-    <div className="flex gap-2 justify-between ">
-      <button className={'btn btn-accent'}>
-        <Icon icon="material-symbols:search"/>
-
-        <span className="sm:visible hidden">Deep Search</span>
-      </button>
-
-      <Link className='btn btn-secondary' href={`/${to}/create`}> Create</Link>
-
-      <button className={'btn btn-primary'}
-              onClick={() => excel(table.getRowModel().rows.map(row => row.original))}>Download
-      </button>
-
-
-    </div>
-
-
-  </div>
-}

@@ -21,39 +21,42 @@ export const loginSchema = z.object({
 
 export const anggotaSchema = z.object({
   id: z.string().optional(),
-  name: z.string(),
-  no_hp: z.string(),
-  email: z.string().email(),
-  alamat: z.string(),
+  // name: z.string(),
+  // no_hp: z.string(),
+  // email: z.string().email(),
+  // alamat: z.string(),
   hewan: z.string(),
   warna: z.string(),
-  sensor: z.string(),
+  // sensor: z.string(),
 });
+
+export const anggotaCreateSchema = z.object({
+  hewan: z.string(),
+  warna: z.string(),
+});
+
 
 export const sensorSchema = z.object({
   id: z.string().optional(),
-  rfid: z.string(),
-  kode: z.string(),
-  status: z.string(),
-  warna: z.string(),
+  rfid: z.string().max(20),
+  kode: z.string().max(10),
+  status: z.string().max(10),
+  warna: z.string().max(10),
 });
 
 export const recordSchema = z.object({
   id: z.string().optional(),
   tanggal: z.date(),
-  jamMasuk: z.date(),
+  jamMasuk: z.string(),
   lokasi: z.string(),
-  warna: z.string(),
+  // warna: z.string(),
 });
 
 
-export type IRegister = z.infer<typeof registerSchema>
-export type ILogin = z.infer<typeof loginSchema>
-export type IAnggotaCreate = z.infer<typeof anggotaSchema>
-export type IAnggota = Required<IAnggotaCreate>
-
-export type ISensorCreate = z.infer<typeof sensorSchema>
-export type ISensor = Required<ISensorCreate>
-
-export type IRecordCreate = z.infer<typeof recordSchema>
-export type IRecord = Required<IRecordCreate>
+export const userSchema = z.object({
+  id: z.string().optional(),
+  name: z.string(),
+  email: z.string().email(),
+  alamat: z.string(),
+  no_hp: z.string(),
+});

@@ -3,10 +3,12 @@ import {PropsWithChildren} from 'react'
 import {QueryClient, QueryClientProvider,} from '@tanstack/react-query'
 
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 100_00,
+      // refetchOnWindowFocus: false,
+      // refetchOnMount: false,
+      // staleTime: 1000 * 10,
     },
   },
 })

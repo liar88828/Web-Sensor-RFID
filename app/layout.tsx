@@ -4,7 +4,8 @@ import "./globals.css";
 import TRQuery from "@/components/provider/ReactQuery";
 import Navbar from "@/components/Layouts/Navbar ";
 import NextAuthProvider from "@/components/provider/NextAuthProvider";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter( { subsets: [ "latin" ] } );
 
 export const metadata: Metadata = {
@@ -29,7 +30,9 @@ export default function RootLayout ( {
             <Navbar />
               { children }
             {/* </div> */}
+
           </div>
+          <ToastContainer />
         </TRQuery>
       </NextAuthProvider>
       </body>
