@@ -5,8 +5,8 @@ import PagesForm from "@/components/Layouts/PagesForm";
 import {BackLink} from "@/components/link/backLink";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
-import {IRecord, IRecordCreate} from "@/utils/validator/zod";
 import Loading from "@/components/elements/Loading";
+import {IRecord, IRecordCreate} from "@/interface/type";
 
 export default function Page() {
   const router = useRouter()

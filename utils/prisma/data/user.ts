@@ -18,9 +18,75 @@ class User {
   }
 
   async findKey(keys: keyof IUser | 'id', value: string) {
-    return prisma.user.findUnique({
-      where: {id: value}
+    return prisma.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({
+        where: {id: value},
+        select: {
+          name: true, no_hp: true, alamat: true, email: true, id: true
+        }
+      })
+      if (!user) {
+        return null
+      }
+      const anggota = await tx.anggota.findUnique({
+        where: {
+          id_user: user.id
+        },
+        include: {
+          id_sensor: {
+            include: {
+              id_record: true
+            }
+          }
+        }
+      })
+
+      if (!anggota) {
+        return {...user}
+      } else {
+        return {...user, anggota}
+      }
+
     })
+    //
+    // .user.findUnique({
+    //  where: {id: value},
+    //  select: {
+    //    name: true,
+    //    no_hp: true,
+    //    alamat: true,
+    //    email: true,
+    // include: {
+    //   Anggota: {
+    //
+    //     include: {
+    //       id_sensor: {
+    //
+    //         include: {
+    //           id_record: true
+    //         }
+    //       },
+    //       user: {
+    //         select: {
+    //           name: true,
+    //           no_hp: true,
+    //           alamat: true,
+    //           email: true,
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // select: {
+    //   name: true,
+    //   no_hp: true,
+    //   alamat: true,
+    //   email: true,
+    // },
+    // })
+    // let {} = response
+
   }
 
   async create(json: IUser) {

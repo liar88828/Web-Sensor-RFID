@@ -19,6 +19,6 @@ export default function Page() {
   if (isLoading) return <Loading/>
 
   if (isError) return <h1>Error</h1>
-  console.log(data)
+  // console.log(data)
   return <AnggotaTable data={data as Anggota[]}/>
 }

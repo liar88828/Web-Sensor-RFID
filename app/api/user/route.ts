@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
   if (id !== null) {
     if (id.length >= 1) {
       const data = await userData.findKey('id', id)
+      console.log(data)
       return NextResponse.json(data, {status: 200})
     }
   }

@@ -4,148 +4,10 @@ import React, {useState} from 'react'
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
 import ReactPaginate from "react-paginate";
-import {IAnggota} from "@/utils/validator/zod";
+import {IAnggota, oldAnggota} from "@/interface/type";
 
 enableCache('local');
 
-const exampleData: IAnggota[] = [
-  {
-
-    id: '1231231',
-    nama: 'febrian',
-    alamat: "semarang",
-    email: 'Mariya@gmail.com',
-    no_hp: "0123121231",
-    // hewan
-    hewan: 'burung hantu',
-    warna: "hijau",
-    //
-    sensor: '1231231'
-  },
-
-  {
-    id: '12312231',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '123121',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '41342342',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '25432',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '5234523',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '234524',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '24523',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '23452',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: '3423',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: 'asdasdasdafasdf',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  }, {
-    id: 'asdasd',
-    nama: 'Alif',
-    alamat: "Ungaran",
-    email: 'Anwar@gmail.com',
-    no_hp: "0123121312",
-    // hewan
-    hewan: 'burung jalak',
-    warna: "merah",
-    //
-    sensor: '1412'
-  },
-]
 
 function AnggotaTabel({datas}: {
   datas:IAnggota[]
@@ -186,10 +48,10 @@ function AnggotaTabel({datas}: {
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold">{data.nama}</div>
+                  {/*<div className="font-bold">{data.nama}</div>*/}
                   {/*<div className="text-sm opacity-50">{data.no_hp}</div>*/}
                   {/*<div className="text-sm opacity-50">{data.email}</div>*/}
-                  <div className="text-sm opacity-50">{data.alamat}</div>
+                  {/*<div className="text-sm opacity-50">{data.alamat}</div>*/}
                 </div>
               </div>
             </td>
@@ -197,7 +59,8 @@ function AnggotaTabel({datas}: {
               {data.hewan}
 
             </td>
-            <td>{data.sensor}
+            <td>
+              {/*{data.sensor}*/}
               <br/>
               <span className="badge badge-primary badge-sm">{data.warna}</span>
             </td>
@@ -248,29 +111,27 @@ function Anggota( ) {
   const [search, setSearch] = useState<string>('')
   // const [data,setData] = useState<IAnggota>(exampleData)
 
-  const filteredData = exampleData.filter((el) => {
-    if (search === '') {
-      return el;
-    } else {
-      return el.nama.toLowerCase().includes(search)
-    }
-  })
-
+  // const filteredData = exampleData.filter((el) => {
+  //   if (search === '') {
+  //     return el;
+  //   } else {
+  //     return el.nama.toLowerCase().includes(search)
+  //   }
+  // })
+  //
 
   const [itemOffset, setItemOffset] = useState(0);
 
   const itemsPerPage: number = 1
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = filteredData.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+  // const currentItems = filteredData.slice(itemOffset, endOffset);
+  // const pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
   const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * itemsPerPage) % filteredData.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+    // const newOffset = (event.selected * itemsPerPage) % filteredData.length;
+    // console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+    // setItemOffset(newOffset);
   };
 
   return (
@@ -292,7 +153,7 @@ function Anggota( ) {
       <div>
         <div className='border'>
           {/* <TabelAnggota /> */}
-          <AnggotaTabel datas={currentItems}/>
+          {/*<AnggotaTabel datas={currentItems}/>*/}
         </div>
       </div>
 
@@ -311,7 +172,10 @@ function Anggota( ) {
           //
           activeClassName={'join-item btn btn-active'}
           pageClassName={'join-item btn  '}
-          pageCount={pageCount}
+          pageCount={
+            // pageCount
+            2
+          }
           //
           previousClassName={'join-item btn'}
           previousLabel="< previous"

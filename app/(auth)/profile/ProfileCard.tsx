@@ -1,45 +1,45 @@
 import React from 'react';
+import {DetailProfile} from "@/interface/type";
+import {cssValid} from "@/utils/nextAdd";
+import Divider from "@/components/elements/Divider";
 
 
-const dataProfile = {
-  name: 'Febrian',
-  jabatan: 'PT. Orangenah',
-  keterangan: "kerjaan ne mong tura turu paling",
-  status: "Active",
-  tahunKerja: new Date().toLocaleDateString('id-ID',{dateStyle:'full'}),
-}
-
-function ProfileCard() {
+function ProfileCard({data}: { data: DetailProfile, }) {
   return (
-    <div className="bg-white p-3 border-t-4 border-green-400">
+    <div className="bg-white p-3 border-t-4 border-green-400 shadow-lg static">
       <div className="image overflow-hidden">
         {/*<div className="avatar">*/}
 
-          <img className="h-auto w-full mx-auto rounded"
-               src="https://picsum.photos/id/4/200/200"
-               alt="asdasda"/>
+        <img className="h-auto w-full mx-auto rounded"
+             src="https://picsum.photos/id/4/200/200"
+             alt="asdasda"/>
 
         {/*</div>*/}
 
       </div>
-      <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{dataProfile.name}</h1>
-      <h3 className="text-gray-600 font-lg text-semibold leading-6">{dataProfile.jabatan}</h3>
-      <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{dataProfile.keterangan}</p>
+      <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Nama {data.name}</h1>
+      <h2 className="text-gray-600 font-lg text-semibold leading-6">Alamat {data.alamat}</h2>
+      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">Email {data.email}</h2>
+      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">No Hp {data.no_hp}</h2>
       <ul
-        className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-        <li className="flex items-center py-3">
-          <span>Status</span>
-          <span className="ml-auto">
-            <span
-              className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-              {dataProfile.status}
+        className="bg-gray-100 pt-2 px-3 mt-3  rounded shadow-lg">
+        Status RFID
+        <Divider/>
+        {data.anggota.id_sensor.map(s =>
+          <li className="flex items-center pb-3"
+              key={s.id}>
+            <span>{s.kode}</span>
+            <span className="ml-2">
+            <span className={`${cssValid(s.status, 'Active')} py-1 px-2 rounded text-white text-sm`}>
+              {s.status}
             </span>
           </span>
-        </li>
-        <li className="flex items-center py-3">
-          <span>Member since</span>
-          <span className="ml-auto">{dataProfile.tahunKerja}</span>
-        </li>
+          </li>
+        )}
+        {/*<li className="flex items-center py-3">*/}
+        {/*  <span>Member since</span>*/}
+        {/*  <span className="ml-auto"></span>*/}
+        {/*</li>*/}
       </ul>
     </div>
   );

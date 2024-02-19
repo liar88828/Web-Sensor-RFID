@@ -1,19 +1,10 @@
 'use client'
 import React from 'react';
 import {Icon} from "@iconify/react/dist/iconify.js";
+import {DetailAnggota, DetailProfile, IAnggota, oldAnggota, UserData} from "@/interface/type";
 
-const data = {
-  firstName: 'Febrian',
-  lastName: "Alif Hermawan",
-  jenisKelamin: "Laki Laki",
-  no_hp: '+62 231231',
-  alamat: 'Semarang',
-  email: 'jane@example.com',
-  lahir: 'Feb 06, 1998'
 
-}
-
-function About() {
+function AboutProfile({data}: { data:  DetailProfile }) {
   return (
     <div className="bg-white p-3 shadow-sm rounded-sm">
       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -29,12 +20,12 @@ function About() {
 
           <div className="grid grid-cols-2">
             <div className=" px-2 py-1 font-semibold">Nama</div>
-            <div className="px-2 py-1 ">{data.firstName}</div>
+            <div className="px-2 py-1 ">{data.name}</div>
           </div>
 
           <div className="grid grid-cols-2">
-            <div className=" px-2 py-1 font-semibold">Jenis</div>
-            <div className="px-2 py-1 ">{data.jenisKelamin}</div>
+            <div className=" px-2 py-1 font-semibold">Alamat</div>
+            <div className="px-2 py-1 ">{data.alamat}</div>
           </div>
 
           <div className="grid grid-cols-2">
@@ -43,20 +34,20 @@ function About() {
           </div>
 
           <div className="grid grid-cols-2">
-            <div className=" px-2 py-1 font-semibold">Alamat</div>
-            <div className="px-2 py-1 ">{data.alamat}</div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 md:grid-cols-3">
             <div className=" px-2 py-1 font-semibold">Email</div>
             <div className="px-2 py-1 ">{data.email}</div>
-
           </div>
 
-          <div className="grid grid-cols-2">
-            <div className=" px-2 py-1 font-semibold">Lahir</div>
-            <div className="px-2 py-1 ">{data.lahir}</div>
-          </div>
+          {/*<div className="grid lg:grid-cols-2 md:grid-cols-3">*/}
+          {/*  <div className=" px-2 py-1 font-semibold"></div>*/}
+          {/*  <div className="px-2 py-1 ">{data.email}</div>*/}
+
+          {/*</div>*/}
+
+          {/*<div className="grid grid-cols-2">*/}
+          {/*  <div className=" px-2 py-1 font-semibold">Lahir</div>*/}
+          {/*  <div className="px-2 py-1 ">{}</div>*/}
+          {/*</div>*/}
           {/*<div className="grid grid-cols-2">*/}
           {/*  <div className=" px-2 py-1 font-semibold">Lahir</div>*/}
           {/*  <divpx-2 py-1  className="">{data.lahir}</div>*/}
@@ -71,4 +62,4 @@ function About() {
   );
 }
 
-export default About;
+export default AboutProfile;
