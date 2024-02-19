@@ -27,7 +27,7 @@ export default function Page() {
     mutate(data, {
       onSuccess: () => {
         // router.push('/sensor')
-        router.push('/user' + paginationParam)
+        router.push('/sensor' + paginationParam)
 
       }
     })

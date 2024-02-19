@@ -3,7 +3,7 @@ import React from 'react'
 
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
-import {ISensor} from "@/utils/validator/zod";
+import {ISensor} from "@/interface/type";
 
 enableCache('local');
 

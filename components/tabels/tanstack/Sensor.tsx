@@ -14,10 +14,10 @@ import {
 import {Filter} from "@/components/tabels/tanstack/Options";
 import Divider from "@/components/elements/Divider";
 import {sensorToExcel} from "@/utils/excel";
-import {ISensor} from "@/utils/validator/zod";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
+import {ISensor} from "@/interface/type";
 
 // export type Person = {
 //   firstName: string

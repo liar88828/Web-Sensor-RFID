@@ -28,6 +28,8 @@ class User {
       if (!user) {
         return null
       }
+
+
       const anggota = await tx.anggota.findUnique({
         where: {
           id_user: user.id
@@ -41,11 +43,25 @@ class User {
         }
       })
 
+
       if (!anggota) {
         return {...user}
-      } else {
+      }
+      const sensor = anggota.id_sensor.map(data => data.id)
+
+      // console.log(sensor)
+
+      const record = await tx.record.findMany({
+        where: {
+          id_sensor: {in: sensor}
+        }
+      })
+
+      if (!record) {
         return {...user, anggota}
       }
+      return {...user, anggota, record}
+
 
     })
     //

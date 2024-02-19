@@ -52,7 +52,8 @@ export type DetailAnggota = IAnggota & {
 }
 
 export type DetailProfile = UserData & {
-  anggota: DetailAnggota
+  anggota: DetailAnggota,
+  record: IRecord[]
 }
 
 
@@ -69,6 +70,10 @@ export type ISensor = Required<ISensorCreate>
 
 export type IRecordCreate = z.infer<typeof recordSchema>
 export type IRecord = Required<IRecordCreate>
+
+export type ISensorGlobal = { value: IRecord[], rfid: string }
+
+
 //
 // export interface Root {
 //   name: string

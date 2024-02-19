@@ -7,6 +7,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
 import {IRecord, IRecordCreate} from "@/interface/type";
+import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page() {
   const router = useRouter()
@@ -25,7 +26,9 @@ export default function Page() {
     mutate(data, {
       onSuccess: () => {
         // router.push('/record')
-        router.back()
+        // router.back()
+        router.push('/record' + paginationParam)
+
       }
     })
   }

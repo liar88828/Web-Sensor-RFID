@@ -1,10 +1,17 @@
 import React from 'react';
 import {DetailProfile} from "@/interface/type";
-import {cssValid} from "@/utils/nextAdd";
 import Divider from "@/components/elements/Divider";
+import {cssValid} from "@/utils/css";
+import {Card} from "@/components/skeleton/Card";
+import {useSearchParams} from "next/navigation";
+import {useQuery} from "@tanstack/react-query";
+import Loading from "@/components/elements/Loading";
+function ProfileCard() {
+  const id = useSearchParams().get('id')
+  const {data,isLoading} = useQuery<DetailProfile>({queryKey: ['user', id]})
 
+  if (!data||isLoading) return <Loading/>
 
-function ProfileCard({data}: { data: DetailProfile, }) {
   return (
     <div className="bg-white p-3 border-t-4 border-green-400 shadow-lg static">
       <div className="image overflow-hidden">
@@ -25,17 +32,20 @@ function ProfileCard({data}: { data: DetailProfile, }) {
         className="bg-gray-100 pt-2 px-3 mt-3  rounded shadow-lg">
         Status RFID
         <Divider/>
-        {data.anggota.id_sensor.map(s =>
-          <li className="flex items-center pb-3"
-              key={s.id}>
-            <span>{s.kode}</span>
-            <span className="ml-2">
+
+        {!data.anggota
+          ? <Card/>
+          : data.anggota.id_sensor.map(s =>
+              <li className="flex items-center pb-3"
+                  key={s.id}>
+                <span>{s.kode}</span>
+                <span className="ml-2">
             <span className={`${cssValid(s.status, 'Active')} py-1 px-2 rounded text-white text-sm`}>
               {s.status}
             </span>
           </span>
-          </li>
-        )}
+              </li>
+          )}
         {/*<li className="flex items-center py-3">*/}
         {/*  <span>Member since</span>*/}
         {/*  <span className="ml-auto"></span>*/}

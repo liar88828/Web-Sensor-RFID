@@ -27,7 +27,9 @@ export default function Page() {
 
   return (
     <PagesForm
-      back={<BackLink href={'sensor'} title={'Create'}/>}
+      back={<></>
+      // <BackLink href={'sensor'} title={'Create'}/>
+    }
       form={<FormSensor method='POST' fun={createSensor}/>}
     />
     // <div>

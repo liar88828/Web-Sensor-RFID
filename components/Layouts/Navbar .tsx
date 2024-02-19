@@ -3,21 +3,28 @@
 import Link from 'next/link';
 // import Link from 'next/link'
 import Slidebar from './Slidebar';
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
+import React from "react";
 
 export default function Navbar() {
   const {data: session} = useSession()
-  const path = usePathname().split('/',)
+  const pathName = usePathname()
+  // const callback = useSearchParams().get('callback')
+  // const callback = useSearchParams().getAll('callback')
+  //
+  const path = pathName.split('/',)
 
-  // console.log(path)
+  const router = useRouter()
+  // console.log(callback)
   return (
     <section className="fixed top-2 left-2 right-2">
 
       <div className="navbar bg-base-100 rounded-lg ">
         <div className="navbar-start">
-          <div className="flex-1">
+          <div className="flex flex-row gap-2">
             <Slidebar/>
+            <button onClick={() => router.back()} className="btn btn-neutral">Back</button>
           </div>
         </div>
 
