@@ -6,7 +6,6 @@ import RecordProfile from "@/app/(auth)/profile/RecordProfile";
 
 
 export default function Profile() {
-
   return (
     <div className=" p-2 sm:flex sm:gap-2">
       <div className="sm:w-fit w-full flex flex-col my-2 ">

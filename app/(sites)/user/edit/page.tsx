@@ -2,7 +2,6 @@
 import {useRouter, useSearchParams} from 'next/navigation'
 import React from 'react'
 import PagesForm from "@/components/Layouts/PagesForm";
-import {BackLink} from "@/components/link/backLink";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
 import FormUser from "@/components/form/User";
@@ -19,7 +18,7 @@ export default function Page() {
     isError,
   } = useGetID<IUser>("user", id)
 
-  const {mutate} = useUpdate("record", id)
+  const {mutate} = useUpdate("user", id)
 
   function updateData(data: IUser) {
     console.log(data)
@@ -37,7 +36,10 @@ export default function Page() {
   if (isError) return <h1>Error</h1>
 
   return (<PagesForm
-      back={<BackLink href={'user'} title={'Edit'}/>}
+      back={
+        <></>
+        // <BackLink href={'user'} title={'Edit'}/>
+      }
       form={<FormUser method='PUT' fun={updateData} defaultData={data}/>}
     />
   )

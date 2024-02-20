@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import Profile from "@/app/(auth)/profile/profile";
 import {DetailProfile} from "@/interface/type";
 import {useGetID} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
 import {useSearchParams} from "next/navigation";
-import Link from "next/link";
+import Profile from "@/app/(auth)/profile/profile";
+import {useQueryClient} from "@tanstack/react-query";
 
 //
 // const exampleData: DetailProfile = {
@@ -38,18 +38,15 @@ import Link from "next/link";
 //   },
 // }
 export default function Page() {
+  const queryClient = useQueryClient()
   const search = useSearchParams()
   const id = search.get('id') as string
-  // const callback = search.get('callback') as string
 
   const {data, isLoading, isError,} = useGetID<DetailProfile>("user", id)
-
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
 
-  return (
-    <div className="container mx-auto ">
-      <Profile/>
-    </div>
-  )
+  queryClient.setQueryData(['SENSOR'], {value: data.record, rfid: "ALL"})
+
+  return (<Profile/>)
 }

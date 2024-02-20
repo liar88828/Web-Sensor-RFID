@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import {ISensorGlobal} from "@/interface/type";
 import Link from "next/link";
@@ -6,8 +7,10 @@ import {useGlobalState} from "@/hook/useGlobalState";
 
 function Record() {
   const id = useSearchParams().get('id') as string
-  const {query} = useGlobalState<ISensorGlobal>('SENSOR')
-  console.log(query)
+  const {query} = useGlobalState<ISensorGlobal>(['SENSOR'])
+
+  // console.log(query)
+  // if (!query) return <Loading/>
   return (
     <table className="table table-zebra static">
       <thead>
@@ -22,7 +25,9 @@ function Record() {
       </thead>
       <tbody>
       {
-        !query.value ?
+        !query?.value
+        || query.value.length === 0
+          ?
 
           <tr className={'skeleton w-16 h-16 rounded-full shrink-0'}>
             <th>Data Kosong</th>
@@ -32,8 +37,8 @@ function Record() {
             <th>Data Kosong</th>
             <th>
               <Link className={'btn btn-accent shadow'}
-                    href={'/sensor/create?callback=/profile' + id}>
-                Buat Sensor
+                    href={'/record/create?callback=/profile' + id}>
+                Buat Record
               </Link>
             </th>
           </tr>

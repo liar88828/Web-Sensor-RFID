@@ -108,7 +108,7 @@ export function UserTable({data}: { data: IUser[] }) {
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
+    // debugTable: true,
   })
 
   return (

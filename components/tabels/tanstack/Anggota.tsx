@@ -139,7 +139,7 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
+    // debugTable: true,
   })
 
   return (

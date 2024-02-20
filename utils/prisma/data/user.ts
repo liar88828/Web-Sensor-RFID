@@ -45,7 +45,7 @@ class User {
 
 
       if (!anggota) {
-        return {...user}
+        return {...user, anggota:null, record:null}
       }
       const sensor = anggota.id_sensor.map(data => data.id)
 
@@ -58,7 +58,7 @@ class User {
       })
 
       if (!record) {
-        return {...user, anggota}
+        return {...user, anggota, record:null}
       }
       return {...user, anggota, record}
 
@@ -112,7 +112,7 @@ class User {
         email: json.email,
         alamat: json.alamat,
         no_hp: json.no_hp,
-        role: 'User'
+        role: 'USER'
       }
     })
   }

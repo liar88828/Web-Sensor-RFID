@@ -53,7 +53,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   //
-  role          String
+  role          String    @default("USER")
   password      String?
   otp           Int?
   expiresOtp    DateTime?

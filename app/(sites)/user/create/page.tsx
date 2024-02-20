@@ -27,7 +27,9 @@ export default function Page() {
 
   return (
     <PagesForm
-      back={<BackLink href={'user'} title={'Create'}/>}
+      back={<></>
+      // <BackLink href={'user'} title={'Create'}/>
+    }
       form={<FormUser method='POST' fun={createData}/>}
     />
     // <div>

@@ -120,7 +120,7 @@ export function RecordTable({data}: { data: IRecord[] }) {
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
+    // debugTable: true,
   })
 
   return (

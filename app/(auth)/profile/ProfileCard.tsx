@@ -1,16 +1,18 @@
+'use client'
 import React from 'react';
-import {DetailProfile} from "@/interface/type";
 import Divider from "@/components/elements/Divider";
 import {cssValid} from "@/utils/css";
 import {Card} from "@/components/skeleton/Card";
 import {useSearchParams} from "next/navigation";
-import {useQuery} from "@tanstack/react-query";
 import Loading from "@/components/elements/Loading";
-function ProfileCard() {
-  const id = useSearchParams().get('id')
-  const {data,isLoading} = useQuery<DetailProfile>({queryKey: ['user', id]})
+import {useGlobalState} from "@/hook/useGlobalState";
+import {DetailProfile, ISensorGlobal} from "@/interface/type";
 
-  if (!data||isLoading) return <Loading/>
+function ProfileCard() {
+  const id = useSearchParams().get('id') as string
+  const {query: data} = useGlobalState<DetailProfile>(['user', id])
+
+  if (!data) return <Loading/>
 
   return (
     <div className="bg-white p-3 border-t-4 border-green-400 shadow-lg static">

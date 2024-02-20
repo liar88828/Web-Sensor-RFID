@@ -7,24 +7,24 @@ import {useGlobalState} from "@/hook/useGlobalState";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
 import Loading from "@/components/elements/Loading";
-import {queryClient} from "@/components/provider/ReactQuery";
 
 export default function SensorProfile() {
-  // console.log(data[0].status)
-  const id = useSearchParams().get('id')
-  const data = queryClient.getQueryData<DetailProfile>(['user', id])
-  const {mutate} = useGlobalState<ISensorGlobal>("SENSOR", {value: data?.record, rfid: 'ALL'})
+  const id = useSearchParams().get('id') as string
+  const {query: data} = useGlobalState<DetailProfile>(['user', id])
+  const {set} = useGlobalState<ISensorGlobal>(["SENSOR"])
+
   if (!data) return <Loading/>
 
-
   const newData: DetailAnggota = data.anggota
+
   return (
-    <div className="bg-white p-3 shadow-lg rounded  ">
+    <div className="bg-white p-3 shadow-lg rounded  sm:w-[70vw]">
 
       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
         <span className="text-green-500"><Icon icon="mdi:paper-outline"/></span>
         <span className="tracking-wide">Sensor</span>
       </div>
+
       <div className="overflow-x-auto bg-base-100 rounded shadow">
         <table className="table table-zebra static">
           {/* head */}
@@ -64,14 +64,14 @@ export default function SensorProfile() {
                   <td>{sensor.kode}</td>
                   <td>
                 <span
-                  className={sensor.status === 'Active' ? ' bg-success ' : ' bg-error ' + ' p-1 rounded text-white text-sm'}>
+                  className={`${sensor.status === 'Active' ? ' bg-success ' : ' bg-error'}  p-1 rounded text-white text-sm`}>
                 {sensor.status}
                 </span>
                   </td>
                   <td>{sensor.warna}</td>
                   <td>
                     <button
-                      onClick={() => mutate({value: sensor.id_record, rfid: sensor.rfid})}
+                      onClick={() => set.mutate({value: sensor.id_record, rfid: sensor.rfid})}
                       className={'btn btn-xs btn-primary'}>Show Record
                     </button>
                   </td>
