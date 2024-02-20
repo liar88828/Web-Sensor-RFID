@@ -14,6 +14,16 @@ class Sensor {
     })
   }
 
+  async findDontHaveSensor(id: string) {
+    return prisma.sensor.findUnique({
+      where: {
+        id: id,
+        id_anggota: null
+      }
+    })
+
+  }
+
   async create(json: ISensorCreate) {
     return prisma.sensor.create({
       data: {

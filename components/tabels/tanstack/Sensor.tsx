@@ -18,6 +18,7 @@ import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {ISensor} from "@/interface/type";
+import {cssValid} from "@/utils/css";
 
 // export type Person = {
 //   firstName: string
@@ -90,6 +91,8 @@ export function SensorTable({data}: { data: ISensor[] }) {
       {
         accessorKey: 'status',
         header: () => 'Status',
+        cell: info => <span className={' text-white  p-1 rounded '+cssValid('ACTIVE', info.getValue() as string)}
+        >{info.getValue() as string}</span>,
         footer: props => props.column.id,
       },
       {

@@ -10,15 +10,14 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {makeData, newRecord} from "@/utils/faker";
 import {Filter} from "@/components/tabels/tanstack/Options";
 
 import Divider from "@/components/elements/Divider";
-import {IRecord} from "@/utils/validator/zod";
 import {recordToExcel} from "@/utils/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
+import {IRecord} from "@/interface/type";
 
 // export type Person = {
 //   firstName: string

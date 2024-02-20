@@ -1,18 +1,17 @@
 'use client'
 import React from 'react';
 import Divider from "@/components/elements/Divider";
-import {cssValid} from "@/utils/css";
 import {Card} from "@/components/skeleton/Card";
 import {useSearchParams} from "next/navigation";
 import Loading from "@/components/elements/Loading";
 import {useGlobalState} from "@/hook/useGlobalState";
-import {DetailProfile, ISensorGlobal} from "@/interface/type";
+import Link from "next/link";
+import {Root} from "@/interface/user";
 
 function ProfileCard() {
   const id = useSearchParams().get('id') as string
-  const {query: data} = useGlobalState<DetailProfile>(['user', id])
-
-  if (!data) return <Loading/>
+  const {query} = useGlobalState<Root>(['user', id])
+  if (!query?.Anggota) return <Loading/>
 
   return (
     <div className="bg-white p-3 border-t-4 border-green-400 shadow-lg static">
@@ -26,28 +25,38 @@ function ProfileCard() {
         {/*</div>*/}
 
       </div>
-      <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Nama {data.name}</h1>
-      <h2 className="text-gray-600 font-lg text-semibold leading-6">Alamat {data.alamat}</h2>
-      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">Email {data.email}</h2>
-      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">No Hp {data.no_hp}</h2>
+      <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Nama {query.name}</h1>
+      <h2 className="text-gray-600 font-lg text-semibold leading-6">Alamat {query.alamat}</h2>
+      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">Email {query.email}</h2>
+      <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">No Hp {query.no_hp}</h2>
       <ul
         className="bg-gray-100 pt-2 px-3 mt-3  rounded shadow-lg">
-        Status RFID
+        Hewan {!query.Anggota || query.Anggota.length === 0 && <Link
+        className={'btn btn-primary'}
+        href={'/anggota/create'}>
+        Create Anggota
+      </Link>}
         <Divider/>
 
-        {!data.anggota
+        {!query.Anggota
           ? <Card/>
-          : data.anggota.id_sensor.map(s =>
-              <li className="flex items-center pb-3"
-                  key={s.id}>
-                <span>{s.kode}</span>
+          : <li className="flex items-center pb-3 gap-2">
+            {query?.Anggota.map(anggota => <>
+                <span>Hewan
+                  <div className="badge badge-primary">{anggota.hewan}</div>
+                </span>
+                <span>Warna
+                  <div className="badge badge-secondary">{anggota.warna}</div>
+                </span>
                 <span className="ml-2">
-            <span className={`${cssValid(s.status, 'Active')} py-1 px-2 rounded text-white text-sm`}>
-              {s.status}
-            </span>
+            {/*<span className={`${cssValid(s.status, 'Active')} py-1 px-2 rounded text-white text-sm`}>*/}
+                  {/*  {s.status}*/}
+                  {/*</span>*/}
           </span>
-              </li>
-          )}
+              </>
+            )}
+          </li>
+        }
         {/*<li className="flex items-center py-3">*/}
         {/*  <span>Member since</span>*/}
         {/*  <span className="ml-auto"></span>*/}

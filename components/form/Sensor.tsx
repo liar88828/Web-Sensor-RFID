@@ -5,7 +5,11 @@ import {sensorSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {ISensor, ISensorCreate, Method} from '@/interface/type'
+import {Anggota, ISensor, ISensorCreate, Method} from '@/interface/type'
+import {SelectNormal} from "@/components/elements/Select";
+import {useGet} from "@/hook/useFetch";
+import {SearchBar,} from "@/components/elements/SearchBar";
+import Loading from "@/components/elements/Loading";
 
 export default function FormSensor(
   {
@@ -26,12 +30,23 @@ export default function FormSensor(
     resolver: zodResolver(sensorSchema),
     defaultValues: method === 'PUT' ? defaultData : {}
   })
-  const onSubmit = (data: ISensorCreate) => fun(data)
-
+  const onSubmit = (data: ISensorCreate) => {
+    console.log(data)
+    fun(data)
+  }
+  const {data, isLoading, isError} = useGet<Anggota[]>('', 'create', 'anggota')
+  if (isLoading) return <Loading/>
+  if (!data || isError) return <Loading/>
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormLayout>
         <FormBody>
+          <SearchBar<Anggota>
+            data={data}
+            value={'hewan'}
+            value2={'warna'} reg={register('id_anggota')}
+            title={'Cari Anggota... '}/>
+
           <InputForm
             errors={errors}
             title={'Rfid'}
@@ -48,14 +63,13 @@ export default function FormSensor(
         </FormBody>
 
         <FormBody>
-          <InputForm
-            errors={errors}
-            title={'Status'}
-            type="text"
-            max={10}
-
-            reg={register("status")}/>
-
+          {/*<InputForm*/}
+          {/*  errors={errors}*/}
+          {/*  title={'Status'}*/}
+          {/*  type="text"*/}
+          {/*  max={10}*/}
+          {/*  reg={register("status")}/>*/}
+          <SelectNormal reg={register('status')} title={'Status'} data={['INVALID', 'ACTIVE']}/>
 
           <InputForm
             errors={errors}

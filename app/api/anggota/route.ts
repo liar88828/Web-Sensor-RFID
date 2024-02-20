@@ -5,6 +5,12 @@ import {anggotaData} from "@/utils/prisma/data/anggota";
 export async function GET(req: NextRequest) {
   const {id, limit, page} = await Inputs(req)
 
+  console.log(page)
+  if (page==='create') {
+    const data = await anggotaData.findDontHaveUser()
+    return NextResponse.json(data, {status: 200})
+  }
+
   if (!id && limit && page) {
     const data = await anggotaData.findAll(Number(limit), Number(page))
     return NextResponse.json(data, {status: 200})
@@ -16,6 +22,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(data, {status: 200})
     }
   }
+
   console.log(id, limit, page)
 
 }

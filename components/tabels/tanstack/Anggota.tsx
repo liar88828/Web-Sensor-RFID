@@ -71,37 +71,37 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
         cell: info => info.getValue(),
         footer: props => props.column.id,
       },
-      {
-        id: 'nama',
-        // accessorKey: 'name',
-        header: () => 'Nama',
-        accessorFn: row => row.user.name,
-        // cell: info => info.getValue(),
-        footer: props => props.column.id,
-      },
-      {
-        // id: 'kode',
-        accessorKey: 'no_hp',
-        header: () => 'No HP',
-        accessorFn: row => row.user.no_hp,
-        // cell: info => info.getValue(),
-        footer: props => props.column.id,
-        // header: () => <span>Last Name</span>,
-      },
+      // {
+      //   id: 'nama',
+      //   // accessorKey: 'name',
+      //   header: () => 'Nama',
+      //   accessorFn: row => row.user.name,
+      //   // cell: info => info.getValue(),
+      //   footer: props => props.column.id,
+      // },
+      // {
+      //   // id: 'kode',
+      //   accessorKey: 'no_hp',
+      //   header: () => 'No HP',
+      //   accessorFn: row => row.user.no_hp,
+      //   // cell: info => info.getValue(),
+      //   footer: props => props.column.id,
+      //   // header: () => <span>Last Name</span>,
+      // },
 
-      {
-        accessorKey: 'email',
-        header: () => 'Email',
-        accessorFn: row => row.user.email,
-        footer: props => props.column.id,
-      },
-      {
-        accessorKey: 'alamat',
-        header: () => 'Alamat',
-        accessorFn: row => row.user.alamat,
-
-        footer: props => props.column.id,
-      },
+      // {
+      //   accessorKey: 'email',
+      //   header: () => 'Email',
+      //   accessorFn: row => row.user.email,
+      //   footer: props => props.column.id,
+      // },
+      // {
+      //   accessorKey: 'alamat',
+      //   header: () => 'Alamat',
+      //   accessorFn: row => row.user.alamat,
+      //
+      //   footer: props => props.column.id,
+      // },
       {
         accessorKey: 'hewan',
         header: () => 'Hewan',
@@ -114,12 +114,12 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
         accessorFn: row => row.warna,
         footer: props => props.column.id,
       },
-      {
-        accessorKey: 'sensor',
-        header: () => 'Sensor',
-        accessorFn: (row) => row.id_sensor.map(data => data.kode),
-        footer: props => props.column.id,
-      },
+      // {
+      //   accessorKey: 'sensor',
+      //   header: () => 'Sensor',
+      //   accessorFn: (row) => row.id_sensor.map(data => data.kode),
+      //   footer: props => props.column.id,
+      // },
     ],
     []
   )

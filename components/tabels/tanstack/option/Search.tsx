@@ -16,6 +16,7 @@ interface SearchTable<T> {
 }
 
 export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, detail = false}: SearchTable<T>) {
+
   const id = table.getSelectedRowModel().rows.map((data: any) => data.original.id)
 
   const {mutate} = useDelete(to)
@@ -25,7 +26,6 @@ export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, deta
       }
     })
   }
-
   return <div className={'flex justify-start sm:items-center flex-col sm:flex-row gap-2'}>
     <div className="space-x-2 flex no-wrap">
 

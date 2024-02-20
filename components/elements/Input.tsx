@@ -18,7 +18,6 @@ interface InputFormProps
   min?: number | string
   max?: number | string
   defaultValue?: string | number,
-
   errors: Partial<FieldErrorsImpl<DeepRequired<any>>> & { root?: Record<string, GlobalError> & GlobalError }
 }
 

@@ -42,7 +42,7 @@ const useCreate = <T>(to: IPages) => {
         toast.success(`${to} Create successfully`);
       },
       onError() {
-        toast.error(`${to} Deleted Fail`);
+        toast.error(`${to} Create Fail`);
       }
     }
   )

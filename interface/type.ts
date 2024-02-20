@@ -18,9 +18,9 @@ export interface Anggota {
   id: string
   hewan: string
   warna: string
-  id_user: string
-  id_sensor: IdSensor[]
-  user: UserData
+  // id_user: string
+  // id_sensor: IdSensor[]
+  // user: UserData
 }
 
 export interface IdSensor {

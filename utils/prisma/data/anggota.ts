@@ -1,5 +1,5 @@
 import prisma from "@/utils/prisma/client";
-import {IAnggota, IAnggotaCreate} from "@/interface/type";
+import {IAnggotaCreate} from "@/interface/type";
 
 class Anggota {
   async findAll(limit: number = 100, page: number = 0) {
@@ -11,7 +11,7 @@ class Anggota {
         id_sensor: {
           select: {kode: true}
         },
-        user: {
+        User: {
           select: {
             alamat: true,
             name: true,
@@ -23,23 +23,38 @@ class Anggota {
     })
   }
 
-  async findKey(keys: keyof IAnggota, value: string) {
+  async findKey(keys: keyof IAnggotaCreate, value: string) {
     return prisma.anggota.findUnique({
       where: {id: value}
     })
   }
 
-  async create(json: IAnggotaCreate) {
-    return prisma.anggota.create({
-      data: {
-        warna: json.warna,
-        hewan: json.hewan,
-        id_user: '1',
+  async findDontHaveUser() {
+    return prisma.anggota.findMany({
+      where: {
+        id_sensor: {
+
+          every: {
+            id_anggota: null
+          }
+        }
       }
     })
   }
 
-  async update(id: string, json: IAnggota) {
+
+  async create(json: IAnggotaCreate) {
+    console.log(json)
+    return prisma.anggota.create({
+      data: {
+        warna: json.warna,
+        hewan: json.hewan,
+        id_user: json.id_user,
+      }
+    })
+  }
+
+  async update(id: string, json: IAnggotaCreate) {
     return prisma.anggota.update({
       where: {
         id
@@ -47,6 +62,7 @@ class Anggota {
       data: {
         warna: json.warna,
         hewan: json.hewan,
+        id_user: json.id_user,
       }
     })
   }

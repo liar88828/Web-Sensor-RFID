@@ -1,11 +1,12 @@
 'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
-import {anggotaSchema, } from "@/utils/validator/zod";
+import {anggotaSchema,} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {IAnggota, IAnggotaCreate, Method} from '@/interface/type'
+import {IAnggota, IAnggotaCreate, IUser, Method} from '@/interface/type'
+import {SelectAsync} from "@/components/elements/Select";
 
 export default function FormAnggota(
   {
@@ -24,12 +25,25 @@ export default function FormAnggota(
   } = useForm<IAnggotaCreate>({
     resolver: zodResolver(anggotaSchema),
   })
-  const onSubmit = (data: IAnggotaCreate) => fun(data)
+  const onSubmit = (data: IAnggotaCreate) => {
+    console.log(data)
+    fun(data)
+  }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormLayout>
         <FormBody>
+
+          <SelectAsync<IUser>
+            to={'user'}
+            keys={'id'}
+            values={'name'}
+            title={'User'}
+            reg={register('id_user')}
+          />
+
           {/*<InputForm*/}
           {/*  errors={errors}*/}
           {/*  title={'Nama'}*/}

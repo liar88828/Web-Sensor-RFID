@@ -5,6 +5,13 @@ import {userData} from "@/utils/prisma/data/user";
 export async function GET(req: NextRequest) {
   const {id, limit, page} = await Inputs(req)
 
+
+  if (page==='create') {
+    const data = await userData.findDontHaveUser()
+    return NextResponse.json(data, {status: 200})
+  }
+
+
   if (!id && limit && page) {
     const data = await userData.findAll(Number(limit), Number(page))
     return NextResponse.json(data, {status: 200})

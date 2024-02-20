@@ -6,6 +6,7 @@ import Loading from "@/components/elements/Loading";
 import {useSearchParams} from "next/navigation";
 import Profile from "@/app/(auth)/profile/profile";
 import {useQueryClient} from "@tanstack/react-query";
+import {Root} from "@/interface/user";
 
 //
 // const exampleData: DetailProfile = {
@@ -42,10 +43,10 @@ export default function Page() {
   const search = useSearchParams()
   const id = search.get('id') as string
 
-  const {data, isLoading, isError,} = useGetID<DetailProfile>("user", id)
+  const {data, isLoading, isError,} = useGetID<Root>("user", id)
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
-
+  console.log(data)
   queryClient.setQueryData(['SENSOR'], {value: data.record, rfid: "ALL"})
 
   return (<Profile/>)

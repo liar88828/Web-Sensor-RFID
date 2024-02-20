@@ -19,6 +19,28 @@ export default function Page() {
   if (isLoading) return <Loading/>
 
   if (isError) return <h1>Error</h1>
-  // console.log(data)
+  console.log(data)
   return <AnggotaTable data={data as Anggota[]}/>
+}
+
+export type Root = Root2[]
+
+export interface Root2 {
+  id: string
+  hewan: string
+  warna: string
+  id_user?: string
+  id_sensor: IdSensor[]
+  User?: User
+}
+
+export interface IdSensor {
+  kode: string
+}
+
+export interface User {
+  alamat: string
+  name: string
+  no_hp: string
+  email: string
 }

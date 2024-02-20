@@ -52,12 +52,12 @@ model User {
   //
   accounts      Account[]
   sessions      Session[]
+  Anggota       Anggota[]
   //
   role          String    @default("USER")
   password      String?
   otp           Int?
   expiresOtp    DateTime?
-  Anggota       Anggota?
 
   @@map("users")
 }
@@ -75,20 +75,20 @@ model Anggota {
   id        String   @id @default(uuid())
   hewan     String   @db.VarChar(100)
   warna     String   @db.VarChar(10)
+  id_user   String?
   id_sensor Sensor[]
-  id_user   String   @unique
-  user      User     @relation(fields: [id_user], references: [id])
+  User      User?    @relation(fields: [id_user], references: [id])
 }
 
 model Sensor {
   id         String   @id @default(uuid())
   rfid       String   @db.VarChar(20)
   kode       String   @db.VarChar(10)
-  status     String   @default("Invalid") @db.VarChar(10)
+  status     String   @default("INVALID") @db.VarChar(10)
   warna      String   @db.VarChar(10)
-  Anggota    Anggota? @relation(fields: [id_anggota], references: [id])
   id_anggota String?
   id_record  Record[]
+  Anggota    Anggota? @relation(fields: [id_anggota], references: [id])
 }
 
 model Record {
@@ -96,6 +96,6 @@ model Record {
   tanggal   DateTime @db.Date
   jamMasuk  DateTime @db.Time()
   lokasi    String
-  Sensor    Sensor?  @relation(fields: [id_sensor], references: [id])
   id_sensor String?
+  Sensor    Sensor?  @relation(fields: [id_sensor], references: [id])
 }

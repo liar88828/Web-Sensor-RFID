@@ -1,21 +1,21 @@
 'use client'
 import React from 'react';
 import {Icon} from "@iconify/react/dist/iconify.js";
-// import {cssValid} from "@/utils/nextAdd";
-import {DetailAnggota, DetailProfile, ISensorGlobal} from "@/interface/type";
+import {ISensorGlobal} from "@/interface/type";
 import {useGlobalState} from "@/hook/useGlobalState";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
 import Loading from "@/components/elements/Loading";
+import {Root} from "@/interface/user";
 
 export default function SensorProfile() {
   const id = useSearchParams().get('id') as string
-  const {query: data} = useGlobalState<DetailProfile>(['user', id])
+  const {query} = useGlobalState<Root>(['user', id])
   const {set} = useGlobalState<ISensorGlobal>(["SENSOR"])
 
-  if (!data) return <Loading/>
+  if (!query) return <Loading/>
 
-  const newData: DetailAnggota = data.anggota
+  const newData: Root['sensor'] = query.sensor
 
   return (
     <div className="bg-white p-3 shadow-lg rounded  sm:w-[70vw]">
@@ -57,7 +57,7 @@ export default function SensorProfile() {
                 </th>
               </tr>
               :
-              newData.id_sensor.map((sensor, i) => <tr key={sensor.id}>
+              newData.map((sensor, i) => <tr key={sensor.id}>
                   <th>{i + 1}</th>
                   <th>{sensor.id}</th>
                   <th>{sensor.rfid}</th>

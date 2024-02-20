@@ -36,7 +36,10 @@ export default function Page() {
   if (isError) return <h1>Error</h1>
 
   return (<PagesForm
-      back={<BackLink href={'anggota'} title={'Edit'}/>}
+      back={
+        <></>
+    // <BackLink href={'anggota'} title={'Edit'}/>
+  }
       form={<FormAnggota method='PUT' fun={updateData} defaultData={data}/>}
     />
   )

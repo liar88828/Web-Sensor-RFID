@@ -2,7 +2,6 @@
 import React from 'react'
 import FormSensor from "@/components/form/Sensor";
 import PagesForm from "@/components/Layouts/PagesForm";
-import {BackLink} from "@/components/link/backLink";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
@@ -38,7 +37,9 @@ export default function Page() {
 
   return (
     <PagesForm
-      back={<BackLink href={'sensor'} title={'Edit'}/>}
+      back={<></>
+        // <BackLink href={'sensor'} title={'Edit'}/>
+      }
       form={<FormSensor method='PUT' fun={updateSensor} defaultData={data}/>}
     />
   )
