@@ -1,5 +1,5 @@
 'use client'
-import {useRouter} from 'next/navigation'
+import {useParams, useRouter} from 'next/navigation'
 import React from 'react'
 import PagesForm from "@/components/Layouts/PagesForm";
 import {useGetID, useUpdate} from "@/hook/useFetch";
@@ -8,8 +8,9 @@ import FormUser from "@/components/form/User";
 import {IUser} from "@/interface/type";
 import {paginationParam} from "@/utils/nextAdd";
 
-export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
+export default function Page() {
   const router = useRouter()
+  const {id} = useParams() as { id: string }
 
   const {
     data,

@@ -3,11 +3,10 @@ import React from 'react';
 import {Icon} from "@iconify/react/dist/iconify.js";
 import {DetailProfile, ISensorGlobal} from "@/interface/type";
 import {useGlobalState} from "@/hook/useGlobalState";
-import {useSearchParams} from "next/navigation";
 import Record from "@/app/(auth)/profile/table/record";
 
-export default function RecordProfile() {
-  const id = useSearchParams().get('id') as string
+export default function RecordProfile({id}: { id: string }) {
+
   const {query: dataProfile} = useGlobalState<DetailProfile>(['user', id])
   const {query, set} = useGlobalState<ISensorGlobal>(["SENSOR"])
 

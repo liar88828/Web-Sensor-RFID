@@ -4,13 +4,11 @@ import React from 'react'
 
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {Filter} from "@/components/tabels/tanstack/Options";
 
 import Divider from "@/components/elements/Divider";
 import {recordToExcel} from "@/utils/excel";
@@ -18,6 +16,9 @@ import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IRecord} from "@/interface/type";
+import {useGet} from "@/hook/useFetch";
+import Loading from "@/components/elements/Loading";
+import Table from "@/components/tabels/tanstack/option/Table";
 
 // export type Person = {
 //   firstName: string
@@ -30,10 +31,12 @@ import {IRecord} from "@/interface/type";
 // }
 
 
-export function RecordTable({data}: { data: IRecord[] }) {
+export function RecordTable({limit, page}: { limit: string, page: string }) {
   // const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
+  const {data, isLoading, isError} = useGet<IRecord[]>(limit, page, "record")
+
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -106,6 +109,7 @@ export function RecordTable({data}: { data: IRecord[] }) {
 
 
   const table = useReactTable({
+    // @ts-ignore
     data,
     columns,
     state: {
@@ -121,7 +125,9 @@ export function RecordTable({data}: { data: IRecord[] }) {
     getPaginationRowModel: getPaginationRowModel(),
     // debugTable: true,
   })
+  if (isLoading) return <Loading/>
 
+  if (isError) return <h1>Error</h1>
   return (
     <div className="p-6  space-y-2 rounded-xl bg-base-100/60">
       <Search<IRecord>
@@ -133,65 +139,67 @@ export function RecordTable({data}: { data: IRecord[] }) {
       />
 
       <div className=" overflow-x-auto  rounded bg-base-100/90">
-        <table className={' static table table-zebra  table-xs    '}>
-          <thead>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {header.column.getCanFilter() ? (
-                          <div>
-                            <Filter column={header.column} table={table}/>
-                          </div>
-                        ) : null}
-                      </>
-                    )}
-                  </th>
-                )
-              })}
-            </tr>
-          ))}
-          </thead>
-          <tbody>
-          {table.getRowModel().rows.map(row => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map(cell => {
-                  return (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-          </tbody>
-          <tfoot>
-          <tr>
-            <td className="p-1">
-              <IndeterminateCheckbox
-                {...{
-                  checked: table.getIsAllPageRowsSelected(),
-                  indeterminate: table.getIsSomePageRowsSelected(),
-                  onChange: table.getToggleAllPageRowsSelectedHandler(),
-                }}
-              />
-            </td>
-            <td colSpan={20}>Page Rows ({table.getRowModel().rows.length})</td>
-          </tr>
-          </tfoot>
-        </table>
+        <Table<IRecord> table={table}/>
+        {/*<table className={' static table table-zebra  table-xs    '}>*/}
+        {/*  <thead>*/}
+        {/*  {table.getHeaderGroups().map(headerGroup => (*/}
+        {/*    <tr key={headerGroup.id}>*/}
+        {/*      {headerGroup.headers.map(header => {*/}
+        {/*        return (*/}
+        {/*          <th key={header.id} colSpan={header.colSpan}>*/}
+        {/*            {header.isPlaceholder ? null : (*/}
+        {/*              <>*/}
+        {/*                {flexRender(*/}
+        {/*                  header.column.columnDef.header,*/}
+        {/*                  header.getContext()*/}
+        {/*                )}*/}
+        {/*                {header.column.getCanFilter() ? (*/}
+        {/*                  <div>*/}
+        {/*                    <Filter column={header.column} table={table}/>*/}
+        {/*                  </div>*/}
+        {/*                ) : null}*/}
+        {/*              </>*/}
+        {/*            )}*/}
+        {/*          </th>*/}
+        {/*        )*/}
+        {/*      })}*/}
+        {/*    </tr>*/}
+        {/*  ))}*/}
+        {/*  </thead>*/}
+        {/*  <tbody>*/}
+        {/*  {table.getRowModel().rows.map(row => {*/}
+        {/*    return (*/}
+        {/*      <tr key={row.id}>*/}
+        {/*        {row.getVisibleCells().map(cell => {*/}
+        {/*          return (*/}
+        {/*            <td key={cell.id}>*/}
+        {/*              {flexRender(*/}
+        {/*                cell.column.columnDef.cell,*/}
+        {/*                cell.getContext()*/}
+        {/*              )}*/}
+        {/*            </td>*/}
+        {/*          )*/}
+        {/*        })}*/}
+        {/*      </tr>*/}
+        {/*    )*/}
+        {/*  })}*/}
+        {/*  </tbody>*/}
+        {/*  <tfoot>*/}
+        {/*  <tr>*/}
+        {/*    <td className="p-1">*/}
+        {/*      <IndeterminateCheckbox*/}
+        {/*        {...{*/}
+        {/*          checked: table.getIsAllPageRowsSelected(),*/}
+        {/*          indeterminate: table.getIsSomePageRowsSelected(),*/}
+        {/*          onChange: table.getToggleAllPageRowsSelectedHandler(),*/}
+        {/*        }}*/}
+        {/*      />*/}
+        {/*    </td>*/}
+        {/*    <td colSpan={20}>Page Rows ({table.getRowModel().rows.length})</td>*/}
+        {/*  </tr>*/}
+        {/*  </tfoot>*/}
+        {/*</table>*/}
+
         {/*Pagination*/}
         {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>

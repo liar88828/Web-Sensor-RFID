@@ -1,15 +1,14 @@
 'use client'
-import {useRouter} from "next/navigation";
-import {useGetID, useUpdate} from "@/hook/useFetch";
+import React from 'react';
+import PagesForm from "@/components/Layouts/PagesForm";
+import FormAnggota from "@/components/form/Anggota";
 import {IAnggota, IAnggotaCreate} from "@/interface/type";
 import {paginationParam} from "@/utils/nextAdd";
 import Loading from "@/components/elements/Loading";
-import PagesForm from "@/components/Layouts/PagesForm";
-import FormAnggota from "@/components/form/Anggota";
-import React from "react";
+import {useGetID, useUpdate} from "@/hook/useFetch";
+import {useRouter} from "next/navigation";
 
-
-export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
+function ClientComponent({id}: { id: string }) {
   const router = useRouter()
 
   const {
@@ -47,3 +46,5 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
 
   );
 }
+
+export default ClientComponent;

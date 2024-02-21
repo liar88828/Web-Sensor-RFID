@@ -12,7 +12,7 @@ export function SelectAsync<T>(
   const {data, isLoading, isError} = useGet<any[]>('_', 'create', to)
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
-  console.log(data)
+  // console.log(data)
   return (
     <div className={"form-control w-full max-w-xs mt-1"}>
       <div className="label">

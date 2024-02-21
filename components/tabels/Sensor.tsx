@@ -3,29 +3,10 @@ import React from 'react'
 
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
-import {ISensor} from "@/interface/type";
+import {exampleDataSensor} from "@/utils/exampleData";
 
 enableCache('local');
 
-
-const exampleDataSensor: ISensor[] = [
-
-  {
-    id: '2312312',
-
-    rfid: 'cincin burung',
-    kode: "1231231",
-    status: 'Active',
-    warna: "hijau",
-  },
-  {
-    id: '231231',
-    rfid: 'cincin burung',
-    kode: "1231231",
-    status: 'Active',
-    warna: "hijau",
-  }
-]
 
 export default function Sensor() {
   return (

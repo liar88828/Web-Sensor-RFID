@@ -20,7 +20,7 @@ export const loginSchema = z.object({
 
 
 export const anggotaSchema = z.object({
-  // id: z.string().optional(),
+  id: z.string().optional(),
   id_user: z.string().optional(),
   // name: z.string(),
   // no_hp: z.string(),

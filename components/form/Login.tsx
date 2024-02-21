@@ -1,19 +1,20 @@
 'use client'
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {signIn} from "next-auth/react";
 import {useForm} from "react-hook-form";
-import {ILogin, loginSchema} from "@/utils/validator/zod";
+import {loginSchema} from "@/utils/validator/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {FormBody, FormLayout} from "@/components/form/FormLayout";
 import {InputForm} from "@/components/elements/Input";
 import Link from "next/link";
+import {ILogin} from "@/interface/type";
 
 export function LoginForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+  // const searchParams = useSearchParams();
+  // const callbackUrl = searchParams.get("callbackUrl") || "/profile";
 
   const {
     register,
@@ -32,14 +33,14 @@ export function LoginForm() {
         redirect: false,
         email: data.email,
         password: data.password,
-        callbackUrl,
+        callbackUrl: '/'
       });
 
       setLoading(false);
 
       console.log(res);
       if (!res?.error) {
-        router.push(callbackUrl);
+        router.push('/');
       } else {
         // setError("invalid email or password");
       }

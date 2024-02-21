@@ -1,9 +1,8 @@
 'use client'
-import React from 'react'
-import {DetailProfile} from "@/interface/type";
+import React, {Suspense} from 'react'
 import {useGetID} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
-import {useSearchParams} from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import Profile from "@/app/(auth)/profile/profile";
 import {useQueryClient} from "@tanstack/react-query";
 import {Root} from "@/interface/user";
@@ -41,7 +40,8 @@ import {Root} from "@/interface/user";
 export default function Page() {
   const queryClient = useQueryClient()
   const search = useSearchParams()
-  const id = search.get('id') as string
+  // const id = search.get('id') as string
+  const {id} = useParams() as { id: string }
 
   const {data, isLoading, isError,} = useGetID<Root>("user", id)
   if (isLoading) return <Loading/>
@@ -49,5 +49,7 @@ export default function Page() {
   console.log(data)
   queryClient.setQueryData(['SENSOR'], {value: data.record, rfid: "ALL"})
 
-  return (<Profile/>)
+  return <Suspense>
+    <Profile id={id}/>
+  </Suspense>
 }

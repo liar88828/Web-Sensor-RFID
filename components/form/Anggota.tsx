@@ -90,16 +90,11 @@ export default function FormAnggota(
           {/*  type="text"*/}
           {/*  reg={register("sensor")}/>*/}
 
-
           <FormButton>
             <SubmitButton method={method}/>
           </FormButton>
         </FormBody>
-
-
       </FormLayout>
     </form>
-
-
   )
 }

@@ -1,5 +1,5 @@
 import {faker} from "@faker-js/faker";
-import {IAnggota, IRecord, ISensor} from "@/utils/validator/zod";
+import {IAnggota, IRecord, ISensor} from "@/interface/type";
 
 export function makeData<T>(Datas: () => T, ...lens: number[]): T[] {
   const makeDataLevel = (depth = 0): T[] => {
@@ -18,21 +18,22 @@ export function makeData<T>(Datas: () => T, ...lens: number[]): T[] {
 export const newAnggota = (): IAnggota => {
   return {
     id: faker.number.int({max: 999999}).toString(),
-    name: faker.animal.bird(),
-    no_hp: faker.number.int({max: 1000000}).toString(),
-    email: faker.internet.email(),
-    alamat: faker.location.city(),
+    // name: faker.animal.bird(),
+    // no_hp: faker.number.int({max: 1000000}).toString(),
+    // email: faker.internet.email(),
+    // alamat: faker.location.city(),
     warna: faker.color.human(),
     hewan: faker.animal.bird(),
-    sensor: faker.number.int({max: 1000000}).toString(),
-
+    // sensor: faker.number.int({max: 1000000}).toString(),
+    id_user: faker.string.uuid(),
   }
 }
 
 
 export const newSensor = (): ISensor => {
   return {
-    id: faker.number.int({max: 999999}).toString(),
+    id_anggota: faker.string.uuid(),
+    id: faker.string.uuid(),
     rfid: faker.animal.bird(),
     kode: faker.number.int({max: 1000000}).toString(),
     warna: faker.color.human(),

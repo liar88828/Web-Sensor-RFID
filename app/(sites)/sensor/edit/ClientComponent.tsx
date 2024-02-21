@@ -1,14 +1,15 @@
 'use client'
-import React from 'react'
+import React from 'react';
+import PagesForm from "@/components/Layouts/PagesForm";
+import FormSensor from "@/components/form/Sensor";
 import {useRouter} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import {ISensor, ISensorCreate} from "@/interface/type";
 import {paginationParam} from "@/utils/nextAdd";
 import Loading from "@/components/elements/Loading";
-import PagesForm from "@/components/Layouts/PagesForm";
-import FormSensor from "@/components/form/Sensor";
 
-export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
+function ClientComponent({id}: { id: string }) {
+
   const router = useRouter()
 
   const {
@@ -43,3 +44,5 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
     />
   );
 }
+
+export default ClientComponent;

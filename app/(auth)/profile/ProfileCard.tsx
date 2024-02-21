@@ -8,8 +8,8 @@ import {useGlobalState} from "@/hook/useGlobalState";
 import Link from "next/link";
 import {Root} from "@/interface/user";
 
-function ProfileCard() {
-  const id = useSearchParams().get('id') as string
+function ProfileCard({id}: { id: string }) {
+
   const {query} = useGlobalState<Root>(['user', id])
   if (!query?.Anggota) return <Loading/>
 

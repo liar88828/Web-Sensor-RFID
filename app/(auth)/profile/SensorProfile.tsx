@@ -8,8 +8,8 @@ import {useSearchParams} from "next/navigation";
 import Loading from "@/components/elements/Loading";
 import {Root} from "@/interface/user";
 
-export default function SensorProfile() {
-  const id = useSearchParams().get('id') as string
+export default function SensorProfile({id}: { id: string }) {
+
   const {query} = useGlobalState<Root>(['user', id])
   const {set} = useGlobalState<ISensorGlobal>(["SENSOR"])
 

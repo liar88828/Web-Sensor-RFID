@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
 import ReactPaginate from "react-paginate";
-import {IAnggota, oldAnggota} from "@/interface/type";
+import {IAnggota} from "@/interface/type";
 
 enableCache('local');
 

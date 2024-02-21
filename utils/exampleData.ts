@@ -1,4 +1,23 @@
-import {oldAnggota} from "@/interface/type";
+import {ISensor} from "@/interface/type";
+
+export const exampleDataSensor: ISensor[] = [
+  {
+    id: '2312312',
+    id_anggota: "asdasda",
+    rfid: 'cincin burung',
+    kode: "1231231",
+    status: 'Active',
+    warna: "hijau",
+  },
+  {
+    id: '231231',
+    id_anggota: "asdasda",
+    rfid: 'cincin burung',
+    kode: "1231231",
+    status: 'Active',
+    warna: "hijau",
+  }
+]
 
 const exampleData = [
   {

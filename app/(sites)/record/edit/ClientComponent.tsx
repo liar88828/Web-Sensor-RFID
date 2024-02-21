@@ -1,32 +1,32 @@
 'use client'
+import React from 'react';
 import {useRouter} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
-import {IAnggota, IAnggotaCreate} from "@/interface/type";
+import {IRecord, IRecordCreate} from "@/interface/type";
 import {paginationParam} from "@/utils/nextAdd";
 import Loading from "@/components/elements/Loading";
 import PagesForm from "@/components/Layouts/PagesForm";
-import FormAnggota from "@/components/form/Anggota";
-import React from "react";
+import FormRecord from "@/components/form/Record";
 
-
-export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
+function ClientComponent({id}: { id: string }) {
   const router = useRouter()
 
   const {
     data,
     isLoading,
     isError,
-  } = useGetID<IAnggota>("anggota", id)
+  } = useGetID<IRecord>("record", id)
 
-  const {mutate} = useUpdate("anggota", id)
+  const {mutate} = useUpdate("record", id)
 
-
-  function updateData(data: IAnggotaCreate) {
+  function updateRecord(data: IRecordCreate) {
     console.log(data)
     mutate(data, {
       onSuccess: () => {
         // router.push('/record')
-        router.push('/anggota' + paginationParam)
+        // router.back()
+        router.push('/record' + paginationParam)
+
       }
     })
   }
@@ -38,12 +38,12 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
 
   return (
     <PagesForm
-      back={
-        <></>
-        // <BackLink href={'anggota'} title={'Edit'}/>
+      back={<></>
+        // <BackLink href={'record'} title={'Create'}/>
       }
-      form={<FormAnggota method='PUT' fun={updateData} defaultData={data}/>}
+      form={<FormRecord method='PUT' fun={updateRecord} defaultData={data}/>}
     />
-
   );
 }
+
+export default ClientComponent;

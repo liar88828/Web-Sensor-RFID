@@ -13,7 +13,6 @@ import {IRegister} from "@/interface/type";
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState("");
 
   const {
     register,
@@ -37,14 +36,14 @@ export function RegisterForm() {
 
       setLoading(false);
       if (!res.ok) {
-        setError((await res.json()).message);
+        // setError((await res.json()).message);
         return;
       }
 
       await signIn(undefined, {callbackUrl: "/"});
     } catch (error: any) {
       setLoading(false);
-      setError(error);
+      // setError(error);
     }
 
   }

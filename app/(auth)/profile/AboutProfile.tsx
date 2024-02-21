@@ -1,10 +1,10 @@
 'use client'
 import React from 'react';
 import {Icon} from "@iconify/react/dist/iconify.js";
-import {DetailAnggota, DetailProfile, IAnggota, oldAnggota, UserData} from "@/interface/type";
+import {DetailProfile} from "@/interface/type";
 
 
-function AboutProfile({data}: { data:  DetailProfile }) {
+function AboutProfile({data}: { data: DetailProfile }) {
   return (
     <div className="bg-white p-3 shadow-sm rounded-sm">
       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
