@@ -35,3 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /.idea/sonarlint/issuestore/a/6/a6d5c9ce9b7ca4949a2916c7ed39bd4c0989c787
+.env
