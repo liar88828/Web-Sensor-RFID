@@ -43,13 +43,24 @@ class Anggota {
   }
 
 
-  async create(json: IAnggotaCreate) {
+  async create(json: IAnggotaCreate,) {
     console.log(json)
     return prisma.anggota.create({
       data: {
         warna: json.warna,
         hewan: json.hewan,
         id_user: json.id_user,
+      }
+    })
+  }
+
+  async createWithUser(id: string, json: IAnggotaCreate,) {
+    console.log(id,json,'create with user')
+    return prisma.anggota.create({
+      data: {
+        warna: json.warna,
+        hewan: json.hewan,
+        id_user: id,
       }
     })
   }

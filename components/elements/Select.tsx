@@ -46,18 +46,33 @@ export function SelectNormal(
 
 
 export function SelectJson<T>(
-  {title, reg, keys, values, data}: {
-    reg: any, title: string, to: IPages, keys: keyof T, values: keyof T, data: any[]
+  {title = '', reg, keys, values, data, showTitle = true, values2, onChange}: {
+    reg?: any,
+    title?: string,
+    keys: keyof T,
+    values: keyof T,
+    data: any[],
+    showTitle: boolean,
+    values2?: keyof T,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }) {
 
+
   return (
-    <div className={"form-control w-full max-w-xs mt-1"}>
-      <div className="label">
-        <span className="label-text">{title}</span>
-      </div>
-      <select className="select select-bordered" {...reg}>
+    <div className={"form-control w-full "}>
+      {showTitle &&
+        <div className="label">
+          <span className="label-text">{title}</span>
+        </div>
+      }
+      <select
+        className="select select-bordered "
+        {...reg}
+        onChange={onChange}>
         <option value={''}>Select....</option>
-        {data.map(d => (<option value={d[keys]} key={d.id}>{d[values]}</option>))}
+        {data.map(d => (<option
+          value={d[keys]}
+          key={d.id}>{d[values]} {values2 ? d[values2] : ''}</option>))}
       </select>
     </div>
   );

@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const {id, limit, page} = await Inputs(req)
 
 
-  if (page==='create') {
+  if (page === 'create') {
     const data = await userData.findDontHaveUser()
     return NextResponse.json(data, {status: 200})
   }
@@ -46,6 +46,8 @@ export async function PUT(req: NextRequest) {
   }
   return NextResponse.json({data: 'Error'}, {status: 404})
 }
+
+
 
 export async function DELETE(req: NextRequest) {
   const {id} = await Inputs(req)

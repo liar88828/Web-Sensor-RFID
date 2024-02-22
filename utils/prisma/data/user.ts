@@ -65,7 +65,14 @@ class User {
       // })
       // console.log(user)
 
+
       if (user.Anggota.length === 0) return {...user, record: null}
+
+      const sensorNull = await tx.sensor.findMany({
+        where: {id_anggota: null}
+      })
+
+      if (!sensorNull) return {...user, sensorNull: null}
 
       const id_anggota = user.Anggota.map(data => data.id)
       // console.log(id_anggota, 'anggota')
@@ -78,15 +85,17 @@ class User {
           id_anggota: {in: id_anggota},
         }
       })
-      if (sensor.length === 0) return {...user, sensor: null}
+      if (sensor.length === 0) return {...user, sensor: null, sensorNull}
       const id_sensor = sensor.map(data => data.id)
 
       // console.log(id_sensor, 'sensor')
       const record = await tx.record.findMany({
         where: {id_sensor: {in: id_sensor}}
       })
-      if (record.length === 0) return {...user, sensor, record: null}
-      return {...user, sensor, record}
+      if (record.length === 0) return {...user, sensor, record: null, sensorNull}
+
+
+      return {...user, sensor, record, sensorNull}
       // console.log(record, 'record')
 
       //
@@ -177,6 +186,7 @@ class User {
       }
     })
   }
+
 
   async deleted(id: string) {
     return prisma.user.delete({where: {id}})

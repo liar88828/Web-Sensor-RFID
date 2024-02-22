@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const {id, limit, page} = await Inputs(req)
 
   console.log(page)
-  if (page==='create') {
+  if (page === 'create') {
     const data = await anggotaData.findDontHaveUser()
     return NextResponse.json(data, {status: 200})
   }
@@ -29,7 +29,13 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   // console.log('test')
+  const {id} = await Inputs(req)
   const json = await req.json()
+  if (id) {
+    const data = await anggotaData.createWithUser(id, json)
+    return NextResponse.json(data, {status: 200})
+
+  }
   const data = await anggotaData.create(json)
   return NextResponse.json(data, {status: 200})
 }

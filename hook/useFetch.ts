@@ -1,44 +1,33 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {IPages} from "@/interface/type";
-import {nextUrl} from "@/utils/nextAdd";
 import {queryClient} from "@/components/provider/ReactQuery";
 import {toast} from "react-toastify";
+import {apiCreate, apiDelete, apiGetAll, apiGetID, apiPatch, apiUpdate} from "@/utils/toApi";
 
 
 const useGet = <T>(limit: string, page: string, to: IPages) => {
   return useQuery<T>({
     queryKey: [to],
-
     queryFn: async () =>
-      fetch(`${nextUrl}/api/${to}?limit=${limit}&page=${page}`, {cache: 'no-store'})
-        .then(data => data.json()),
-    // refetchInterval: 1000 * 20
+      apiGetAll(to, limit, page),
   })
 }
 
+
 const useGetID = <T>(to: IPages, id: string) => {
   return useQuery<T>({
-
       queryKey: [to, id],
-      queryFn: async () =>
-        fetch(nextUrl + '/api/' + to + '?id=' + id, {cache: 'no-store'})
-          .then(data => data.json()),
-      // refetchInterval: 1000 * 20
-
+      queryFn: async () => apiGetID(to, id),
     },
   )
 }
 
 
-const useCreate = <T>(to: IPages) => {
+const useCreate = <T>(to: IPages, id?: string) => {
   return useMutation({
-      mutationFn: (add: T) => fetch(nextUrl + '/api/' + to, {
-        method: "POST", headers: {'Content-type': "application/json"},
-        body: JSON.stringify(add)
-      })
-        .then(data => data.json()),
-      onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: [to]})
+      mutationFn: (add: T) => apiCreate(to, id, add),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({queryKey: [to]})
         toast.success(`${to} Create successfully`);
       },
       onError() {
@@ -48,15 +37,27 @@ const useCreate = <T>(to: IPages) => {
   )
 }
 
+
 const useUpdate = <T>(to: IPages, id: string) => {
   return useMutation({
-      mutationFn: (add: T) => fetch(nextUrl + '/api/' + to + '?id=' + id, {
-        method: "PUT", headers: {'Content-type': "application/json"},
-        body: JSON.stringify(add)
-      })
-        .then(data => data.json()),
-      onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: [to]})
+      mutationFn: (add: T) => apiUpdate(to, id, add),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({queryKey: [to]})
+        toast.success(`${to} Create successfully`);
+      },
+      onError() {
+        toast.error(`${to} Deleted Fail`);
+      }
+    }
+  )
+}
+
+
+const usePatch = <T>(to: IPages, id: string) => {
+  return useMutation({
+      mutationFn: (add: Partial<T>) => apiPatch(to, id, add),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({queryKey: [to, id]})
         toast.success(`${to} Create successfully`);
       },
       onError() {
@@ -69,12 +70,9 @@ const useUpdate = <T>(to: IPages, id: string) => {
 
 const useDelete = (to: IPages) => {
   return useMutation({
-      mutationFn: (id: string) => fetch(nextUrl + '/api/' + to + '?id=' + id, {
-        method: "DELETE"
-      })
-        .then(data => data.json()),
-      onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: [to]})
+      mutationFn: (id: string) => apiDelete(to, id),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({queryKey: [to]})
         toast.success(`${to} Create successfully`);
       },
       onError() {
@@ -85,4 +83,4 @@ const useDelete = (to: IPages) => {
 }
 
 
-export {useGet, useCreate, useUpdate, useDelete, useGetID}
+export {useGet, useCreate, useUpdate, useDelete, useGetID, usePatch}

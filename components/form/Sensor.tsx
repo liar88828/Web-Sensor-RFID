@@ -21,6 +21,7 @@ export default function FormSensor(
     method: Method,
     fun: (data: ISensorCreate) => any
   }) {
+
   const {
     register,
     handleSubmit,
@@ -30,22 +31,21 @@ export default function FormSensor(
     resolver: zodResolver(sensorSchema),
     defaultValues: method === 'PUT' ? defaultData : {}
   })
+
   const onSubmit = (data: ISensorCreate) => {
     console.log(data)
     fun(data)
   }
   const {data, isLoading, isError} = useGet<Anggota[]>('', 'create', 'anggota')
+
   if (isLoading) return <Loading/>
   if (!data || isError) return <Loading/>
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormLayout>
         <FormBody>
-          <SearchBar<Anggota>
-            data={data}
-            value={'hewan'}
-            value2={'warna'} reg={register('id_anggota')}
-            title={'Cari Anggota... '}/>
+
 
           <InputForm
             errors={errors}

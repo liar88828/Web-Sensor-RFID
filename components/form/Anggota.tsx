@@ -36,13 +36,13 @@ export default function FormAnggota(
       <FormLayout>
         <FormBody>
 
-          <SelectAsync<IUser>
-            to={'user'}
-            keys={'id'}
-            values={'name'}
-            title={'User'}
-            reg={register('id_user')}
-          />
+          {/*<SelectAsync<IUser>*/}
+          {/*  to={'user'}*/}
+          {/*  keys={'id'}*/}
+          {/*  values={'name'}*/}
+          {/*  title={'User'}*/}
+          {/*  reg={register('id_user')}*/}
+          {/*/>*/}
 
           {/*<InputForm*/}
           {/*  errors={errors}*/}

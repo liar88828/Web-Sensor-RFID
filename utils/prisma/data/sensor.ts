@@ -35,6 +35,18 @@ class Sensor {
     })
   }
 
+  async createWithAnggota(id: string, json: ISensorCreate) {
+    return prisma.sensor.create({
+      data: {
+        id_anggota: id,
+        rfid: json.rfid,
+        kode: json.kode,
+        status: json.status,
+        warna: json.warna,
+      }
+    })
+  }
+
   async update(id: string, json: ISensor) {
     return prisma.sensor.update({
       where: {
@@ -48,6 +60,18 @@ class Sensor {
       }
     })
   }
+
+  async patch(id: string, json: ISensor) {
+    return prisma.sensor.update({
+      where: {
+        id
+      },
+      data: {
+        id_anggota: json.id_anggota
+      }
+    })
+  }
+
 
   async deleted(id: string) {
     return prisma.sensor.delete({where: {id}})

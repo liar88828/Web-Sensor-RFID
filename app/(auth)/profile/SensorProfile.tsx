@@ -4,7 +4,6 @@ import {Icon} from "@iconify/react/dist/iconify.js";
 import {ISensorGlobal} from "@/interface/type";
 import {useGlobalState} from "@/hook/useGlobalState";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
 import Loading from "@/components/elements/Loading";
 import {Root} from "@/interface/user";
 
@@ -23,6 +22,9 @@ export default function SensorProfile({id}: { id: string }) {
       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
         <span className="text-green-500"><Icon icon="mdi:paper-outline"/></span>
         <span className="tracking-wide">Sensor</span>
+        <Link
+          className={' btn btn-success '}
+          href={`/sensor/create/${id}`}>Tambah</Link>
       </div>
 
       <div className="overflow-x-auto bg-base-100 rounded shadow">

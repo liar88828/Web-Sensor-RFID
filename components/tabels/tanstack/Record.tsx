@@ -16,8 +16,6 @@ import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IRecord} from "@/interface/type";
-import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 // export type Person = {
@@ -31,11 +29,11 @@ import Table from "@/components/tabels/tanstack/option/Table";
 // }
 
 
-export function RecordTable({limit, page}: { limit: string, page: string }) {
+export function RecordTable({data}: { data: IRecord[] }) {
   // const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
-  const {data, isLoading, isError} = useGet<IRecord[]>(limit, page, "record")
+  // const {data, isLoading, isError} = useGet<IRecord[]>(limit, page, "record")
 
 
   const [globalFilter, setGlobalFilter] = React.useState('')
@@ -125,9 +123,7 @@ export function RecordTable({limit, page}: { limit: string, page: string }) {
     getPaginationRowModel: getPaginationRowModel(),
     // debugTable: true,
   })
-  if (isLoading) return <Loading/>
 
-  if (isError) return <h1>Error</h1>
   return (
     <div className="p-6  space-y-2 rounded-xl bg-base-100/60">
       <Search<IRecord>

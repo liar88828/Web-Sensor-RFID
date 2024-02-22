@@ -16,13 +16,18 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(data, {status: 200})
     }
   }
-  console.log(id,limit,page)
+  console.log(id, limit, page)
 
 }
 
 export async function POST(req: NextRequest) {
-  // console.log('test')
+  const {id} = await Inputs(req)
   const json = await req.json()
+  // console.log(id, json)
+  if (id) {
+    const data = await sensorData.createWithAnggota(id, json)
+    return NextResponse.json(data, {status: 200})
+  }
   const data = await sensorData.create(json)
   return NextResponse.json(data, {status: 200})
 }
@@ -37,6 +42,18 @@ export async function PUT(req: NextRequest) {
   }
   return NextResponse.json({data: 'Error'}, {status: 404})
 }
+
+export async function PATCH(req: NextRequest) {
+  const {id} = await Inputs(req)
+  const json = await req.json()
+  console.log({id, json})
+  if (id) {
+    const data = await sensorData.patch(id, json)
+    return NextResponse.json(data, {status: 200})
+  }
+  return NextResponse.json({data: 'Error'}, {status: 404})
+}
+
 
 export async function DELETE(req: NextRequest) {
   const {id} = await Inputs(req)

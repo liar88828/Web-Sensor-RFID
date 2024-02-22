@@ -51,6 +51,7 @@ export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, deta
             <Link className='btn btn-success' href={`/profile?id=${id[0]}&callback=/${to + paginationParam}`}> Detail</Link>}
 
           <Link className='btn btn-warning' href={`/${to}/edit?id=` + id[0]}> Edit</Link>
+
           <button className='btn btn-error' onClick={async () => onDelete()}> Delete</button>
         </>
       }

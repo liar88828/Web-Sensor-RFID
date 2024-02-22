@@ -1,8 +1,7 @@
 'use client'
-import React, {Suspense} from 'react'
+import React from 'react'
 import {useGetID} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
-import {useParams, useSearchParams} from "next/navigation";
 import Profile from "@/app/(auth)/profile/profile";
 import {useQueryClient} from "@tanstack/react-query";
 import {Root} from "@/interface/user";
@@ -37,19 +36,14 @@ import {Root} from "@/interface/user";
 //     ],
 //   },
 // }
-export default function Page() {
+export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
   const queryClient = useQueryClient()
-  const search = useSearchParams()
-  // const id = search.get('id') as string
-  const {id} = useParams() as { id: string }
 
   const {data, isLoading, isError,} = useGetID<Root>("user", id)
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
-  console.log(data)
+  // console.log(data)
   queryClient.setQueryData(['SENSOR'], {value: data.record, rfid: "ALL"})
 
-  return <Suspense>
-    <Profile id={id}/>
-  </Suspense>
+  return <Profile id={id}/>
 }

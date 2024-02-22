@@ -5,20 +5,20 @@ import PagesForm from "@/components/Layouts/PagesForm";
 import {useRouter} from "next/navigation";
 import {useCreate} from "@/hook/useFetch";
 import {IAnggotaCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 
-export default function Page({searchParams: {id_user}}: { searchParams: { id_user: string } }) {
-
+export default function Page({params: {id_user}}: { params: { id_user: string } }) {
+  // console.log(id_user)
   const router = useRouter()
 
-  const {mutate, status} = useCreate("anggota")
-  console.log(status)
+  const {mutate} = useCreate("anggota", id_user)
+
+  // console.log(status)
 
   function createData(data: IAnggotaCreate) {
-    console.log(data)
+    // console.log(data)
     mutate(data, {
       onSuccess: () => {
-        router.push('/anggota' + paginationParam)
+        router.push('/profile?id=' + id_user)
       }
     })
   }

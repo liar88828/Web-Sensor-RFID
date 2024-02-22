@@ -17,8 +17,6 @@ import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/Indeter
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {Anggota} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
-import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
 
 // export type Person = {
 //   firstName: string
@@ -31,10 +29,7 @@ import Loading from "@/components/elements/Loading";
 // }
 
 
-export function AnggotaTable({limit, page}: { limit: string, page: string }) {
-  const {data, isLoading, isError} = useGet<Anggota[]>(limit, page, "anggota")
-
-
+export function AnggotaTable({data}: { data: Anggota[] }) {
   // const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
@@ -129,10 +124,9 @@ export function AnggotaTable({limit, page}: { limit: string, page: string }) {
   )
 
 
-
   const table = useReactTable({
-  // @ts-ignore
-    data ,
+    // @ts-ignore
+    data,
     columns,
     state: {
       rowSelection,
@@ -147,9 +141,6 @@ export function AnggotaTable({limit, page}: { limit: string, page: string }) {
     getPaginationRowModel: getPaginationRowModel(),
     // debugTable: true,
   })
-
-  if (isLoading) return <Loading/>
-  if (isError || !data) return <h1>Error</h1>
 
   return (
     <div className="p-6 space-y-2 rounded-xl bg-base-100/60">

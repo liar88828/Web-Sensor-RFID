@@ -10,7 +10,6 @@ import FormSensor from "@/components/form/Sensor";
 
 export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
   const router = useRouter()
-
   const {
     data,
     isLoading,

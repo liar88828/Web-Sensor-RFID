@@ -16,17 +16,10 @@ import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/Indeter
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IUser} from "@/interface/type";
 import {userToExcel} from "@/utils/excel";
-import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 
-export function UserTable({page, limit}: { page: string, limit: string }) {
-  const {data, isLoading, isError} = useGet<IUser[]>(
-    limit,
-    page,
-    "user")
-
+export function UserTable({data}: { data: IUser[] }) {
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -118,9 +111,7 @@ export function UserTable({page, limit}: { page: string, limit: string }) {
     // debugTable: true,
   })
 
-  if (isLoading) return <Loading/>
 
-  if (isError) return <h1>Error</h1>
   return (
     <div className="p-6 space-y-2 rounded-xl bg-base-100/60">
       <Search<IUser>

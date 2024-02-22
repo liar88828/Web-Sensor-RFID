@@ -33,7 +33,7 @@ export const anggotaSchema = z.object({
 export const anggotaCreateSchema = z.object({
   hewan: z.string(),
   warna: z.string(),
-  id_user: z.string(),
+  id_user: z.string().optional(),
   id: z.string().optional(),
 
 });
@@ -45,7 +45,7 @@ export const sensorSchema = z.object({
   kode: z.string().max(10),
   status: z.string().max(10),
   warna: z.string().max(10),
-  id_anggota: z.string().max(33),
+  id_anggota: z.string().max(33).optional(),
 });
 
 export const recordSchema = z.object({

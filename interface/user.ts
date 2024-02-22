@@ -7,6 +7,7 @@ export interface Root {
   Anggota: Anggoum[]
   sensor: Sensor[]
   record: Record[]
+  sensorNull: Sensor[]
 }
 
 export interface Anggoum {
