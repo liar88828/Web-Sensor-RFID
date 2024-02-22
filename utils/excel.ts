@@ -1,8 +1,8 @@
 import xlsx, {IJsonSheet} from "json-as-xlsx";
 
-import {Anggota, IRecord, ISensor, IUser} from "@/interface/type";
+import {IAnggota, IRecord, ISensor, IUser} from "@/interface/type";
 
-export function anggotaToExcel(data: Anggota[]) {
+export function anggotaToExcel(data: IAnggota[]) {
   // console.log(data)
   const title = 'Anggota'
   console.log(data)

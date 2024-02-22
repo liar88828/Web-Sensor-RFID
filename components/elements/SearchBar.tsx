@@ -2,7 +2,6 @@
 
 import React, {useState} from "react";
 import {Icon} from "@iconify/react";
-import {Anggota} from "@/interface/type";
 
 export function SearchBar<T>({title, reg, data, value, value2}: {
   data: T[],
@@ -57,6 +56,7 @@ export function SearchBar<T>({title, reg, data, value, value2}: {
     </ul>
   </div>
 }
+
 //----example
 // <SearchBar<Anggota>
 //   data={data}

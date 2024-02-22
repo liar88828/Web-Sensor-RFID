@@ -1,13 +1,13 @@
 'use client'
 import {AnggotaTable} from "@/components/tabels/tanstack/Anggota";
 import {useGet} from "@/hook/useFetch";
-import {Anggota} from "@/interface/type";
 import Loading from "@/components/elements/Loading";
 import React from "react";
+import {IAnggota} from "@/interface/type";
 
 export default function Page({searchParams: {limit, page}}: { searchParams: { limit: string, page: string } }) {
 
-  const {data, isLoading, isError} = useGet<Anggota[]>(
+  const {data, isLoading, isError} = useGet<IAnggota[]>(
     limit,
     page,
     "anggota")

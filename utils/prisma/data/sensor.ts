@@ -76,6 +76,15 @@ class Sensor {
   async deleted(id: string) {
     return prisma.sensor.delete({where: {id}})
   }
+
+  async deleteValue(id: string) {
+    return prisma.sensor.update(
+      {
+        where: {id},
+        data: {id_anggota: null}
+      }
+    )
+  }
 }
 
 export const sensorData = new Sensor()

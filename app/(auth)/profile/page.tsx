@@ -39,7 +39,7 @@ import {Root} from "@/interface/user";
 export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
   const queryClient = useQueryClient()
 
-  const {data, isLoading, isError,} = useGetID<Root>("user", id)
+  const {data, isLoading, isError,} = useGetID<Root>("user", id ,)
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
   // console.log(data)

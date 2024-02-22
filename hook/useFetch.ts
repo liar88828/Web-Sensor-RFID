@@ -2,7 +2,7 @@ import {useMutation, useQuery} from "@tanstack/react-query";
 import {IPages} from "@/interface/type";
 import {queryClient} from "@/components/provider/ReactQuery";
 import {toast} from "react-toastify";
-import {apiCreate, apiDelete, apiGetAll, apiGetID, apiPatch, apiUpdate} from "@/utils/toApi";
+import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/toApi";
 
 
 const useGet = <T>(limit: string, page: string, to: IPages) => {
@@ -14,10 +14,26 @@ const useGet = <T>(limit: string, page: string, to: IPages) => {
 }
 
 
-const useGetID = <T>(to: IPages, id: string) => {
+// const useGetID = <T>(to: IPages, id: string, ) => {
+//   return useQuery<T>({
+//       queryKey: [to, id],
+//       queryFn: async () => apiGetID(to, id),
+//     },
+//   )
+// }
+//
+const useGetIDWithPages = <T>(to: IPages, id: string, page: IPages) => {
   return useQuery<T>({
       queryKey: [to, id],
-      queryFn: async () => apiGetID(to, id),
+      queryFn: async () => apiGetIDWithPages(to, id, page),
+    },
+  )
+}
+
+const useGetID = <T>(to: IPages, id: string, page?: IPages) => {
+  return useQuery<T>({
+      queryKey: [to, id],
+      queryFn: async () => apiGetIDWithPages(to, id, page),
     },
   )
 }
@@ -53,9 +69,9 @@ const useUpdate = <T>(to: IPages, id: string) => {
 }
 
 
-const usePatch = <T>(to: IPages, id: string) => {
+const usePatch = <T>(to: IPages, id: string, page: IPages) => {
   return useMutation({
-      mutationFn: (add: Partial<T>) => apiPatch(to, id, add),
+      mutationFn: (json: Partial<T>) => apiPatch(to, id, page, json),
       onSuccess: async () => {
         await queryClient.invalidateQueries({queryKey: [to, id]})
         toast.success(`${to} Create successfully`);
@@ -68,11 +84,11 @@ const usePatch = <T>(to: IPages, id: string) => {
 }
 
 
-const useDelete = (to: IPages) => {
+const useDelete = (to: IPages, id?: string, page?: IPages) => {
   return useMutation({
-      mutationFn: (id: string) => apiDelete(to, id),
+      mutationFn: async ({value}: { value: string }) => apiDelete(to, value, page),
       onSuccess: async () => {
-        await queryClient.invalidateQueries({queryKey: [to]})
+        await queryClient.invalidateQueries({queryKey: [to, id]})
         toast.success(`${to} Create successfully`);
       },
       onError() {
@@ -83,4 +99,4 @@ const useDelete = (to: IPages) => {
 }
 
 
-export {useGet, useCreate, useUpdate, useDelete, useGetID, usePatch}
+export {useGet, useCreate, useUpdate, useDelete, useGetID, usePatch, useGetIDWithPages}

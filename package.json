@@ -14,6 +14,7 @@
         "@hookform/resolvers": "^3.3.4",
         "@prisma/client": "^5.7.1",
         "@tanstack/react-query": "^5.20.5",
+        "@tanstack/react-query-devtools": "^5.24.0",
         "@tanstack/react-table": "^8.12.0",
         "bcrypt": "^5.1.1",
         "json-as-xlsx": "^2.5.6",

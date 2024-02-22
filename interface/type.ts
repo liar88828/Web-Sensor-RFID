@@ -14,18 +14,18 @@ export  type IPages = 'anggota' | 'sensor' | 'record' | 'user'
 export type TMethod = "PUT" | "POST" | "GET" | "DELETE" | "PATCH";
 
 // type Data = keyof TDelivery;
-export interface Anggota {
+export interface AnggotaRelational {
   id: string
   hewan: string
   warna: string
-  // id_user: string
-  // id_sensor: IdSensor[]
-  // user: UserData
+  id_user: string
+  id_sensor: ISensor[]
 }
 
-export interface IdSensor {
-  kode: string
-}
+// export interface IdSensor {
+//   kode: string,
+//   id: string
+// }
 
 export interface UserData {
   alamat: string
@@ -56,7 +56,10 @@ export type DetailProfile = UserData & {
   record: IRecord[]
 }
 
-
+export interface PatchAnggotaSensor {
+  id_anggota: string;
+  id_sensor: string;
+}
 export type IRegister = z.infer<typeof registerSchema>
 export type IUser = z.infer<typeof userSchema>
 export type ILogin = z.infer<typeof loginSchema>

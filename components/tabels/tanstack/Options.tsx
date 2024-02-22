@@ -47,16 +47,13 @@ export function Filter({
 
 
 // A debounced input react component
-export function DebouncedInput({
-                                 value: initialValue,
-                                 onChange,
-                                 debounce = 500,
-                                 ...props
-                               }: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+export function DebouncedInput(
+  {value: initialValue, onChange, debounce = 500, ...props}:
+    {
+      value: string | number
+      onChange: (value: string | number) => void
+      debounce?: number
+    } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
   const [value, setValue] = React.useState(initialValue)
 
   React.useEffect(() => {

@@ -33,7 +33,6 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  // console.log('test')
   const {id} = await Inputs(req)
   const json = await req.json()
   if (id) {
@@ -56,12 +55,19 @@ export async function PATCH(req: NextRequest) {
 
 
 export async function DELETE(req: NextRequest) {
-  const {id} = await Inputs(req)
-  if (id) {
+  const {id, page} = await Inputs(req)
 
+  if (id) {
+    if (page) {
+      if (page === 'delete_anggota') {
+        const data = await sensorData.deleteValue(id)
+        return NextResponse.json(data, {status: 200})
+      }
+    }
     const data = await sensorData.deleted(id)
     return NextResponse.json(data, {status: 200})
   }
+
   return NextResponse.json({data: 'Error'}, {status: 404})
 
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import {flexRender, Table} from "@tanstack/react-table";
 import {Filter} from "@/components/tabels/tanstack/Options";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
-import {Anggota} from "@/interface/type";
 
 function Table<T>({table}: { table: Table<T> }) {
   return (

@@ -5,7 +5,7 @@ import {sensorSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {Anggota, ISensor, ISensorCreate, Method} from '@/interface/type'
+import {IAnggota, ISensor, ISensorCreate, Method} from '@/interface/type'
 import {SelectNormal} from "@/components/elements/Select";
 import {useGet} from "@/hook/useFetch";
 import {SearchBar,} from "@/components/elements/SearchBar";
@@ -36,7 +36,7 @@ export default function FormSensor(
     console.log(data)
     fun(data)
   }
-  const {data, isLoading, isError} = useGet<Anggota[]>('', 'create', 'anggota')
+  const {data, isLoading, isError} = useGet<IAnggota[]>('', 'create', 'anggota')
 
   if (isLoading) return <Loading/>
   if (!data || isError) return <Loading/>

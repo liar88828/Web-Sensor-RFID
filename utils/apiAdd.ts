@@ -1,4 +1,5 @@
 import {NextRequest} from "next/server";
+import {IPages} from "@/interface/type";
 
 export async function Inputs(request: NextRequest) {
   const url = new URL(request.url);
@@ -9,7 +10,7 @@ export async function Inputs(request: NextRequest) {
 
   let id = searchParams.get("id") ?? null
   let limit = searchParams.get("limit") ?? null
-  let page = searchParams.get("page") ?? null
+  let page: string | null | IPages = searchParams.get("page") ?? null
 
   return {id, limit, page}
 }

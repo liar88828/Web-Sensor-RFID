@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import {Table} from "@tanstack/react-table";
 import {IPages} from "@/interface/type";

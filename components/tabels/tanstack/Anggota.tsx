@@ -15,8 +15,8 @@ import {anggotaToExcel} from "@/utils/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
-import {Anggota} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
+import {IAnggota} from "@/interface/type";
 
 // export type Person = {
 //   firstName: string
@@ -29,7 +29,7 @@ import Table from "@/components/tabels/tanstack/option/Table";
 // }
 
 
-export function AnggotaTable({data}: { data: Anggota[] }) {
+export function AnggotaTable({data}: { data: IAnggota[] }) {
   // const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
@@ -37,7 +37,7 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
   // const [rowSize, setRowSize] = useState(0)
-  const columns = React.useMemo<ColumnDef<Anggota>[]>(
+  const columns = React.useMemo<ColumnDef<IAnggota>[]>(
     () => [
       {
         id: 'select',
@@ -144,7 +144,7 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
 
   return (
     <div className="p-6 space-y-2 rounded-xl bg-base-100/60">
-      <Search<Anggota>
+      <Search<IAnggota>
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
         excel={anggotaToExcel}
@@ -154,12 +154,12 @@ export function AnggotaTable({data}: { data: Anggota[] }) {
 
       <div className="overflow-x-auto rounded bg-base-100/90">
 
-        <Table<Anggota> table={table}/>
+        <Table<IAnggota> table={table}/>
 
         {/*Pagination*/}
         {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
-        <Pagination<Anggota> table={table}/>
+        <Pagination<IAnggota> table={table}/>
         {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
       </div>
     </div>

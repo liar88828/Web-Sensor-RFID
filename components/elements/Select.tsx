@@ -72,7 +72,7 @@ export function SelectJson<T>(
         <option value={''}>Select....</option>
         {data.map(d => (<option
           value={d[keys]}
-          key={d.id}>{d[values]} {values2 ? d[values2] : ''}</option>))}
+          key={d.id}>{d[values]}  {values2 ? d[values2] : ''}</option>))}
       </select>
     </div>
   );

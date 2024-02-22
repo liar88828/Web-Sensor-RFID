@@ -1,25 +1,20 @@
 'use client'
-import React, {useState} from 'react';
+import React from 'react';
 import Divider from "@/components/elements/Divider";
 import Loading from "@/components/elements/Loading";
 import {useGlobalState} from "@/hook/useGlobalState";
 import {Root} from "@/interface/user";
 import Link from "next/link";
-import {ISensor} from "@/interface/type";
-import {usePatch} from "@/hook/useFetch";
-import {SelectJson} from "@/components/elements/Select";
+import Anggota from "@/app/(auth)/profile/table/anggota";
 
 function AnggotaCard({id}: { id: string }) {
 
-  const [idSensor, setIdSensor] = useState<string>('')
-  const [idSensorAnggota, setIdSensorAnggota] = useState<string>('')
   const {query,} = useGlobalState<Root>(['user', id])
-  const {mutate:mutateSetIdSensor} = usePatch<ISensor>('sensor', idSensor)
-  const {mutate:mutateDeleteIdSensor} = usePatch<ISensor>('sensor', idSensor)
-  console.log({
-    anggota: idSensorAnggota,
-    sensor: idSensor
-  })
+
+  // console.log({
+  //   anggota: idSensorAnggota,
+  //   sensor: idSensor
+  // })
   if (!query?.Anggota) return <Loading/>
 
   // console.log(query)
@@ -40,96 +35,13 @@ function AnggotaCard({id}: { id: string }) {
       <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">Email {query.email}</h2>
       <h2 className="text-sm text-gray-500 hover:text-gray-600 leading-6">No Hp {query.no_hp}</h2>
       <div className={'bg-gray-100 pt-2 px-3 mt-3  rounded shadow-lg'}>
-        Hewan {!query.Anggota || query.Anggota.length === 0 ? <Link
-          className={'btn btn-primary'}
-          href={'/anggota/create'}>
-          Create Anggota
-        </Link> :
-
-        <Link
-          className={' btn btn-success '}
-          href={`/anggota/create/${id}`}>Tambah</Link>
+        Hewan {
+        !query.Anggota || query.Anggota.length === 0
+          ? <Link className={'btn btn-primary'} href={'/anggota/create'}>Create Anggota</Link>
+          : <Link className={' btn btn-success '} href={`/anggota/create/${id}`}>Tambah</Link>
       }
         <Divider/>
-
-        <table className="table table-zebra static">
-          <thead>
-          <tr>
-            <th>No</th>
-            <th>Hewan</th>
-            <th>Warna</th>
-            <th>RFID</th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          {!query.Anggota
-            ?
-            <tr className={'skeleton w-16 h-16 rounded-full shrink-0'}>
-              <th>Data Kosong</th>
-              <th>Data Kosong</th>
-              <th>Data Kosong</th>
-              <th>
-                <Link className={'btn btn-accent shadow'}
-                      href={'/record/create?callback=/profile' + id}>
-                  Buat Record
-                </Link>
-              </th>
-            </tr> : query?.Anggota.map((anggota, i) => <tr
-              key={anggota.id}
-              className={' '}
-            >
-              <th>{i + 1}</th>
-              <th>{anggota.hewan}</th>
-              <th>{anggota.warna}</th>
-              <th>{
-                anggota.id_sensor.length !== 0
-                  ? anggota.id_sensor.map(d => d.rfid)
-                  : <SelectJson<ISensor>
-                    onChange={(e) => {
-                      setIdSensorAnggota(anggota.id)
-                      setIdSensor(e.target.value as string)
-                    }}
-                    data={query.sensorNull}
-                    keys={'id'}
-                    values={'rfid'}
-                    values2={"warna"}
-                    showTitle={false}
-                  />
-              }</th>
-              <th>
-                {anggota.id_sensor.length === 0
-                  ?
-                  <button
-                    className={'btn btn-primary btn-xs'}
-                    onClick={() => {
-                      mutateSetIdSensor({
-                        id_anggota: idSensorAnggota,
-                      })
-                    }}>Simpan
-                  </button>
-                  :
-                  <button
-                    className={'btn btn-error btn-xs'}
-                    onClick={() => {
-                      const toDelete = {
-                        id_sensor: anggota.id_sensor.map(d => d.id),
-                        id_anggota: anggota.id
-                      }
-                      mutateDeleteIdSensor({
-                        id_anggota: idSensorAnggota,
-                      })
-                    }}>Hapus
-                  </button>
-                }
-
-
-              </th>
-            </tr>)}
-
-          </tbody>
-        </table>
-
+        <Anggota id_user={id}/>
       </div>
     </div>
   );
