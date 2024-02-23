@@ -13,15 +13,6 @@ const useGet = <T>(page: string, to: IPages) => {
   })
 }
 
-
-// const useGetID = <T>(to: IPages, id: string, ) => {
-//   return useQuery<T>({
-//       queryKey: [to, id],
-//       queryFn: async () => apiGetID(to, id),
-//     },
-//   )
-// }
-//
 const useGetIDWithPages = <T>(to: IPages, id: string, page: IPages) => {
   return useQuery<T>({
       queryKey: [to, id],

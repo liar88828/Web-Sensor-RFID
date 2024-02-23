@@ -16,27 +16,9 @@ import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IRecord, TableProps} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
 
-// export type Person = {
-//   firstName: string
-//   lastName: string
-//   age: number
-//   visits: number
-//   progress: number
-//   status: 'relationship' | 'complicated' | 'single'
-//   subRows?: Person[]
-// }
-
-
-export function RecordTable({data,setPages}: TableProps<IRecord[]>) {
-  // const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
-  // const refreshData = () => setData(() => makeData(100))
-  // const rerender = React.useReducer(() => ({}), {})[1]
-  // const {data, isLoading, isError} = useGet<IRecord[]>(limit, page, "record")
-
-
+export function RecordTable({data}: TableProps<IRecord[]>) {
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
-  // const [rowSize, setRowSize] = useState(0)
   const columns = React.useMemo<ColumnDef<IRecord>[]>(
     () => [
       {
@@ -76,29 +58,19 @@ export function RecordTable({data,setPages}: TableProps<IRecord[]>) {
         footer: props => props.column.id,
       },
       {
-        // id: 'kode',
         accessorKey: 'jamMasuk',
         header: () => 'Jam Masuk',
         cell: info => new Date(String(info.getValue())).toLocaleDateString('id-ID', {
           hour: 'numeric',
           minute: "numeric",
-          // dateStyle: "short"
         }),
-
         footer: props => props.column.id,
       },
-
       {
         accessorKey: 'lokasi',
         header: () => 'Lokasi',
         footer: props => props.column.id,
       },
-      // {
-      //   accessorKey: 'warna',
-      //   header: () => 'Warna',
-      //   footer: props => props.column.id,
-      // },
-
     ],
     []
   )
@@ -130,76 +102,12 @@ export function RecordTable({data,setPages}: TableProps<IRecord[]>) {
         excel={recordToExcel}
         table={table}
         to={'record'}
-        setPages={setPages}
       />
 
       <div className=" overflow-x-auto  rounded bg-base-100/90">
         <Table<IRecord> table={table}/>
-        {/*<table className={' static table table-zebra  table-xs    '}>*/}
-        {/*  <thead>*/}
-        {/*  {table.getHeaderGroups().map(headerGroup => (*/}
-        {/*    <tr key={headerGroup.id}>*/}
-        {/*      {headerGroup.headers.map(header => {*/}
-        {/*        return (*/}
-        {/*          <th key={header.id} colSpan={header.colSpan}>*/}
-        {/*            {header.isPlaceholder ? null : (*/}
-        {/*              <>*/}
-        {/*                {flexRender(*/}
-        {/*                  header.column.columnDef.header,*/}
-        {/*                  header.getContext()*/}
-        {/*                )}*/}
-        {/*                {header.column.getCanFilter() ? (*/}
-        {/*                  <div>*/}
-        {/*                    <Filter column={header.column} table={table}/>*/}
-        {/*                  </div>*/}
-        {/*                ) : null}*/}
-        {/*              </>*/}
-        {/*            )}*/}
-        {/*          </th>*/}
-        {/*        )*/}
-        {/*      })}*/}
-        {/*    </tr>*/}
-        {/*  ))}*/}
-        {/*  </thead>*/}
-        {/*  <tbody>*/}
-        {/*  {table.getRowModel().rows.map(row => {*/}
-        {/*    return (*/}
-        {/*      <tr key={row.id}>*/}
-        {/*        {row.getVisibleCells().map(cell => {*/}
-        {/*          return (*/}
-        {/*            <td key={cell.id}>*/}
-        {/*              {flexRender(*/}
-        {/*                cell.column.columnDef.cell,*/}
-        {/*                cell.getContext()*/}
-        {/*              )}*/}
-        {/*            </td>*/}
-        {/*          )*/}
-        {/*        })}*/}
-        {/*      </tr>*/}
-        {/*    )*/}
-        {/*  })}*/}
-        {/*  </tbody>*/}
-        {/*  <tfoot>*/}
-        {/*  <tr>*/}
-        {/*    <td className="p-1">*/}
-        {/*      <IndeterminateCheckbox*/}
-        {/*        {...{*/}
-        {/*          checked: table.getIsAllPageRowsSelected(),*/}
-        {/*          indeterminate: table.getIsSomePageRowsSelected(),*/}
-        {/*          onChange: table.getToggleAllPageRowsSelectedHandler(),*/}
-        {/*        }}*/}
-        {/*      />*/}
-        {/*    </td>*/}
-        {/*    <td colSpan={20}>Page Rows ({table.getRowModel().rows.length})</td>*/}
-        {/*  </tr>*/}
-        {/*  </tfoot>*/}
-        {/*</table>*/}
-
-        {/*Pagination*/}
-        {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
         <Pagination<IRecord> table={table}/>
-        {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
       </div>
     </div>
   )

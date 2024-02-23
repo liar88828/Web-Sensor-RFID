@@ -16,7 +16,7 @@ import {userToExcel} from "@/utils/excel";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 
-export function UserTable({data, setPages}: TableProps<IUser[]>) {
+export function UserTable({data,  }: TableProps<IUser[]>) {
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -99,13 +99,11 @@ export function UserTable({data, setPages}: TableProps<IUser[]>) {
       globalFilter
     },
     enableRowSelection: true, //enable row selection for all rows
-    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    // debugTable: true,
   })
 
 
@@ -118,7 +116,6 @@ export function UserTable({data, setPages}: TableProps<IUser[]>) {
         table={table}
         to={'user'}
         detail={true}
-        setPages={setPages}
       />
 
       <div className="overflow-x-auto rounded bg-base-100/90">

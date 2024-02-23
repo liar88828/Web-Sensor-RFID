@@ -26,7 +26,7 @@ import Table from "@/components/tabels/tanstack/option/Table";
 // }
 
 
-export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
+export function SensorTable({data,}: TableProps<ISensor[]>) {
 
 
   const [globalFilter, setGlobalFilter] = React.useState('')
@@ -69,7 +69,6 @@ export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
         id: 'rfid',
         accessorKey: 'rfid',
         header: () => 'RFID',
-        // accessorFn: row => row.rfid,
         cell: info => info.getValue(),
         footer: props => props.column.id,
       },
@@ -77,10 +76,8 @@ export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
         // id: 'kode',
         accessorKey: 'kode',
         header: () => 'Kode',
-        // accessorFn: row => row.kode,
         cell: info => info.getValue(),
         footer: props => props.column.id,
-        // header: () => <span>Last Name</span>,
       },
 
       {
@@ -102,21 +99,18 @@ export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
 
 
   const table = useReactTable({
-    // @ts-ignore
     data,
     columns,
     state: {
       rowSelection,
       globalFilter
     },
-    enableRowSelection: true, //enable row selection for all rows
-    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    // debugTable: true,
   })
 
 
@@ -129,21 +123,12 @@ export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
         setGlobalFilter={setGlobalFilter}
         excel={sensorToExcel}
         to={"sensor"}
-        setPages={setPages}
       />
 
       <div className=" overflow-x-auto  rounded bg-base-100/90">
-
         <Table<ISensor> table={table}/>
-
-        {/*Pagination*/}
-        {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
         <Pagination<ISensor> table={table}/>
-        {/*<Options<ISensor> table={table} rowSelection={rowSelection}*/}
-        {/*                  // refreshData={refreshData}*/}
-        {/*                  // rerender={rerender}*/}
-        {/*/>*/}
       </div>
     </div>
   )

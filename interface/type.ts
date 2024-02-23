@@ -63,6 +63,7 @@ export interface PatchAnggotaSensor {
   id_anggota: string;
   id_sensor: string;
 }
+
 export type IRegister = z.infer<typeof registerSchema>
 export type IUser = z.infer<typeof userSchema>
 export type ILogin = z.infer<typeof loginSchema>
@@ -78,7 +79,7 @@ export type IRecordCreate = z.infer<typeof recordSchema>
 export type IRecord = Required<IRecordCreate>
 
 export type ISensorGlobal = { value: IRecord[], rfid: string }
-export type IDataOrang = { name: string, alamat: string, no_hp: string ,id:string}
+export type IDataOrang = { name: string, alamat: string, no_hp: string, id: string }
 
 
 export interface FormProps<T> {
@@ -90,14 +91,14 @@ export interface FormProps<T> {
 export interface PageProps {
   searchParams: { page: string };
 }
-export  interface PageId {
+
+export interface PageId {
   searchParams: { id: string };
 }
 
 
 export interface TableProps<T> {
   data: T;
-  setPages: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface SearchTable<T> {
@@ -107,8 +108,8 @@ export interface SearchTable<T> {
   excel: (data: T[]) => void;
   to: IPages;
   detail?: boolean;
-  setPages: React.Dispatch<React.SetStateAction<number>>;
 }
+
 export interface PageData {
   value: boolean;
   pageState: number;

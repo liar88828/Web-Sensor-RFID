@@ -18,27 +18,9 @@ import {Search} from "@/components/tabels/tanstack/option/Search";
 import Table from "@/components/tabels/tanstack/option/Table";
 import {IAnggota, TableProps} from "@/interface/type";
 
-// export type Person = {
-//   firstName: string
-//   lastName: string
-//   age: number
-//   visits: number
-//   progress: number
-//   status: 'relationship' | 'complicated' | 'single'
-//   subRows?: Person[]
-// }
-
-
-
-
-export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
-  // const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
-  // const refreshData = () => setData(() => makeData(100))
-  // const rerender = React.useReducer(() => ({}), {})[1]
-
+export function AnggotaTable({data,}: TableProps<IAnggota[]>) {
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
-  // const [rowSize, setRowSize] = useState(0)
   const columns = React.useMemo<ColumnDef<IAnggota>[]>(
     () => [
       {
@@ -72,37 +54,7 @@ export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
         cell: info => info.getValue(),
         footer: props => props.column.id,
       },
-      // {
-      //   id: 'nama',
-      //   // accessorKey: 'name',
-      //   header: () => 'Nama',
-      //   accessorFn: row => row.user.name,
-      //   // cell: info => info.getValue(),
-      //   footer: props => props.column.id,
-      // },
-      // {
-      //   // id: 'kode',
-      //   accessorKey: 'no_hp',
-      //   header: () => 'No HP',
-      //   accessorFn: row => row.user.no_hp,
-      //   // cell: info => info.getValue(),
-      //   footer: props => props.column.id,
-      //   // header: () => <span>Last Name</span>,
-      // },
 
-      // {
-      //   accessorKey: 'email',
-      //   header: () => 'Email',
-      //   accessorFn: row => row.user.email,
-      //   footer: props => props.column.id,
-      // },
-      // {
-      //   accessorKey: 'alamat',
-      //   header: () => 'Alamat',
-      //   accessorFn: row => row.user.alamat,
-      //
-      //   footer: props => props.column.id,
-      // },
       {
         accessorKey: 'hewan',
         header: () => 'Hewan',
@@ -115,12 +67,7 @@ export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
         accessorFn: row => row.warna,
         footer: props => props.column.id,
       },
-      // {
-      //   accessorKey: 'sensor',
-      //   header: () => 'Sensor',
-      //   accessorFn: (row) => row.id_sensor.map(data => data.kode),
-      //   footer: props => props.column.id,
-      // },
+
     ],
     []
   )
@@ -134,14 +81,12 @@ export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
       rowSelection,
       globalFilter
     },
-    enableRowSelection: true, //enable row selection for all rows
-    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    // debugTable: true,
   })
 
   return (
@@ -152,18 +97,12 @@ export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
         excel={anggotaToExcel}
         table={table}
         to={'anggota'}
-        setPages={setPages}
       />
 
       <div className="overflow-x-auto rounded bg-base-100/90">
-
         <Table<IAnggota> table={table}/>
-
-        {/*Pagination*/}
-        {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
         <Pagination<IAnggota> table={table}/>
-        {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}
       </div>
     </div>
   )
