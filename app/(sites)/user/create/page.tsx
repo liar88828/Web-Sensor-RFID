@@ -1,12 +1,10 @@
 'use client'
 import React from 'react'
 import PagesForm from "@/components/Layouts/PagesForm";
-import {BackLink} from "@/components/link/backLink";
 import {useCreate} from "@/hook/useFetch";
 import {useRouter} from "next/navigation";
 import {IUser} from "@/interface/type";
 import FormUser from "@/components/form/User";
-import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page() {
 
@@ -19,7 +17,7 @@ export default function Page() {
     mutate(data, {
       onSuccess: () => {
         // router.push('/sensor')
-        router.push('/user' + paginationParam)
+        router.push('/user' )
 
       }
     })
@@ -28,8 +26,8 @@ export default function Page() {
   return (
     <PagesForm
       back={<></>
-      // <BackLink href={'user'} title={'Create'}/>
-    }
+        // <BackLink href={'user'} title={'Create'}/>
+      }
       form={<FormUser method='POST' fun={createData}/>}
     />
     // <div>

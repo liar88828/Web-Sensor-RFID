@@ -3,10 +3,10 @@ import {sensorData} from "@/utils/prisma/data/sensor";
 import {Inputs} from "@/utils/apiAdd";
 
 export async function GET(req: NextRequest) {
-  const {id, limit, page} = await Inputs(req)
+  const {id, page} = await Inputs(req)
 
-  if (!id && limit && page) {
-    const data = await sensorData.findAll(Number(limit), Number(page))
+  if (!id && page) {
+    const data = await sensorData.findAll(Number(page))
     return NextResponse.json(data, {status: 200})
   }
 
@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(data, {status: 200})
     }
   }
-  console.log(id, limit, page)
+  console.log(id, page)
 
 }
 

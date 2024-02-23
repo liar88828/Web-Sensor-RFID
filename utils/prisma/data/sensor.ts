@@ -1,8 +1,10 @@
 import prisma from "@/utils/prisma/client";
 import {ISensor, ISensorCreate} from "@/interface/type";
+import {limitDataBase} from "@/utils/nextAdd";
 
 class Sensor {
-  async findAll(limit: number = 100, page: number = 0) {
+  async findAll(page: number = 0) {
+    let limit = limitDataBase
 
     page = (page) * limit
     return prisma.sensor.findMany({take: limit, skip: page})

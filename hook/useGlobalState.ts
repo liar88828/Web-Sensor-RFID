@@ -1,10 +1,11 @@
-
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {queryClient} from "@/components/provider/ReactQuery";
 
 type KEY = string[] | ['SENSOR']
 
+
 export function useGlobalState<T>(key: KEY, initialData?: T | any) {
-  const queryClient = useQueryClient()
+// const queryClients = useQueryClient()
   // const query = useQuery<T>({
   //     queryKey: [key],
   //     queryFn: () => initialData,
@@ -58,3 +59,14 @@ export function useGlobalState<T>(key: KEY, initialData?: T | any) {
 //   })
 //   return {state, setState}
 // }
+
+
+export const useRQSGlobalState = (key: string[], initialData: any) => [
+  useQuery({
+    queryKey: key,
+    queryFn: () => initialData,
+    enabled: false,
+    initialData: initialData,
+  }).data,
+  (value: any) => queryClient.setQueryData(key, value),
+]

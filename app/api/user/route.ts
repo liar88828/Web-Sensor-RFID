@@ -3,7 +3,7 @@ import {Inputs} from "@/utils/apiAdd";
 import {userData} from "@/utils/prisma/data/user";
 
 export async function GET(req: NextRequest) {
-  const {id, limit, page} = await Inputs(req)
+  const {id,  page} = await Inputs(req)
 
 
   if (page === 'create') {
@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
   }
 
 
-  if (!id && limit && page) {
-    const data = await userData.findAll(Number(limit), Number(page))
+  if (!id  && page) {
+    const data = await userData.findAll(Number(page))
     return NextResponse.json(data, {status: 200})
   }
 
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(data, {status: 200})
     }
   }
-  console.log(id, limit, page)
+  console.log(id,  page)
 
 }
 

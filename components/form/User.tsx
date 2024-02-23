@@ -1,22 +1,12 @@
-'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {IUser, Method} from "@/interface/type";
+import {FormProps, IUser} from "@/interface/type";
 import {userSchema} from "@/utils/validator/zod";
 
-export default function FormUser(
-  {
-    method,
-    defaultData,
-    fun,
-  }: {
-    method: Method,
-    defaultData?: IUser
-    fun: (data: IUser) => any
-  }) {
+export default function FormUser({method, defaultData, fun}: FormProps<IUser>) {
   const {
     register,
     handleSubmit,

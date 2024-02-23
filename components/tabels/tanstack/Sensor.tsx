@@ -1,7 +1,4 @@
-'use client'
 import React from 'react'
-
-
 import {
   ColumnDef,
   getCoreRowModel,
@@ -14,10 +11,8 @@ import {sensorToExcel} from "@/utils/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
-import {ISensor} from "@/interface/type";
+import {ISensor, TableProps} from "@/interface/type";
 import {cssValid} from "@/utils/css";
-import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 // export type Person = {
@@ -31,12 +26,7 @@ import Table from "@/components/tabels/tanstack/option/Table";
 // }
 
 
-export function SensorTable({page, limit}: { page: string, limit: string }) {
-
-  const {data, isLoading, isError} = useGet<ISensor[]>(
-    limit,
-    page,
-    "sensor")
+export function SensorTable({data, setPages}: TableProps<ISensor[]>) {
 
 
   const [globalFilter, setGlobalFilter] = React.useState('')
@@ -129,9 +119,6 @@ export function SensorTable({page, limit}: { page: string, limit: string }) {
     // debugTable: true,
   })
 
-  if (isLoading) return <Loading/>
-
-  if (isError) return <h1>Error</h1>
 
   return (
     <div className="p-6 space-y-2 rounded-xl bg-base-100/60">
@@ -142,6 +129,7 @@ export function SensorTable({page, limit}: { page: string, limit: string }) {
         setGlobalFilter={setGlobalFilter}
         excel={sensorToExcel}
         to={"sensor"}
+        setPages={setPages}
       />
 
       <div className=" overflow-x-auto  rounded bg-base-100/90">

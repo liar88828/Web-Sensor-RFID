@@ -6,7 +6,6 @@ import {useGetID, useUpdate} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
 import FormUser from "@/components/form/User";
 import {IUser} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
   const router = useRouter()
@@ -24,7 +23,7 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
     mutate(data, {
       onSuccess: () => {
         // router.push('/record')
-        router.push('/user' + paginationParam)
+        router.push('/user' )
 
       }
     })

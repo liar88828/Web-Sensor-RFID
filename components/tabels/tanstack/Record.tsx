@@ -1,7 +1,5 @@
 'use client'
 import React from 'react'
-
-
 import {
   ColumnDef,
   getCoreRowModel,
@@ -15,7 +13,7 @@ import {recordToExcel} from "@/utils/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
-import {IRecord} from "@/interface/type";
+import {IRecord, TableProps} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 // export type Person = {
@@ -29,7 +27,7 @@ import Table from "@/components/tabels/tanstack/option/Table";
 // }
 
 
-export function RecordTable({data}: { data: IRecord[] }) {
+export function RecordTable({data,setPages}: TableProps<IRecord[]>) {
   // const [data, setData] = React.useState(() => makeData<IRecord>(newRecord, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
@@ -132,6 +130,7 @@ export function RecordTable({data}: { data: IRecord[] }) {
         excel={recordToExcel}
         table={table}
         to={'record'}
+        setPages={setPages}
       />
 
       <div className=" overflow-x-auto  rounded bg-base-100/90">

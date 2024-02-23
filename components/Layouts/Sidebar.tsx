@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
-import {paginationParam} from "@/utils/nextAdd";
 
 enableCache('local');
 
@@ -12,33 +11,33 @@ const SlideList = [
   {
     title: 'Home',
     icon: <Icon fontSize={24} icon="material-symbols:home-outline"/>,
-    href: '/home' + paginationParam,
+    href: '/home' ,
   },
   {
     title: 'User',
     icon: <Icon fontSize={24} icon="mdi:user-outline"/>,
-    href: '/user' + paginationParam,
+    href: '/user' ,
   },
   {
     title: 'Anggota',
     icon: <Icon fontSize={24} icon="ic:baseline-people"/>,
-    href: '/anggota' + paginationParam,
+    href: '/anggota' ,
   },
   {
     title: 'Sensor',
     icon: <Icon fontSize={24} icon="material-symbols-light:sensors-rounded"/>,
-    href: '/sensor' + paginationParam,
+    href: '/sensor' ,
   },
   {
     title: 'Record',
     icon: <Icon fontSize={24} icon="bx:video-recording"/>,
-    href: '/record' + paginationParam,
+    href: '/record' ,
   },
 
 ]
 
 
-export default function Slidebar() {
+export default function Sidebar() {
 
   return (
 

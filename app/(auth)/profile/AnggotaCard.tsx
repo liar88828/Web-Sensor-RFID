@@ -5,7 +5,7 @@ import Loading from "@/components/elements/Loading";
 import {useGlobalState} from "@/hook/useGlobalState";
 import {Root} from "@/interface/user";
 import Link from "next/link";
-import Anggota from "@/app/(auth)/profile/table/anggota";
+import Anggota from "@/components/tabels/basic/anggota";
 
 function AnggotaCard({id}: { id: string }) {
 

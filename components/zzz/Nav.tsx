@@ -15,7 +15,7 @@ function SettingProfile() {
           <img
             className="inline h-6 rounded-full"
             src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
-            alt={'asdasda'}/>
+            alt={'gambar'}/>
 
           <svg fill="currentColor" viewBox="0 0 20 20"
                className="inline w-4 h-4 transition-transform duration-200 transform">

@@ -9,8 +9,8 @@ export async function Inputs(request: NextRequest) {
 
 
   let id = searchParams.get("id") ?? null
-  let limit = searchParams.get("limit") ?? null
+  // let limit = searchParams.get("limit") ?? null
   let page: string | null | IPages = searchParams.get("page") ?? null
 
-  return {id, limit, page}
+  return {id, page}
 }

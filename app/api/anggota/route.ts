@@ -4,7 +4,7 @@ import {anggotaData} from "@/utils/prisma/data/anggota";
 import {IPages} from "@/interface/type";
 
 export async function GET(req: NextRequest) {
-  const {id, limit, page} = await Inputs(req)
+  const {id,  page} = await Inputs(req)
 
   // console.log(page)
   if (page === 'create') {
@@ -18,8 +18,8 @@ export async function GET(req: NextRequest) {
   }
 
 
-  if (!id && limit && page) {
-    const data = await anggotaData.findAll(Number(limit), Number(page))
+  if (!id  && page) {
+    const data = await anggotaData.findAll(  Number(page))
     return NextResponse.json(data, {status: 200})
   }
   // console.log(id, page)

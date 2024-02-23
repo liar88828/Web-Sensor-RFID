@@ -1,5 +1,5 @@
 import {faker} from "@faker-js/faker";
-import {IAnggota, IRecord, ISensor} from "@/interface/type";
+import {IAnggota, IDataOrang, IRecord, ISensor, ISensorGlobal} from "@/interface/type";
 
 export function makeData<T>(Datas: () => T, ...lens: number[]): T[] {
   const makeDataLevel = (depth = 0): T[] => {
@@ -80,3 +80,37 @@ export type RequiredWithoutUndefined<T> = {
 //   email: "asdasda",
 //   name: "asdasda"
 // }
+
+
+export const dataOrang = (): IDataOrang => {
+  return {
+    id: faker.number.int({max: 999999}).toString(),
+    name: faker.person.fullName(),
+    alamat: faker.person.jobArea(),
+    no_hp: faker.phone.number('501-###-###')
+  }
+}
+export const dataRecord = (): ISensorGlobal => {
+  return {
+    // id: faker.number.int({max: 999999}).toString(),
+    // name: faker.person.fullName(),
+    // alamat: faker.person.jobArea(),
+    rfid: faker.person.fullName(),
+    value: faker.helpers.arrayElements(fakerRecord,)
+  }
+}
+
+
+const dataRecords = () => {
+  return {
+    id: faker.number.int({max: 999999}).toString(),
+    jamMasuk: faker.date.anytime().toString(),
+    tanggal: faker.date.anytime(),
+    lokasi: faker.location.city()
+  }
+}
+
+export const fakerDataOrang = makeData(dataOrang, 10)
+// export const fakerDataRecord = makeData(dataRecord, 10)
+export const fakerRecord = makeData(dataRecords, 10)
+export const fakerDataRecord = dataRecord()

@@ -1,8 +1,10 @@
 import prisma from "@/utils/prisma/client";
 import {IUser} from "@/interface/type";
+import {limitDataBase} from "@/utils/nextAdd";
 
 class User {
-  async findAll(limit: number = 100, page: number = 0) {
+  async findAll(page: number = 0) {
+    let limit = limitDataBase
 
     page = (page) * limit
     return prisma.user.findMany({

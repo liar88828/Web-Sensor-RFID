@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 // import Link from 'next/link'
-import Slidebar from './Slidebar';
+import Sidebar from './Sidebar';
 import {usePathname, useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 import React from "react";
@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="navbar bg-base-100 rounded-lg ">
         <div className="navbar-start">
           <div className="flex flex-row gap-2">
-            <Slidebar/>
+            <Sidebar/>
             <button onClick={() => router.back()} className="btn btn-neutral">Back</button>
           </div>
         </div>

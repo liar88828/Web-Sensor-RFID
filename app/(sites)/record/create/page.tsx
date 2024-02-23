@@ -6,7 +6,6 @@ import PagesForm from "@/components/Layouts/PagesForm";
 import {useRouter} from "next/navigation";
 import {useCreate} from "@/hook/useFetch";
 import {IRecordCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page() {
 
@@ -20,7 +19,7 @@ export default function Page() {
     mutate(data, {
       onSuccess: () => {
         // router.back()
-        router.push('/record' + paginationParam)
+        router.push('/record' )
       }
     })
   }

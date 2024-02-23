@@ -3,7 +3,6 @@ import React from 'react'
 import {useRouter} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import {ISensor, ISensorCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 import Loading from "@/components/elements/Loading";
 import PagesForm from "@/components/Layouts/PagesForm";
 import FormSensor from "@/components/form/Sensor";
@@ -23,7 +22,7 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
     mutate(data, {
       onSuccess: () => {
         // router.push('/sensor')
-        router.push('/sensor' + paginationParam)
+        router.push('/sensor' )
 
       }
     })

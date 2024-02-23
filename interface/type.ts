@@ -8,10 +8,13 @@ import {
   sensorSchema,
   userSchema
 } from "@/utils/validator/zod";
+import React from "react";
+import {Table} from "@tanstack/react-table";
 
 export type Method = 'POST' | 'PUT'
 export  type IPages = 'anggota' | 'sensor' | 'record' | 'user'
 export type TMethod = "PUT" | "POST" | "GET" | "DELETE" | "PATCH";
+
 
 // type Data = keyof TDelivery;
 export interface AnggotaRelational {
@@ -75,6 +78,41 @@ export type IRecordCreate = z.infer<typeof recordSchema>
 export type IRecord = Required<IRecordCreate>
 
 export type ISensorGlobal = { value: IRecord[], rfid: string }
+export type IDataOrang = { name: string, alamat: string, no_hp: string ,id:string}
+
+
+export interface FormProps<T> {
+  method: Method;
+  defaultData?: T;
+  fun: (data: T) => any;
+}
+
+export interface PageProps {
+  searchParams: { page: string };
+}
+export  interface PageId {
+  searchParams: { id: string };
+}
+
+
+export interface TableProps<T> {
+  data: T;
+  setPages: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface SearchTable<T> {
+  globalFilter: string;
+  setGlobalFilter: React.Dispatch<React.SetStateAction<string>>;
+  table: Table<T>;
+  excel: (data: T[]) => void;
+  to: IPages;
+  detail?: boolean;
+  setPages: React.Dispatch<React.SetStateAction<number>>;
+}
+export interface PageData {
+  value: boolean;
+  pageState: number;
+}
 
 
 //

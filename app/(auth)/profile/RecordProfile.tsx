@@ -3,7 +3,7 @@ import React from 'react';
 import {Icon} from "@iconify/react/dist/iconify.js";
 import {DetailProfile, ISensorGlobal} from "@/interface/type";
 import {useGlobalState} from "@/hook/useGlobalState";
-import Record from "@/app/(auth)/profile/table/record";
+import Record from "@/components/tabels/basic/record";
 
 export default function RecordProfile({id}: { id: string }) {
 
@@ -23,7 +23,7 @@ export default function RecordProfile({id}: { id: string }) {
         </button>
       </div>
       <div className="overflow-x-auto bg-base-100 rounded shadow">
-        <Record/>
+        {query && <Record data={query.value}/>}
       </div>
 
     </div>

@@ -2,11 +2,9 @@
 import React from 'react'
 import FormSensor from "@/components/form/Sensor";
 import PagesForm from "@/components/Layouts/PagesForm";
-import {BackLink} from "@/components/link/backLink";
 import {useCreate} from "@/hook/useFetch";
 import {useRouter} from "next/navigation";
 import {ISensorCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page() {
 
@@ -19,7 +17,7 @@ export default function Page() {
     mutate(data, {
       onSuccess: () => {
         // router.push('/sensor')
-        router.push('/sensor' + paginationParam)
+        router.push('/sensor' )
 
       }
     })
@@ -28,8 +26,8 @@ export default function Page() {
   return (
     <PagesForm
       back={<></>
-      // <BackLink href={'sensor'} title={'Create'}/>
-    }
+        // <BackLink href={'sensor'} title={'Create'}/>
+      }
       form={<FormSensor method='POST' fun={createSensor}/>}
     />
     // <div>

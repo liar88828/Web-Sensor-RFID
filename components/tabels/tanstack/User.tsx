@@ -1,7 +1,4 @@
-'use client'
 import React from 'react'
-
-
 import {
   ColumnDef,
   getCoreRowModel,
@@ -14,12 +11,12 @@ import Divider from "@/components/elements/Divider";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
-import {IUser} from "@/interface/type";
+import {IUser, TableProps} from "@/interface/type";
 import {userToExcel} from "@/utils/excel";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 
-export function UserTable({data}: { data: IUser[] }) {
+export function UserTable({data, setPages}: TableProps<IUser[]>) {
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -121,6 +118,7 @@ export function UserTable({data}: { data: IUser[] }) {
         table={table}
         to={'user'}
         detail={true}
+        setPages={setPages}
       />
 
       <div className="overflow-x-auto rounded bg-base-100/90">

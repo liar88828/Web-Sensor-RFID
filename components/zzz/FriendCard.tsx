@@ -16,7 +16,7 @@ function FriendCard() {
           <img className="h-16 w-16 rounded-full mx-auto"
                src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
                alt=""/>
-          <a href="#" className="text-main-color">Kojstantin</a>
+          <a href="#" className="text-main-color">Paijo</a>
         </div>
         <div className="text-center my-2">
           <img className="h-16 w-16 rounded-full mx-auto"

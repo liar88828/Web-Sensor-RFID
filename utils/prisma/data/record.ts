@@ -1,8 +1,11 @@
 import prisma from "@/utils/prisma/client";
 import {IRecord, IRecordCreate} from "@/interface/type";
+import {limitDataBase} from "@/utils/nextAdd";
 
 class Record {
-  async findAll(limit: number = 100, page: number = 0) {
+  async findAll(page: number = 0) {
+
+    let limit = limitDataBase
 
     page = (page) * limit
     return prisma.record.findMany({take: limit, skip: page})

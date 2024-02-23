@@ -4,10 +4,10 @@ import React from 'react'
 import PagesForm from "@/components/Layouts/PagesForm";
 import {useRouter} from "next/navigation";
 import {useCreate} from "@/hook/useFetch";
-import {IAnggotaCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
+import {IAnggotaCreate, PageId} from "@/interface/type";
 
-export default function Page({searchParams: {id_user}}: { searchParams: { id_user: string } }) {
+
+export default function Page({searchParams: {id}}: PageId) {
 
   const router = useRouter()
 
@@ -18,7 +18,7 @@ export default function Page({searchParams: {id_user}}: { searchParams: { id_use
     console.log(data)
     mutate(data, {
       onSuccess: () => {
-        router.push('/anggota' + paginationParam)
+        router.push('/anggota')
       }
     })
   }

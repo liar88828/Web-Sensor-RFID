@@ -1,29 +1,20 @@
-'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {anggotaSchema,} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {IAnggota, IAnggotaCreate, IUser, Method} from '@/interface/type'
-import {SelectAsync} from "@/components/elements/Select";
+import {FormProps, IAnggotaCreate} from '@/interface/type'
 
-export default function FormAnggota(
-  {
-    method,
-    defaultData,
-    fun,
-  }: {
-    method: Method,
-    defaultData?: IAnggota
-    fun: (data: IAnggotaCreate) => any
-  }) {
+export default function FormAnggota({method, defaultData, fun,}: FormProps<IAnggotaCreate>) {
   const {
     register,
     handleSubmit,
     formState: {errors},
   } = useForm<IAnggotaCreate>({
     resolver: zodResolver(anggotaSchema),
+    defaultValues: method === 'PUT' ? defaultData : {}
+
   })
   const onSubmit = (data: IAnggotaCreate) => {
     console.log(data)

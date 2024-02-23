@@ -1,26 +1,15 @@
-'use client'
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {sensorSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {IAnggota, ISensor, ISensorCreate, Method} from '@/interface/type'
+import {FormProps, IAnggota, ISensorCreate} from '@/interface/type'
 import {SelectNormal} from "@/components/elements/Select";
 import {useGet} from "@/hook/useFetch";
-import {SearchBar,} from "@/components/elements/SearchBar";
 import Loading from "@/components/elements/Loading";
 
-export default function FormSensor(
-  {
-    defaultData,
-    method,
-    fun
-  }: {
-    defaultData?: ISensor
-    method: Method,
-    fun: (data: ISensorCreate) => any
-  }) {
+export default function FormSensor({defaultData, method, fun}: FormProps<ISensorCreate>) {
 
   const {
     register,
@@ -36,7 +25,7 @@ export default function FormSensor(
     console.log(data)
     fun(data)
   }
-  const {data, isLoading, isError} = useGet<IAnggota[]>('', 'create', 'anggota')
+  const {data, isLoading, isError} = useGet<IAnggota[]>( 'create', 'anggota')
 
   if (isLoading) return <Loading/>
   if (!data || isError) return <Loading/>

@@ -2,7 +2,6 @@
 import {useRouter} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import {IAnggota, IAnggotaCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 import Loading from "@/components/elements/Loading";
 import PagesForm from "@/components/Layouts/PagesForm";
 import FormAnggota from "@/components/form/Anggota";
@@ -26,7 +25,7 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
     mutate(data, {
       onSuccess: () => {
         // router.push('/record')
-        router.push('/anggota' + paginationParam)
+        router.push('/anggota' )
       }
     })
   }

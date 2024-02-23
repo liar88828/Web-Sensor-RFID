@@ -1,9 +1,11 @@
 import prisma from "@/utils/prisma/client";
 import {AnggotaRelational, IAnggotaCreate, IPages, PatchAnggotaSensor} from "@/interface/type";
+import {limitDataBase} from "@/utils/nextAdd";
 
 class Anggota {
-  async findAll(limit: number = 100, page: number = 0) {
+  async findAll(page: number = 0) {
 
+    let limit = limitDataBase
     page = (page) * limit
     return prisma.anggota.findMany({
       take: limit, skip: page,

@@ -5,10 +5,9 @@ import PagesForm from "@/components/Layouts/PagesForm";
 import {useRouter} from "next/navigation";
 import {useGetID, useUpdate} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
-import {IRecord, IRecordCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
+import {IRecord, IRecordCreate, PageId} from "@/interface/type";
 
-export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
+export default function Page({searchParams: {id}}: PageId) {
   const router = useRouter()
 
   const {
@@ -19,21 +18,21 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
 
   const {mutate} = useUpdate("record", id)
 
-  function updateRecord(data: IRecordCreate) {
+  function updateHandlerRecord(data: IRecordCreate) {
     console.log(data)
     mutate(data, {
       onSuccess: () => {
-        // router.push('/record')
-        // router.back()
-        router.push('/record' + paginationParam)
-
+        router.push('/record')
       }
+      // ,onError(){
+      //
+      // }
     })
   }
 
   if (isLoading) return <Loading/>
 
-  if (isError) return <h1>Error</h1>
+  if (isError || !data) return <h1>Error</h1>
 
   return (
     <Suspense>
@@ -41,7 +40,7 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
         back={<></>
           // <BackLink href={'record'} title={'Create'}/>
         }
-        form={<FormRecord method='PUT' fun={updateRecord} defaultData={data}/>}
+        form={<FormRecord method='PUT' fun={updateHandlerRecord} defaultData={data}/>}
       />
     </Suspense>
   )

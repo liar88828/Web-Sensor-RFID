@@ -6,10 +6,10 @@ import React from 'react';
 
 export function SelectAsync<T>(
   {title, reg, keys, values, to}: {
-    reg: any, title: string, to: IPages, keys: keyof T, values: keyof T
+    reg: any, title: string, to: IPages, keys: keyof T, values: keyof T,
   }) {
 
-  const {data, isLoading, isError} = useGet<any[]>('_', 'create', to)
+  const {data, isLoading, isError} = useGet<any[]>( 'create', to)
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
   // console.log(data)

@@ -16,7 +16,7 @@ import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import Table from "@/components/tabels/tanstack/option/Table";
-import {IAnggota} from "@/interface/type";
+import {IAnggota, TableProps} from "@/interface/type";
 
 // export type Person = {
 //   firstName: string
@@ -29,7 +29,9 @@ import {IAnggota} from "@/interface/type";
 // }
 
 
-export function AnggotaTable({data}: { data: IAnggota[] }) {
+
+
+export function AnggotaTable({data, setPages}: TableProps<IAnggota[]>) {
   // const [data, setData] = React.useState(() => makeData<IAnggota>(newAnggota, 100))
   // const refreshData = () => setData(() => makeData(100))
   // const rerender = React.useReducer(() => ({}), {})[1]
@@ -150,6 +152,7 @@ export function AnggotaTable({data}: { data: IAnggota[] }) {
         excel={anggotaToExcel}
         table={table}
         to={'anggota'}
+        setPages={setPages}
       />
 
       <div className="overflow-x-auto rounded bg-base-100/90">

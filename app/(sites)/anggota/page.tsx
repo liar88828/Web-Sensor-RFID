@@ -2,22 +2,19 @@
 import {AnggotaTable} from "@/components/tabels/tanstack/Anggota";
 import {useGet} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
-import React from "react";
-import {IAnggota} from "@/interface/type";
+import React, {useState} from "react";
+import {IAnggota, PageProps} from "@/interface/type";
 
-export default function Page({searchParams: {limit, page}}: { searchParams: { limit: string, page: string } }) {
-
+export default function Page({searchParams: {page}}: PageProps) {
+  const [pages, setPages] = useState<number>(1)
   const {data, isLoading, isError} = useGet<IAnggota[]>(
-    limit,
-    page,
+    String(pages),
     "anggota")
-
 
   if (isLoading) return <Loading/>
 
   if (isError || !data) return <h1>Error</h1>
 
-  return <AnggotaTable data={data}/>
-
+  return <AnggotaTable data={data} setPages={setPages}/>
 
 }

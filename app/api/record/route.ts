@@ -3,10 +3,12 @@ import {recordData} from "@/utils/prisma/data/record";
 import {Inputs} from "@/utils/apiAdd";
 
 export async function GET(req: NextRequest) {
-  const {id, limit, page} = await Inputs(req)
+  const {id, page} = await Inputs(req)
+  console.log(id, page)
 
-  if (!id && limit && page) {
-    const data = await recordData.findAll(Number(limit), Number(page))
+  if (!id && page) {
+    const data = await recordData.findAll(Number(page))
+    // console.log(data,'sensot')
     return NextResponse.json(data, {status: 200})
   }
 
@@ -16,7 +18,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(data, {status: 200})
     }
   }
-  console.log(id, limit, page)
 
 }
 

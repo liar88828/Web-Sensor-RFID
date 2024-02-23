@@ -5,7 +5,6 @@ import PagesForm from "@/components/Layouts/PagesForm";
 import {useCreate} from "@/hook/useFetch";
 import {useRouter} from "next/navigation";
 import {ISensorCreate} from "@/interface/type";
-import {paginationParam} from "@/utils/nextAdd";
 
 export default function Page({params: {id_anggota}}: { params: { id_anggota: string } }) {
 

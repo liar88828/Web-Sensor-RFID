@@ -1,15 +1,15 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {keepPreviousData, useMutation, useQuery} from "@tanstack/react-query";
 import {IPages} from "@/interface/type";
 import {queryClient} from "@/components/provider/ReactQuery";
 import {toast} from "react-toastify";
 import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/toApi";
 
 
-const useGet = <T>(limit: string, page: string, to: IPages) => {
+const useGet = <T>(page: string, to: IPages) => {
   return useQuery<T>({
-    queryKey: [to],
-    queryFn: async () =>
-      apiGetAll(to, limit, page),
+    queryKey: [to, page],
+    queryFn: async () => apiGetAll(to, page),
+    placeholderData: keepPreviousData
   })
 }
 
@@ -41,12 +41,14 @@ const useGetID = <T>(to: IPages, id: string, page?: IPages) => {
 
 const useCreate = <T>(to: IPages, id?: string) => {
   return useMutation({
+      mutationKey: [to],
       mutationFn: (add: T) => apiCreate(to, id, add),
       onSuccess: async () => {
-        await queryClient.invalidateQueries({queryKey: [to]})
+        // await queryClient.invalidateQueries({queryKey: [to]})
         toast.success(`${to} Create successfully`);
       },
-      onError() {
+      onError(error) {
+        console.log(error)
         toast.error(`${to} Create Fail`);
       }
     }
