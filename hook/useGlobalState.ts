@@ -1,5 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {queryClient} from "@/components/provider/ReactQuery";
+import {IPages, PropsData} from "@/interface/type";
 
 type KEY = string[] | ['SENSOR']
 
@@ -60,8 +61,7 @@ export function useGlobalState<T>(key: KEY, initialData?: T | any) {
 //   return {state, setState}
 // }
 
-
-export const useRQSGlobalState = (key: string[], initialData: any) => [
+export const useRQSGlobalState = (key: [IPages, PropsData ], initialData: any) => [
   useQuery({
     queryKey: key,
     queryFn: () => initialData,

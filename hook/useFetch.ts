@@ -5,7 +5,7 @@ import {toast} from "react-toastify";
 import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/toApi";
 
 
-const useGet = <T>(page: string, to: IPages) => {
+const useGet = <T>(to: IPages,page: string|number, ) => {
   return useQuery<T>({
     queryKey: [to, page],
     queryFn: async () => apiGetAll(to, page),

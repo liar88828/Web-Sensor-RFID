@@ -1,28 +1,34 @@
 import React, {useState} from 'react';
 import ReactPaginate from "react-paginate";
+import {useRQSGlobalState} from "@/hook/useGlobalState";
+import {IPages} from "@/interface/type";
 
 
-export function usePaginations(data: any[], showItem: number) {
-  const [itemOffset, setItemOffset] = useState<number>(0);
+export function usePaginations(data: any[], showItem: number,to:IPages) {
   // const [showItem, setShowItem] = useState<number>(0);
+  const [_, setPage] = useRQSGlobalState([to,'pagination'], 0)
+  const [itemOffset, setItemOffset] = useState<number>(0);
   const itemsPerPage: number = showItem
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = data.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(data.length / itemsPerPage);
-
+  const currentPage = 0 - (endOffset / 10)
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % data.length;
     setItemOffset(newOffset);
+    setPage(currentPage)
   };
 
-  return {currentItems, handlePageClick, pageCount,}
+  return {currentItems, handlePageClick, pageCount, currentPage}
 }
 
 
-export function Paginations({handlePageClick, pageCount}: {
+export function Paginations({handlePageClick, pageCount,}: {
   handlePageClick: (event: any) => void,
   pageCount: number
 }) {
+
+
   return (
     <div className="flex justify-center">
       <ReactPaginate

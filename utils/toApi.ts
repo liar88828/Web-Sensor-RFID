@@ -55,7 +55,7 @@ export async function apiGetIDWithPages(to: IPages, id: string, page?: IPages) {
   return res.json()
 }
 
-export async function apiGetAll(to: IPages, page: string) {
+export async function apiGetAll(to: IPages, page: string | number) {
   const res = await fetch(`${nextUrl}/api/${to}?page=${page}`, {cache: 'no-store'})
   if (!res.ok) {
     throw new Error(`Error Cannot Get Data ${to}`)

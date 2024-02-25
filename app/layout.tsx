@@ -26,7 +26,7 @@ export default function RootLayout ( {
         <TRQuery>
           {/* <div className="bg-red-200 p-2"> */}
 
-            <div className="min-h-screen  bg-red-200/40 pt-20">
+            <div className="min-h-screen  bg-base-200/30 pt-20 p-5">
             <Navbar />
               { children }
             {/* </div> */}

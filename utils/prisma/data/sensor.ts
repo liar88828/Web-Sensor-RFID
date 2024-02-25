@@ -7,7 +7,7 @@ class Sensor {
     let limit = limitDataBase
 
     page = (page) * limit
-    return prisma.sensor.findMany({take: limit, skip: page})
+    return prisma.sensor.findMany({take: limit, skip: page,})
   }
 
   async findKey(keys: keyof ISensor, value: string) {

@@ -25,7 +25,7 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
     console.log(data)
     fun(data)
   }
-  const {data, isLoading, isError} = useGet<IAnggota[]>( 'create', 'anggota')
+  const {data, isLoading, isError} = useGet<IAnggota[]>('anggota', 'create')
 
   if (isLoading) return <Loading/>
   if (!data || isError) return <Loading/>
@@ -54,7 +54,7 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
         <FormBody>
           {/*<InputForm*/}
           {/*  errors={errors}*/}
-          {/*  title={'Status'}*/}
+          {/*  title={'DataStatus'}*/}
           {/*  type="text"*/}
           {/*  max={10}*/}
           {/*  reg={register("status")}/>*/}

@@ -9,7 +9,7 @@ export function SelectAsync<T>(
     reg: any, title: string, to: IPages, keys: keyof T, values: keyof T,
   }) {
 
-  const {data, isLoading, isError} = useGet<any[]>( 'create', to)
+  const {data, isLoading, isError} = useGet<any[]>(  to,'create')
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
   // console.log(data)

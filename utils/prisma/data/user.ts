@@ -19,6 +19,21 @@ class User {
     })
   }
 
+
+  async status() {
+    return prisma.$transaction(async (tx) => {
+      return {
+        anggota: await tx.anggota.count(),
+        user: await tx.user.count(),
+        sensor: await tx.sensor.count(),
+        record: await tx.record.count(),
+      }
+    })
+  }
+
+
+
+
   async findKey(keys: keyof IUser | 'id', value: string) {
 
     return prisma.$transaction(async (tx) => {

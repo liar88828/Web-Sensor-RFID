@@ -12,9 +12,9 @@ import React from "react";
 import {Table} from "@tanstack/react-table";
 
 export type Method = 'POST' | 'PUT'
-export  type IPages = 'anggota' | 'sensor' | 'record' | 'user'
+export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard'
 export type TMethod = "PUT" | "POST" | "GET" | "DELETE" | "PATCH";
-
+export type PropsData = 'pagination' | 'number' | ''
 
 // type Data = keyof TDelivery;
 export interface AnggotaRelational {
@@ -79,8 +79,18 @@ export type IRecordCreate = z.infer<typeof recordSchema>
 export type IRecord = Required<IRecordCreate>
 
 export type ISensorGlobal = { value: IRecord[], rfid: string }
-export type IDataOrang = { name: string, alamat: string, no_hp: string, id: string }
+export type IDataOrang = { name: string, alamat: string, no_hp: string, id: string, email: string, }
 
+export type IRecordRelational = Required<IRecordCreate> & {
+  Sensor: ISensor
+}
+
+
+export interface LineChart {
+  year: number,
+  month: number,
+  record_count: number
+}
 
 export interface FormProps<T> {
   method: Method;

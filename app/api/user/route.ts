@@ -5,6 +5,12 @@ import {userData} from "@/utils/prisma/data/user";
 export async function GET(req: NextRequest) {
   const {id,  page} = await Inputs(req)
 
+  if (page === 'status') {
+    const data = await userData.status()
+    return NextResponse.json(data, {status: 200})
+  }
+
+
 
   if (page === 'create') {
     const data = await userData.findDontHaveUser()

@@ -4,6 +4,7 @@ import React from 'react';
 import {
   CategoryScale,
   Chart as ChartJS,
+  type ChartOptions,
   Legend,
   LinearScale,
   LineElement,
@@ -12,7 +13,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
-import {faker} from "@faker-js/faker";
+import {LineChart} from "@/interface/type";
 
 
 ChartJS.register(
@@ -25,8 +26,10 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+export const options: ChartOptions<'line'> = {
   responsive: true,
+  maintainAspectRatio: false,
+
   plugins: {
     legend: {
       position: 'top' as const,
@@ -36,6 +39,18 @@ export const options = {
       text: 'Sensor Masuk',
     },
   },
+
+  // scales: {
+  //
+  //   r: {
+  //     ticks: {
+  //       backdropPadding: {
+  //         height:20
+  //       }
+  //     }
+  //   }
+  // }
+
 };
 
 const labels = [
@@ -53,24 +68,28 @@ const labels = [
   "Desember"
 ]
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Belum Masuk',
-      data: labels.map(() => faker.number.int({min: -100, max: 100})),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Sudah Masuk',
-      data: labels.map(() => faker.number.int({min: -100, max: 100})),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
 
-export function Lines() {
-  return <Line options={options} data={data}/>;
+export function Lines({data}: { data: LineChart[] }) {
+  const datOption = {
+    labels: data.map(d => d.month),
+    datasets: [
+      // {
+      //   label: 'Belum Masuk',
+      //   data: data.map(() => faker.number.int({min: -100, max: 100})),
+      //   borderColor: 'rgb(255, 99, 132)',
+      //   backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      // },
+      {
+        label: 'Sudah Masuk',
+        data: data.map((d) => d.record_count),
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+  return <Line options={options}
+               data={datOption}
+               width={100}
+               height={100}
+  />;
 }

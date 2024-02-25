@@ -87,7 +87,8 @@ export const dataOrang = (): IDataOrang => {
     id: faker.number.int({max: 999999}).toString(),
     name: faker.person.fullName(),
     alamat: faker.person.jobArea(),
-    no_hp: faker.phone.number('501-###-###')
+    email: faker.internet.email(),
+    no_hp: faker.string.numeric('+62 82 ### ### ###')
   }
 }
 export const dataRecord = (): ISensorGlobal => {

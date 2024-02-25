@@ -7,10 +7,11 @@ import React from "react";
 import {useRQSGlobalState} from "@/hook/useGlobalState";
 
 export default function Page({searchParams: {page}}: PageProps) {
-  const [value] = useRQSGlobalState(['pageDatas'], 0)
+  const [value] = useRQSGlobalState(['sensor', 'pagination', ], 0)
   const {data, isLoading, isError} = useGet<ISensor[]>(
+    "sensor",
     String(value),
-    "sensor")
+  )
 
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>

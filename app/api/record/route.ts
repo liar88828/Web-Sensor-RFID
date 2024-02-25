@@ -6,11 +6,21 @@ export async function GET(req: NextRequest) {
   const {id, page} = await Inputs(req)
   console.log(id, page)
 
-  if (!id && page) {
-    const data = await recordData.findAll(Number(page))
-    // console.log(data,'sensot')
+
+  if (page === 'dashboard') {
+    const data = await recordData.countRecordsByMonth()
+    // console.log(data)
     return NextResponse.json(data, {status: 200})
   }
+
+
+  if (!id && page) {
+    const data = await recordData.findAll(Number(page))
+
+    // console.log(data,'record')
+    return NextResponse.json(data, {status: 200})
+  }
+
 
   if (id !== null) {
     if (id.length >= 1) {

@@ -8,10 +8,11 @@ import {useRQSGlobalState} from "@/hook/useGlobalState";
 
 
 export default function Page({searchParams: {page}}: PageProps) {
-  const [value] = useRQSGlobalState(['pageDatas'], 0)
+  const [value] = useRQSGlobalState(["record", 'pagination', ], 0)
   const {data, isLoading, isError, isPending, isFetching} = useGet<IRecord[]>(
+    "record",
     String(value),
-    "record")
+  )
 
   if (isLoading || isPending || isFetching) return <Loading/>
   if (isError || !data) return <h1>Error</h1>

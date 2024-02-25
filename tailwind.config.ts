@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   daisyui: {
-    themes: [  "cupcake" ],
+    themes: [ 'corporate', "synthwave",'garden','forest', ],
   },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",

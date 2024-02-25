@@ -10,13 +10,8 @@ import React from "react";
 export default function Navbar() {
   const {data: session} = useSession()
   const pathName = usePathname()
-  // const callback = useSearchParams().get('callback')
-  // const callback = useSearchParams().getAll('callback')
-  //
   const path = pathName.split('/',)
-
   const router = useRouter()
-  // console.log(callback)
   return (
     <section className="fixed top-2 left-2 right-2">
 
@@ -24,7 +19,12 @@ export default function Navbar() {
         <div className="navbar-start">
           <div className="flex flex-row gap-2">
             <Sidebar/>
-            <button onClick={() => router.back()} className="btn btn-neutral">Back</button>
+            <button
+              onClick={() => router.back()}
+              className="btn btn-neutral "
+              // sm:btn-md btn-sm
+            >Back
+            </button>
           </div>
         </div>
 

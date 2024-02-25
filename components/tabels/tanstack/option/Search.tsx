@@ -10,7 +10,7 @@ import Loading from "@/components/elements/Loading";
 
 export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, detail = false}: SearchTable<T>) {
   const queryClients = useQueryClient()
-  const [value, values] = useRQSGlobalState(['pageDatas'], 0)
+  const [value, values] = useRQSGlobalState([to,'pagination'], 0)
   const id = table.getSelectedRowModel().rows.map((data: any) => data.original.id)
 
   const {mutate} = useDelete(to)
