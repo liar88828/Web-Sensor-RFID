@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import ReactPaginate from "react-paginate";
 import {useRQSGlobalState} from "@/hook/useGlobalState";
-import {IPages} from "@/interface/type";
+import {IPages, IPagination} from "@/interface/type";
 
 
-export function usePaginations(data: any[], showItem: number,to:IPages) {
+export function usePaginations<T>(data: T[], showItem: number, to: IPages) {
   // const [showItem, setShowItem] = useState<number>(0);
-  const [_, setPage] = useRQSGlobalState([to,'pagination'], 0)
+  const [_, setPage] = useRQSGlobalState([to, 'pagination'], 0)
   const [itemOffset, setItemOffset] = useState<number>(0);
   const itemsPerPage: number = showItem
   const endOffset = itemOffset + itemsPerPage;
@@ -23,31 +23,30 @@ export function usePaginations(data: any[], showItem: number,to:IPages) {
 }
 
 
-export function Paginations({handlePageClick, pageCount,}: {
-  handlePageClick: (event: any) => void,
-  pageCount: number
-}) {
-
+export function Paginations(
+  {handlePageClick, pageCount, size = 'md'}:
+    IPagination
+) {
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-2">
       <ReactPaginate
-        className={'join'}
+        className={'join shadow-xl'}
         //
-        nextClassName={'join-item btn'}
+        nextClassName={`join-item btn btn-${size} `}
         nextLabel="next >"
         //
-        breakClassName={'join-item btn btn-disabled'}
+        breakClassName={`join-item btn btn-disabled btn-${size}`}
         breakLabel="..."
         //
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         //
-        activeClassName={'join-item btn btn-active'}
-        pageClassName={'join-item btn  '}
+        activeClassName={`join-item btn btn-active btn-${size}`}
+        pageClassName={`join-item btn btn-${size}`}
         pageCount={pageCount}
         //
-        previousClassName={'join-item btn'}
+        previousClassName={`join-item btn btn-${size}`}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
       />

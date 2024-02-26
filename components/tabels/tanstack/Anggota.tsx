@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table'
 
 import Divider from "@/components/elements/Divider";
-import {anggotaToExcel} from "@/utils/excel";
+import {anggotaToExcel} from "@/utils/lib/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";

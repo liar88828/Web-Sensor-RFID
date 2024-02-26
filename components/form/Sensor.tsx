@@ -22,7 +22,7 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
   })
 
   const onSubmit = (data: ISensorCreate) => {
-    console.log(data)
+    // console.log(data)
     fun(data)
   }
   const {data, isLoading, isError} = useGet<IAnggota[]>('anggota', 'create')
@@ -34,8 +34,6 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormLayout>
         <FormBody>
-
-
           <InputForm
             errors={errors}
             title={'Rfid'}

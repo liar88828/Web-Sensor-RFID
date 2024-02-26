@@ -12,11 +12,11 @@ import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IUser, TableProps} from "@/interface/type";
-import {userToExcel} from "@/utils/excel";
+import {userToExcel} from "@/utils/lib/excel";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 
-export function UserTable({data,  }: TableProps<IUser[]>) {
+export function UserTable({data,}: TableProps<IUser[]>) {
 
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -120,8 +120,6 @@ export function UserTable({data,  }: TableProps<IUser[]>) {
 
       <div className="overflow-x-auto rounded bg-base-100/90">
         <Table<IUser> table={table}/>
-        {/*Pagination*/}
-        {/*<div className="h-2"/>*/}
         <Divider className={'divide-primary'} name={''}/>
         <Pagination<IUser> table={table}/>
         {/*<Options<ISensor> table={table} refreshData={refreshData} rerender={rerender} rowSelection={rowSelection}/>*/}

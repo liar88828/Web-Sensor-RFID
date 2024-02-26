@@ -3,12 +3,12 @@ import {enableCache, Icon} from "@iconify/react";
 import React from "react";
 import {indonesianPhone} from "@/utils/formatIndonesia";
 
-enableCache('local');
 
 export function TableOrang({data}: { data: IDataOrang[] }) {
-  return (
+  enableCache('local');
 
-    <table className="table table-zebra table-xs static">
+  return (
+    <table className="table table-zebra table-xs static shadow">
       {/* head */}
       <thead>
       <tr>

@@ -83,7 +83,7 @@ model Anggota {
 model Sensor {
   id         String   @id @default(uuid())
   rfid       String   @db.VarChar(20)
-  kode       String   @db.VarChar(10)
+  kode       String   @unique @db.VarChar(10)
   status     String   @default("INVALID") @db.VarChar(10)
   warna      String   @db.VarChar(10)
   id_anggota String?

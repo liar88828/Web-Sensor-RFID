@@ -3,7 +3,7 @@ import React from 'react'
 
 import {enableCache, Icon} from '@iconify/react/dist/iconify.js'
 import Link from "next/link";
-import {exampleDataSensor} from "@/utils/exampleData";
+import {exampleDataSensor} from "@/utils/asset/exampleData";
 
 enableCache('local');
 

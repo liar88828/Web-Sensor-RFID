@@ -9,15 +9,13 @@ import {Lines} from "@/components/chart/Line";
 
 function DataLines() {
 
-  const {data, isLoading, isError} = useGet<LineChart[]>('record', 'dashboard')
+  const {data, isLoading, isError} = useGet<LineChart[]>('dashboard', 'line')
   if (isLoading) return <Loading/>
   if (!data || isError) return <Errors/>
-  // console.log(data)
+
 
   return (
-
-    // <div className="h-32 w-auto">
-    <div className="rounded  bg-base-100 p-2 h-80 shadow">
+    <div className="rounded  bg-base-100 p-2 h-80 shadow-lg ">
       <Lines data={data}/>
     </div>
   );

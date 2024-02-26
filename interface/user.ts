@@ -1,13 +1,24 @@
-export interface Root {
-  name: string
-  no_hp: string
+export interface IProfile {
+  Anggota: Anggoum[]
   alamat: string
   email: string
   id: string
-  Anggota: Anggoum[]
-  sensor: Sensor[]
-  record: Record[]
+  name: string
+  no_hp: string
+  record: RelationalRecordSensor[]
+  sensor: RelationalSensorRecord[]
   sensorNull: Sensor[]
+}
+
+export type  RelationalSensorRecord = Sensor & {
+  id_record: Record[]
+}
+export type  RelationalRecordSensor = IdRecord & {
+
+}
+
+export type  RelationalAnggotaSensor = Sensor & {
+  id_record: Record[]
 }
 
 export interface Anggoum {

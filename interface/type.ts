@@ -12,9 +12,16 @@ import React from "react";
 import {Table} from "@tanstack/react-table";
 
 export type Method = 'POST' | 'PUT'
-export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard'
+export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard' | 'profile'
 export type TMethod = "PUT" | "POST" | "GET" | "DELETE" | "PATCH";
 export type PropsData = 'pagination' | 'number' | ''
+export type ISize = 'sm' | 'xs' | 'md'
+
+export interface IPagination {
+  handlePageClick: (event: any) => void;
+  pageCount: number;
+  size?: ISize;
+}
 
 // type Data = keyof TDelivery;
 export interface AnggotaRelational {
@@ -35,6 +42,13 @@ export interface UserData {
   name: string
   no_hp: string
   email: string
+}
+
+export interface StatusData {
+  anggota: number;
+  user: number;
+  sensor: number;
+  record: number;
 }
 
 export type oldAnggota = UserData & IAnggota

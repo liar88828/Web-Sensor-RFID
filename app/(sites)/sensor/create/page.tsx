@@ -9,7 +9,7 @@ import {ISensorCreate} from "@/interface/type";
 export default function Page() {
 
   const router = useRouter()
-  console.log('test')
+  // console.log('test')
   const {mutate} = useCreate("sensor")
 
   function createSensor(data: ISensorCreate) {

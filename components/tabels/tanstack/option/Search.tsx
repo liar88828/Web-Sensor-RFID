@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import {SearchTable} from "@/interface/type";
 import {Icon} from "@iconify/react";
@@ -10,15 +9,21 @@ import Loading from "@/components/elements/Loading";
 
 export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, detail = false}: SearchTable<T>) {
   const queryClients = useQueryClient()
-  const [value, values] = useRQSGlobalState([to,'pagination'], 0)
+  const [value, values] = useRQSGlobalState([to, 'pagination'], 0)
   const id = table.getSelectedRowModel().rows.map((data: any) => data.original.id)
 
-  const {mutate} = useDelete(to)
+  const {mutate} = useDelete(to, value)
   const onDelete = async () => {
-    mutate(id[0], {
-      onSuccess: () => {
-      }
-    })
+    if (confirm(`Want to delete id ${id[0]} ?`)) {
+      mutate({value: id[0]}, {
+        onSuccess: () => {
+          // queryClients.invalidateQueries({
+          //   queryKey: [to, 'pagination'
+          //   ]
+          // })
+        }
+      })
+    }
   }
   const pages = queryClients.getQueryData<T[]>([to, String(value)])
   if (!pages) return <Loading/>

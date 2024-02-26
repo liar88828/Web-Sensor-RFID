@@ -7,12 +7,12 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import Divider from "@/components/elements/Divider";
-import {sensorToExcel} from "@/utils/excel";
+import {sensorToExcel} from "@/utils/lib/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {ISensor, TableProps} from "@/interface/type";
-import {cssValid} from "@/utils/css";
+import {cssValid} from "@/utils/next/css";
 import Table from "@/components/tabels/tanstack/option/Table";
 
 // export type Person = {

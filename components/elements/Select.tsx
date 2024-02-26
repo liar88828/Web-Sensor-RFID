@@ -9,7 +9,7 @@ export function SelectAsync<T>(
     reg: any, title: string, to: IPages, keys: keyof T, values: keyof T,
   }) {
 
-  const {data, isLoading, isError} = useGet<any[]>(  to,'create')
+  const {data, isLoading, isError} = useGet<any[]>(to, 'create')
   if (isLoading) return <Loading/>
   if (isError || !data) return <h1>Error</h1>
   // console.log(data)
@@ -46,7 +46,7 @@ export function SelectNormal(
 
 
 export function SelectJson<T>(
-  {title = '', reg, keys, values, data, showTitle = true, values2, onChange}: {
+  {title = '', reg, keys, values, data, showTitle = true, values2, onChange, size = ''}: {
     reg?: any,
     title?: string,
     keys: keyof T,
@@ -55,6 +55,7 @@ export function SelectJson<T>(
     showTitle: boolean,
     values2?: keyof T,
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    size?: 'select-xs' | ''
   }) {
 
 
@@ -66,13 +67,13 @@ export function SelectJson<T>(
         </div>
       }
       <select
-        className="select select-bordered "
+        className={`select select-bordered ${size}`}
         {...reg}
         onChange={onChange}>
         <option value={''}>Select....</option>
         {data.map(d => (<option
           value={d[keys]}
-          key={d.id}>{d[values]}  {values2 ? d[values2] : ''}</option>))}
+          key={d.id}>{d[values]} {values2 ? d[values2] : ''}</option>))}
       </select>
     </div>
   );

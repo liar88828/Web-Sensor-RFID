@@ -120,13 +120,10 @@ class Anggota {
   }
 
   async deletedPage(id: string, page: IPages) {
-    if (page === 'sensor') {
-      return prisma.sensor.update({
-        where: {id},
-        data: {id_anggota: null}
-      })
-
-    }
+    return prisma.sensor.update({
+      where: {id},
+      data: {id_anggota: null}
+    })
   }
 }
 

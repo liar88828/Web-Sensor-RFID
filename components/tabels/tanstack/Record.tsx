@@ -9,12 +9,13 @@ import {
 } from '@tanstack/react-table'
 
 import Divider from "@/components/elements/Divider";
-import {recordToExcel} from "@/utils/excel";
+import {recordToExcel} from "@/utils/lib/excel";
 import {Pagination} from "@/components/tabels/tanstack/option/Pagination";
 import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/IndeterminateCheckbox";
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IRecord, TableProps} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
+import {formatDate, formatTime} from "@/utils/formatIndonesia";
 
 export function RecordTable({data}: TableProps<IRecord[]>) {
   const [globalFilter, setGlobalFilter] = React.useState('')
@@ -54,16 +55,13 @@ export function RecordTable({data}: TableProps<IRecord[]>) {
       {
         accessorKey: 'tanggal',
         header: () => 'Tanggal',
-        cell: info => new Date(String(info.getValue())).toLocaleDateString('id-ID', {dateStyle: "full"}),
+        cell: info => formatDate(info.getValue()),
         footer: props => props.column.id,
       },
       {
         accessorKey: 'jamMasuk',
         header: () => 'Jam Masuk',
-        cell: info => new Date(String(info.getValue())).toLocaleDateString('id-ID', {
-          hour: 'numeric',
-          minute: "numeric",
-        }),
+        cell: info => formatTime(info.getValue()),
         footer: props => props.column.id,
       },
       {

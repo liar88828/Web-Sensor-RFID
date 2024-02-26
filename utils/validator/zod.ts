@@ -1,5 +1,10 @@
 import {z} from "zod";
 
+export const zodUUID = z.object({
+  id: z.string().min(30).max(34),
+})
+export const zodCUID = z.string().isCUID
+
 export const registerSchema = z.object({
   name: z.string(),
   no_hp: z.string(),

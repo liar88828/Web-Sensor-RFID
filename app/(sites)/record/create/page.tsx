@@ -8,26 +8,26 @@ import {useCreate} from "@/hook/useFetch";
 import {IRecordCreate} from "@/interface/type";
 
 export default function Page() {
-
   const router = useRouter()
-
-  const {mutate, status} = useCreate("record")
-  console.log(status)
+  const {mutate,  } = useCreate("record")
 
   function createRecord(data: IRecordCreate) {
-    console.log(data)
+    // console.log(data)
     mutate(data, {
       onSuccess: () => {
         // router.back()
         router.push('/record' )
-      }
+      },
     })
   }
 
 
   return (
     <PagesForm
-      back={<BackLink href={'record'} title={'Record'}/>}
+      back={
+      // <BackLink href={'record'} title={'Record'}/>
+        <></>
+    }
       form={<FormRecord method='POST' fun={createRecord}/>}
     />
   )

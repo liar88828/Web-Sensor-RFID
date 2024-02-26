@@ -32,13 +32,15 @@ class User {
   }
 
 
-
-
   async findKey(keys: keyof IUser | 'id', value: string) {
+    return prisma.user.findUnique({where: {id: value}})
+  }
+
+  async findProfile(id: string) {
 
     return prisma.$transaction(async (tx) => {
       const user = await tx.user.findUnique({
-        where: {id: value},
+        where: {id: id},
         select: {
           name: true, no_hp: true, alamat: true, email: true, id: true,
           Anggota: {
@@ -60,28 +62,10 @@ class User {
           }
         },
       })
-      console.log(user)
+      // console.log(user)
       if (!user) {
         return null
       }
-
-
-      // @ts-ignore
-      // const anggota = await tx.user.findUnique({
-
-      // where: {
-      //   id_user: user.id
-      // },
-      // include: {
-      //   id_sensor: {
-      //     include: {
-      //       id_record: true
-      //     }
-      //   }
-      // }
-      // })
-      // console.log(user)
-
 
       if (user.Anggota.length === 0) return {...user, record: null}
 
@@ -109,61 +93,15 @@ class User {
       const record = await tx.record.findMany({
         where: {id_sensor: {in: id_sensor}}
       })
+      console.log(record,'record')
       if (record.length === 0) return {...user, sensor, record: null, sensorNull}
 
-
       return {...user, sensor, record, sensorNull}
-      // console.log(record, 'record')
 
-      //
-      // console.log(record)
-      // if (!id_sensor) {
-      //   return {...user, record: null}
-      // }
-      //   return {...user, anggota, record}
-      //
-      //
     })
-    //
-    // .user.findUnique({
-    //  where: {id: value},
-    //  select: {
-    //    name: true,
-    //    no_hp: true,
-    //    alamat: true,
-    //    email: true,
-    // include: {
-    //   Anggota: {
-    //
-    //     include: {
-    //       id_sensor: {
-    //
-    //         include: {
-    //           id_record: true
-    //         }
-    //       },
-    //       user: {
-    //         select: {
-    //           name: true,
-    //           no_hp: true,
-    //           alamat: true,
-    //           email: true,
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-
-    // select: {
-    //   name: true,
-    //   no_hp: true,
-    //   alamat: true,
-    //   email: true,
-    // },
-    // })
-    // let {} = response
 
   }
+
 
   async findDontHaveUser() {
     return prisma.user.findMany({

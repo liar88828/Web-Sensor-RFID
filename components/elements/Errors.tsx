@@ -1,8 +1,9 @@
 import React from 'react';
 
-function Errors() {
-  return (
-    <h1>Errors</h1>
+function Errors({text = 'Error...'}: { text?: string }) {
+  return (<div className={'btn btn-error'}>
+      <h1>{text}</h1>
+    </div>
   );
 }
 

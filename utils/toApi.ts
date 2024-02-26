@@ -28,12 +28,29 @@ export async function apiUpdate<T>(to: IPages, id: string, add: T) {
 }
 
 export async function apiCreate<T>(to: IPages, id: string | undefined, add: T) {
-  const res = await fetch(`${nextUrl}/api/${to}?id=${id}`, {
+  let url = `${nextUrl}/api/${to}`
+  if (id) {
+    url.concat('?id=${id}')
+  }
+  // console.log(url)
+  const res = await fetch(url, {
     method: "POST", headers: {'Content-type': "application/json"},
     body: JSON.stringify(add)
   })
   if (!res.ok) {
-    throw new Error(`Error Cannot Create Data ${to}`)
+    const data = await res.json()
+    if (data.message.toString().includes('Unique')) {
+      const value = data.value
+      let text = `The ${value} Data Is Unique `
+      // console.log(text)
+      throw new Error(text)
+    }
+
+
+    throw new Error(
+      JSON.stringify({message: data.message, value: data.value})
+      //`Error Cannot Create Data ${to}`
+    )
   }
   return res.json()
 }
@@ -68,6 +85,7 @@ export async function apiDelete(to: IPages, id: string, page?: IPages,) {
     method: "DELETE"
   })
   if (!res.ok) {
+    console.log(await res.json())
     throw new Error(`Error Cannot Delete Data ${to}`)
   }
   return res.json()

@@ -1,3 +1,5 @@
+import {locations} from "@/utils/nextAdd";
+
 export function indonesianPhone(number: string) {
   // Add country code and remove leading zero
   const countryCode = "+62";
@@ -5,7 +7,18 @@ export function indonesianPhone(number: string) {
   return phoneNumber;
 }
 
-// // Example usage:
-// const originalNumber = "0123123";
-// const indonesianNumber = indonesianPhone(originalNumber);
-// console.log(indonesianNumber); // Output: +62 1231 23
+export const formatNumber = (number: number) => {
+
+  return new Intl.NumberFormat(locations, {
+    notation: "standard",
+    // compactDisplay: "short",
+  }).format(number);
+}
+export const formatDate = (data?: Date | undefined | unknown) => {
+  if (typeof data !== 'string') return 'Wrong Data Date'
+  return new Date(data).toLocaleDateString(locations, {dateStyle: 'full'})
+}
+export const formatTime = (data?: string | undefined | unknown) => {
+  if (typeof data !== 'string') return 'Wrong Data Time'
+  return new Date(data).toLocaleTimeString(locations, {hour: '2-digit', minute: "2-digit"})
+}
