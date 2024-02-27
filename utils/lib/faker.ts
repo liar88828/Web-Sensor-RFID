@@ -25,14 +25,14 @@ export const newAnggota = (): IAnggota => {
     warna: faker.color.human(),
     hewan: faker.animal.bird(),
     // sensor: faker.number.int({max: 1000000}).toString(),
-    id_user: faker.string.uuid(),
+    // id_user: faker.string.uuid(),
   }
 }
 
 
 export const newSensor = (): ISensor => {
   return {
-    id_anggota: faker.string.uuid(),
+    // id_anggota: faker.string.uuid(),
     id: faker.string.uuid(),
     rfid: faker.animal.bird(),
     kode: faker.number.int({max: 1000000}).toString(),
@@ -91,15 +91,15 @@ export const dataOrang = (): IDataOrang => {
     no_hp: faker.string.numeric('+62 82 ### ### ###')
   }
 }
-export const dataRecord = (): ISensorGlobal => {
-  return {
-    // id: faker.number.int({max: 999999}).toString(),
-    // name: faker.person.fullName(),
-    // alamat: faker.person.jobArea(),
-    rfid: faker.person.fullName(),
-    value: faker.helpers.arrayElements(fakerRecord,)
-  }
-}
+// export const dataRecord = (): ISensorGlobal => {
+//   return {
+//     // id: faker.number.int({max: 999999}).toString(),
+//     // name: faker.person.fullName(),
+//     // alamat: faker.person.jobArea(),
+//     rfid: faker.person.fullName(),
+//     value: faker.helpers.arrayElements(fakerRecord,)
+//   }
+// }
 
 
 const dataRecords = () => {
@@ -114,4 +114,4 @@ const dataRecords = () => {
 export const fakerDataOrang = makeData(dataOrang, 10)
 // export const fakerDataRecord = makeData(dataRecord, 10)
 export const fakerRecord = makeData(dataRecords, 10)
-export const fakerDataRecord = dataRecord()
+// export const fakerDataRecord = dataRecord()

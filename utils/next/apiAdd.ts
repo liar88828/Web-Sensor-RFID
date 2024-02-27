@@ -12,12 +12,18 @@ export async function Inputs(request: NextRequest) {
   let id = searchParams.get("id") ?? null
   // let limit = searchParams.get("limit") ?? null
   let page: string | null | IPages = searchParams.get("page") ?? null
-
-  if (request.method === 'POST' || request.method === 'PUT' || request.method === 'PATCH') {
+  let table: string | null | IPages = searchParams.get("table") ?? null
+  let method = request.method
+  if (page === 'undefined') page = null
+  if (table === 'undefined') table = null
+  console.log(method)
+  if (method === 'POST' ||
+    method === 'PUT' ||
+    method === 'PATCH') {
     const json = await request.json()
-    return {id, page, json}
+    return {id, page, json, table}
   }
-  return {id, page}
+  return {id, page, table}
 }
 
 export async function tryCatch(fun: () => any) {

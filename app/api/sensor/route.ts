@@ -6,7 +6,6 @@ import {zodUUID} from "@/utils/validator/zod";
 export async function GET(req: NextRequest) {
   return tryCatch(async () => {
     const {id, page} = await Inputs(req)
-
     if (!id && page) {
       const data = await sensorData.findAll(Number(page))
       return NextResponse.json(data, {status: 200})
@@ -43,6 +42,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   return tryCatch(async () => {
     const {id, json} = await Inputs(req)
+    console.log(id, json)
 
     if (id) {
       const data = await sensorData.update(id, json)

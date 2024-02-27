@@ -4,10 +4,8 @@ import {sensorSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
 import {SubmitButton} from "../elements/button";
-import {FormProps, IAnggota, ISensorCreate} from '@/interface/type'
+import {FormProps, ISensorCreate} from '@/interface/type'
 import {SelectNormal} from "@/components/elements/Select";
-import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
 
 export default function FormSensor({defaultData, method, fun}: FormProps<ISensorCreate>) {
 
@@ -20,15 +18,15 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
     resolver: zodResolver(sensorSchema),
     defaultValues: method === 'PUT' ? defaultData : {}
   })
-
+  // console.log(errors)
   const onSubmit = (data: ISensorCreate) => {
-    // console.log(data)
+    console.log(data)
     fun(data)
   }
-  const {data, isLoading, isError} = useGet<IAnggota[]>('anggota', 'create')
-
-  if (isLoading) return <Loading/>
-  if (!data || isError) return <Loading/>
+  // const {data, isLoading, isError} = useGet<ISensorCreate[]>('sensor', 'create')
+  //
+  // if (isLoading) return <Loading/>
+  // if (!data || isError) return <Loading/>
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,13 +48,11 @@ export default function FormSensor({defaultData, method, fun}: FormProps<ISensor
         </FormBody>
 
         <FormBody>
-          {/*<InputForm*/}
-          {/*  errors={errors}*/}
-          {/*  title={'DataStatus'}*/}
-          {/*  type="text"*/}
-          {/*  max={10}*/}
-          {/*  reg={register("status")}/>*/}
-          <SelectNormal reg={register('status')} title={'Status'} data={['INVALID', 'ACTIVE']}/>
+          <SelectNormal
+            reg={register('status')}
+            title={'Status'}
+            data={['INVALID', 'ACTIVE']}
+          />
 
           <InputForm
             errors={errors}

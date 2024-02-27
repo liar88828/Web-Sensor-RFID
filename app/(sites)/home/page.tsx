@@ -1,13 +1,13 @@
 'use client'
 import Head from "next/head";
-import Hero from "@/components/home/hero";
-import SectionTitle from "@/components/home/sectionTitle";
-import Benefits from "@/components/home/benefits";
-import Video from "@/components/home/video";
-import Testimonials from "@/components/home/testimonials";
-import Cta from "@/components/home/cta";
-import Footer from "@/app/(sites)/dashboard/Footer";
-import {benefitOne, benefitTwo} from "@/components/home/data";
+import Hero from "@/app/(sites)/home/components/hero";
+import SectionTitle from "@/app/(sites)/home/components/sectionTitle";
+import Benefits from "@/app/(sites)/home/components/benefits";
+import Video from "@/app/(sites)/home/components/video";
+import Testimonials from "@/app/(sites)/home/components/testimonials";
+import Cta from "@/app/(sites)/home/components/cta";
+import Footer from "@/app/(sites)/dashboard/components/Footer";
+import {benefitOne, benefitTwo} from "@/app/(sites)/home/components/data";
 
 const Home = () => {
   return (

@@ -21,9 +21,7 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
     console.log(data)
     mutate(data, {
       onSuccess: () => {
-        // router.push('/sensor')
-        router.push('/sensor' )
-
+        router.push('/sensor')
       }
     })
   }
@@ -37,7 +35,10 @@ export default function Page({searchParams: {id}}: { searchParams: { id: string 
       back={<></>
         // <BackLink href={'sensor'} title={'Edit'}/>
       }
-      form={<FormSensor method='PUT' fun={updateSensor} defaultData={data}/>}
+      form={<FormSensor
+        method='PUT'
+        fun={updateSensor}
+        defaultData={data}/>}
     />
   );
 }

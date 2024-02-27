@@ -32,7 +32,7 @@ class User {
   }
 
 
-  async findKey(keys: keyof IUser | 'id', value: string) {
+  async findKey(value: string) {
     return prisma.user.findUnique({where: {id: value}})
   }
 
@@ -93,7 +93,7 @@ class User {
       const record = await tx.record.findMany({
         where: {id_sensor: {in: id_sensor}}
       })
-      console.log(record,'record')
+      console.log(record, 'record')
       if (record.length === 0) return {...user, sensor, record: null, sensorNull}
 
       return {...user, sensor, record, sensorNull}
@@ -102,6 +102,45 @@ class User {
 
   }
 
+
+  async findProfileNew(id: string) {
+    return prisma.$transaction(async (tx) => {
+
+      const user = await tx.user.findUnique({
+        where: {id: id},
+
+        select: {
+          name: true, no_hp: true, alamat: true, email: true, id: true,
+          Anggota: {
+
+            select: {
+              id: true, id_user: true, warna: true, hewan: true,
+              id_sensor: {
+
+                select: {
+                  id: true, warna: true, rfid: true, kode: true, status: true, id_anggota: true,
+                  id_record:
+                    {select: {id: true, tanggal: true, id_sensor: true, lokasi: true, jamMasuk: true, Sensor: true}}
+
+                }
+              }
+            }
+          }
+        }
+      })
+      if (!user) {
+        return null
+      }
+
+      if (user.Anggota.length === 0) return {...user, record: null}
+
+      const sensorNull = await tx.sensor.findMany({
+        where: {id_anggota: null}
+      })
+
+      return {user, sensorNull}
+    })
+  }
 
   async findDontHaveUser() {
     return prisma.user.findMany({

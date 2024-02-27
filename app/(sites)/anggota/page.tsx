@@ -8,6 +8,7 @@ import {useRQSGlobalState} from "@/hook/useGlobalState";
 
 export default function Page({searchParams: {page}}: PageProps) {
   const [value] = useRQSGlobalState(["anggota", 'pagination' ], 0)
+
   const {data, isLoading, isError} = useGet<IAnggota[]>(
     "anggota",
     String(value),

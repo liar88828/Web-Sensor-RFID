@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {Inputs, tryCatch} from "@/utils/next/apiAdd";
 import {anggotaData} from "@/utils/prisma/data/anggota";
 import {IPages} from "@/interface/type";
+import {pageArray} from "@/utils/nextAdd";
 
 export async function GET(req: NextRequest) {
   return tryCatch(async () => {
@@ -81,10 +82,14 @@ export async function DELETE(req: NextRequest) {
   return tryCatch(async () => {
 
     const {id, page} = await Inputs(req)
+    // console.log(id,)
+    // console.log(typeof page)
     if (id) {
       if (page) {
-        const data = await anggotaData.deletedPage(id, page as IPages)
-        return NextResponse.json(data, {status: 200})
+        if (pageArray.includes(page)) {
+          const data = await anggotaData.deletedPage(id, page as IPages)
+          return NextResponse.json(data, {status: 200})
+        }
       }
       const data = await anggotaData.deleted(id)
       return NextResponse.json(data, {status: 200})

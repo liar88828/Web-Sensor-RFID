@@ -5,11 +5,14 @@ import {toast} from "react-toastify";
 import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/toApi";
 
 
-const useGet = <T>(to: IPages, page: string | number,) => {
-
+const useGet = <T>(
+  to: IPages,
+  page: string | number,
+  table?: IPages,
+) => {
   return useQuery<T>({
-    queryKey: [to, page],
-    queryFn: async () => apiGetAll(to, page),
+    queryKey: [to, page, table],
+    queryFn: async () => apiGetAll(to, page, table),
     placeholderData: keepPreviousData,
 
   })
@@ -59,6 +62,7 @@ const useUpdate = <T>(to: IPages, id: string) => {
   return useMutation({
       mutationFn: (add: T) => apiUpdate(to, id, add),
       onSuccess: async () => {
+        console.log('test')
         await queryClient.invalidateQueries({queryKey: [to]})
         toast.success(`${to} Update successfully`);
       },
@@ -88,14 +92,15 @@ const usePatch = <T>(to: IPages, id: string, page: IPages) => {
 
 
 const useDelete = (to: IPages,
-                   id?: string,
-                   page?: IPages) => {
+                   page?: IPages,
+) => {
   const queryClient = useQueryClient()
 
   return useMutation({
+      // mutationKey: [to, page, table],
       mutationFn: ({value}: { value: string }) => apiDelete(to, value, page),
       onSuccess: async () => {
-        await queryClient.invalidateQueries({queryKey: [to, id]})
+        await queryClient.invalidateQueries({queryKey: [to]})
         toast.success(`${to} Delete successfully`);
       },
       onError() {

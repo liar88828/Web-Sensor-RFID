@@ -1,8 +1,8 @@
 import React from 'react'
-import DataStatus from "@/app/(sites)/dashboard/DataStatus";
-import DataOrang from "@/app/(sites)/dashboard/DataOrang";
-import DataRecords from "@/app/(sites)/dashboard/DataRecords";
-import DataLines from "@/app/(sites)/dashboard/DataLines";
+import DataStatus from "@/app/(sites)/dashboard/components/DataStatus";
+import DataOrang from "@/app/(sites)/dashboard/components/DataOrang";
+import DataRecords from "@/app/(sites)/dashboard/components/DataRecords";
+import DataLines from "@/app/(sites)/dashboard/components/DataLines";
 
 export default function page() {
   return (

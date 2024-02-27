@@ -24,9 +24,6 @@ export default function Page({searchParams: {id}}: PageId) {
       onSuccess: () => {
         router.push('/record')
       }
-      // ,onError(){
-      //
-      // }
     })
   }
 
@@ -40,7 +37,11 @@ export default function Page({searchParams: {id}}: PageId) {
         back={<></>
           // <BackLink href={'record'} title={'Create'}/>
         }
-        form={<FormRecord method='PUT' fun={updateHandlerRecord} defaultData={data}/>}
+        form={<FormRecord
+          method='PUT'
+          fun={updateHandlerRecord}
+          defaultData={data}/>
+        }
       />
     </Suspense>
   )

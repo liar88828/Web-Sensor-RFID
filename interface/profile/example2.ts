@@ -13,9 +13,7 @@ export interface IProfile {
 export type  RelationalSensorRecord = Sensor & {
   id_record: Record[]
 }
-export type  RelationalRecordSensor = IdRecord & {
-
-}
+export type  RelationalRecordSensor = IdRecord & {}
 
 export type  RelationalAnggotaSensor = Sensor & {
   id_record: Record[]
@@ -47,10 +45,10 @@ export interface IdRecord {
 
 export interface Sensor {
   id: string
+  warna: string
   rfid: string
   kode: string
   status: string
-  warna: string
   id_anggota: string
   id_record: IdRecord2[]
 }

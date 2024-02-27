@@ -9,7 +9,7 @@ import {IUser} from "@/interface/type";
 
 export default function Page({searchParams: {id}}: { searchParams: { id: string } }) {
   const router = useRouter()
-
+  console.log(id)
   const {
     data,
     isLoading,

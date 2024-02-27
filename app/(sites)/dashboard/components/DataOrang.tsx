@@ -12,7 +12,7 @@ import {LinkButton} from "@/components/elements/button";
 
 export default function DataOrang() {
   const [value] = useRQSGlobalState(["dashboard", 'pagination',], 0)
-  const {data, isLoading, isError} = useGet<IDataOrang[]>('user', value)
+  const {data, isLoading, isError} = useGet<IDataOrang[]>('dashboard', value,'user')
   if (isLoading) return <Loading/>
   if (!data || isError) return <Errors/>
   return <ClientComponent data={data}/>

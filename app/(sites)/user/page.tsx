@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React from 'react'
 import {useGet} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
 import {IUser, PageProps} from "@/interface/type";
@@ -8,7 +8,7 @@ import {useRQSGlobalState} from "@/hook/useGlobalState";
 
 
 export default function Page({searchParams: {page}}: PageProps) {
-  const [value] = useRQSGlobalState(['user',"pagination"], 0)
+  const [value] = useRQSGlobalState(['user', "pagination"], 0)
   const {data, isLoading, isError} = useGet<IUser[]>(
     "user",
     String(value),

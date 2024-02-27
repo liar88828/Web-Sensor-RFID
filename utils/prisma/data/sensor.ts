@@ -63,7 +63,7 @@ class Sensor {
     })
   }
 
-  async patch(id: string, json: ISensor) {
+  async patch(id: string, json: { id_anggota: string }) {
     return prisma.sensor.update({
       where: {
         id

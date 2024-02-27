@@ -19,6 +19,13 @@ export async function GET(req: NextRequest) {
     }
 
     if (id !== null) {
+      if (id.length >= 1) {
+        const data = await userData.findKey(id)
+        return NextResponse.json(data, {status: 200})
+      }
+    }
+
+    if (id !== null) {
       return NextResponse.json('cannot be null', {status: 403})
     }
 

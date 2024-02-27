@@ -3,10 +3,15 @@ import Link from "next/link";
 import {SelectJson} from "@/components/elements/Select";
 import {ISensor, PatchAnggotaSensor} from "@/interface/type";
 import {useDelete, usePatch} from "@/hook/useFetch";
-import {IProfile} from "@/interface/user";
+import {DataProfile} from "@/interface/profile/example1";
 
 
-function AnggotaTable({id, data}: { id: string, data: IProfile }) {
+interface AnggotaTable {
+  id: string;
+  data: DataProfile;
+}
+
+export function AnggotaTableProfile({id, data: {user, sensorNull}}: AnggotaTable) {
   const [idSensor, setIdSensor] = useState<string>('')
   const [idSensorAnggota, setIdSensorAnggota] = useState<string>('')
 
@@ -23,7 +28,7 @@ function AnggotaTable({id, data}: { id: string, data: IProfile }) {
         </tr>
         </thead>
         <tbody>
-        {data.Anggota.length === 0
+        {user.Anggota.length === 0
           ? <tr className={'skeleton w-16 h-16 rounded-full shrink-0'}>
             <th>Data Kosong</th>
             <th>Data Kosong</th>
@@ -35,7 +40,7 @@ function AnggotaTable({id, data}: { id: string, data: IProfile }) {
               </Link>
             </th>
           </tr>
-          : data.Anggota.map((anggota, i) => <tr key={anggota.id}>
+          : user.Anggota.map((anggota, i) => <tr key={anggota.id}>
             <th>{i + 1}</th>
             <td>{anggota.hewan}</td>
             <td>{anggota.warna}</td>
@@ -49,7 +54,7 @@ function AnggotaTable({id, data}: { id: string, data: IProfile }) {
                     setIdSensorAnggota(anggota.id)
                     setIdSensor(e.target.value as string)
                   }}
-                  data={data.sensorNull}
+                  data={sensorNull}
                   keys={'id'}
                   values={'rfid'}
                   values2={"kode"}
@@ -79,9 +84,9 @@ function AnggotaTable({id, data}: { id: string, data: IProfile }) {
   );
 }
 
-export default AnggotaTable;
+
 const ButtonAnggotaHapus = ({id, user_id}: { user_id: string, id: string }) => {
-  const {mutate} = useDelete("profile", user_id, 'sensor')
+  const {mutate} = useDelete("profile", 'sensor')
 
   return (
     <button

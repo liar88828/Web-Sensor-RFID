@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import {SearchTable} from "@/interface/type";
 import {Icon} from "@iconify/react";
@@ -9,23 +10,25 @@ import Loading from "@/components/elements/Loading";
 
 export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, detail = false}: SearchTable<T>) {
   const queryClients = useQueryClient()
-  const [value, values] = useRQSGlobalState([to, 'pagination'], 0)
+  const [value, values] = useRQSGlobalState([to, 'pagination'], 0) as [number, (d: number) => any]
   const id = table.getSelectedRowModel().rows.map((data: any) => data.original.id)
 
-  const {mutate} = useDelete(to, value)
+  const {mutate} = useDelete(to)
   const onDelete = async () => {
+    // console.log( id[0])
     if (confirm(`Want to delete id ${id[0]} ?`)) {
       mutate({value: id[0]}, {
         onSuccess: () => {
           // queryClients.invalidateQueries({
-          //   queryKey: [to, 'pagination'
-          //   ]
+          //   queryKey: [to, 'pagination']
           // })
+          //
         }
       })
     }
   }
-  const pages = queryClients.getQueryData<T[]>([to, String(value)])
+  const pages = queryClients.getQueryData<T[]>([to, String(value), null])
+  console.log(pages)
   if (!pages) return <Loading/>
 
   return <div className={'flex justify-start sm:items-center flex-col sm:flex-row gap-2'}>
@@ -64,19 +67,15 @@ export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, deta
         </>
       }
 
-
       <button className={'btn btn-primary'}
               onClick={() => excel(table.getRowModel().rows.map(row => row.original))}>Download
       </button>
-
 
       <button
         className={`btn btn-info btn-circle ${pages?.length === 0 && 'btn-disabled'} `}
         onClick={() => values(value + 1)}
       >
         <Icon icon="carbon:next-outline" width="2rem" height="2rem"/></button>
-
-
     </div>
 
 

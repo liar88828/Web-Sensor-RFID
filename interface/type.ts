@@ -10,6 +10,8 @@ import {
 } from "@/utils/validator/zod";
 import React from "react";
 import {Table} from "@tanstack/react-table";
+import {IdRecord} from "@/interface/profile/example1";
+
 
 export type Method = 'POST' | 'PUT'
 export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard' | 'profile'
@@ -78,23 +80,24 @@ export interface PatchAnggotaSensor {
   id_sensor: string;
 }
 
-export type IRegister = z.infer<typeof registerSchema>
-export type IUser = z.infer<typeof userSchema>
-export type ILogin = z.infer<typeof loginSchema>
+export type IRegister = z.output<typeof registerSchema>
+export type IUser = z.output<typeof userSchema>
+export type ILogin = z.output<typeof loginSchema>
 
-export type IAnggotaTable = z.infer<typeof anggotaSchema>
-export type IAnggotaCreate = z.infer<typeof anggotaCreateSchema>
+//
+export type IAnggotaTable = z.output<typeof anggotaSchema>
+export type IAnggotaCreate = z.output<typeof anggotaCreateSchema>
 export type IAnggota = Required<IAnggotaTable>
-
-export type ISensorCreate = z.infer<typeof sensorSchema>
+//
+export type ISensorCreate = z.output<typeof sensorSchema>
 export type ISensor = Required<ISensorCreate>
-
-export type IRecordCreate = z.infer<typeof recordSchema>
+//
+export type IRecordCreate = z.output<typeof recordSchema>
 export type IRecord = Required<IRecordCreate>
-
-export type ISensorGlobal = { value: IRecord[], rfid: string }
+//
+export type ISensorGlobal = { value: IdRecord[], rfid: string }
 export type IDataOrang = { name: string, alamat: string, no_hp: string, id: string, email: string, }
-
+//
 export type IRecordRelational = Required<IRecordCreate> & {
   Sensor: ISensor
 }

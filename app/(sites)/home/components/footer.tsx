@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div>
               {" "}
-              <Link href="/" className="flex items-center space-x-2 text-2xl font-medium  ">
+              <Link href="/public" className="flex items-center space-x-2 text-2xl font-medium  ">
                     <Image
                       src="/img/logo.svg"
                       alt="N"
@@ -56,7 +56,7 @@ export default function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {navigation.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2   rounded-md  hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none  ">
+                <Link key={index} href="/public" className="w-full px-4 py-2   rounded-md  hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none  ">
                     {item}
                 </Link>
               ))}
@@ -65,7 +65,7 @@ export default function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {legal.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2   rounded-md   hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none ">
+                <Link key={index} href="/public" className="w-full px-4 py-2   rounded-md   hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none ">
                     {item}
                 </Link>
               ))}

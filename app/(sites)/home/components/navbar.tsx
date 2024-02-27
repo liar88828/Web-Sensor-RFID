@@ -19,7 +19,7 @@ const Navbar = () => {
         <div>
           <>
             <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-              <Link href="/">
+              <Link href="/public">
                   <span className="flex items-center space-x-2 text-2xl font-medium  ">
                     <span>
                       <Image
@@ -49,12 +49,12 @@ const Navbar = () => {
               <div className="flex flex-wrap w-full my-5 lg:hidden">
                 <>
                   {navigation.map((item, index) => (
-                    <Link key={index} href="/"
+                    <Link key={index} href="/public"
                           className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md  hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100  focus:outline-none">
                       {item}
                     </Link>
                   ))}
-                  <Link href="/"
+                  <Link href="/public"
                         className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">
                     Get Started
                   </Link>
@@ -70,7 +70,7 @@ const Navbar = () => {
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
             {navigation.map((menu, index) => (
               <li className="mr-3 nav__item" key={index}>
-                <Link href="/"
+                <Link href="/public"
                       className="inline-block px-4 py-2 text-lg font-normal no-underline rounded-md   hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none  ">
                   {menu}
                 </Link>
@@ -80,7 +80,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
-          <Link href="/" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
+          <Link href="/public" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
             Get Started
           </Link>
 

@@ -1,6 +1,3 @@
-import {ISensor} from "@/interface/type";
-
-
 const dataOrang = [
   {
     "id": "asdas",
@@ -248,7 +245,7 @@ const dataRecord =
       "lokasi": "New Karinefield"
     }
   ]
-export const exampleDataSensor: ISensor[] = [
+export const exampleDataSensor= [
   {
     id: '2312312',
     id_anggota: "asdasda",

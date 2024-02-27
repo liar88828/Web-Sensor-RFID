@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 
     const {id} = await Inputs(req)
     if (id !== null) {
-      const data = await userData.findProfile(id)
+      const data = await userData.findProfileNew(id)
       // console.log(data)
       return NextResponse.json(data, {status: 200})
     }
