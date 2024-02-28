@@ -36,46 +36,49 @@ export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, deta
       <input
         value={globalFilter ?? ''}
         onChange={e => setGlobalFilter(String(e.target.value))}
-        className="   input input-primary w-full sm:w-fit "
+        className="   input input-primary w-full sm:w-fit input-response "
         placeholder="Search all columns..."
       />
-      <button className={'btn btn-accent'}
+      <button className={'btn btn-accent btn-response'}
       >
         <Icon icon="material-symbols:search"/>
         <span className="sm:visible hidden">Deep Search</span>
       </button>
     </div>
 
-    <div className="flex gap-2 justify-between ">
+    <div className="flex gap-2 justify-between  ">
 
       {/*---------*/}
       <button
-        className={`btn btn-info btn-circle ${value === 0 && 'btn-disabled'}`}
+        className={`btn btn-info btn-square 
+        btn-response
+        ${value === 0 && 'btn-disabled'}`}
         onClick={() => values(value - 1)}
-      ><Icon icon="carbon:previous-outline" width="2rem" height="2rem"/></button>
+      >
+        <Icon icon="carbon:previous-outline"  className={'sm:text-3xl'}/></button>
 
-      <Link className='btn btn-secondary' href={`/${to}/create`}> Create</Link>
+      <Link className='btn btn-secondary btn-response' href={`/${to}/create`}> Create</Link>
 
       {
         id.length === 1 && <>
           {detail &&
-            <Link className='btn btn-success' href={`/profile?id=${id[0]}&callback=/${to}`}> Detail</Link>}
+            <Link className='btn btn-success btn-response' href={`/user/profile?id=${id[0]}&callback=/${to}`}> Detail</Link>}
 
-          <Link className='btn btn-warning' href={`/${to}/edit?id=` + id[0]}> Edit</Link>
+          <Link className='btn btn-warning btn-response' href={`/${to}/edit?id=` + id[0]}> Edit</Link>
 
-          <button className='btn btn-error' onClick={async () => onDelete()}> Delete</button>
+          <button className='btn btn-error btn-response' onClick={async () => onDelete()}> Delete</button>
         </>
       }
 
-      <button className={'btn btn-primary'}
+      <button className={'btn btn-primary btn-response'}
               onClick={() => excel(table.getRowModel().rows.map(row => row.original))}>Download
       </button>
 
       <button
-        className={`btn btn-info btn-circle ${pages?.length === 0 && 'btn-disabled'} `}
+        className={`btn btn-info btn-square btn-response ${pages?.length === 0 && 'btn-disabled'} `}
         onClick={() => values(value + 1)}
       >
-        <Icon icon="carbon:next-outline" width="2rem" height="2rem"/></button>
+        <Icon icon="carbon:next-outline" className={'sm:text-3xl'} /></button>
     </div>
 
 

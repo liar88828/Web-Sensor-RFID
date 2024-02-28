@@ -36,7 +36,7 @@ export default function DataRecords() {
 export function ClientComponent({data}: { data: DataRecord[] }) {
   const {currentItems, handlePageClick, pageCount} = usePaginations<DataRecord>(data, 10, 'record')
 
-  return <div className="rounded bg-base-100 p-2 shadow-lg ">
+  return <div className="rounded bg-base-100 p-2 shadow-lg border-t-4 border-red-400">
     <div className=" flex items-center">
       <h1 className="font-bold p-2">Data Record</h1>
       <LinkButton href={'/record'} size={'sm'}/>

@@ -21,7 +21,7 @@ export default function DataOrang() {
 
 export function ClientComponent({data}: { data: IDataOrang[] }) {
   const {currentItems, handlePageClick, pageCount} = usePaginations(data, 10, 'anggota')
-  return <div className="rounded bg-base-100 p-2 shadow-lg ">
+  return <div className="rounded bg-base-100 p-2 shadow-lg border-t-4 border-green-400">
     <div className=" flex items-center">
       <h1 className="font-bold p-2">Data Orang</h1>
       <LinkButton href={'/anggota'} size={'sm'}/>

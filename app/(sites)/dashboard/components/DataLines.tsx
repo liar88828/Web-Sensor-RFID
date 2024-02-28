@@ -15,7 +15,7 @@ function DataLines() {
 
 
   return (
-    <div className="rounded  bg-base-100 p-2 h-80 shadow-lg ">
+    <div className="rounded  bg-base-100 p-2 h-80 shadow-lg border-t-4 border-yellow-400">
       <Lines data={data}/>
     </div>
   );

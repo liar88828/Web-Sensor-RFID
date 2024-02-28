@@ -6,7 +6,7 @@ import DataLines from "@/app/(sites)/dashboard/components/DataLines";
 
 export default function page() {
   return (
-    <div>
+    <div className={' '}>
       <DataStatus/>
       <div className="flex gap-5 flex-wrap sm:flex-nowrap mt-2">
         <div className="w-[100%] sm:w-[65%] space-y-5">

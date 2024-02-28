@@ -14,7 +14,7 @@ export default function Sidebar() {
       <div className="drawer-content">
         {/* Page content here */}
         <label htmlFor="my-drawer"
-               className="btn btn-primary drawer-button "
+               className="btn btn-primary drawer-button btn-response "
           // btn-sm sm:btn-md
         >
 

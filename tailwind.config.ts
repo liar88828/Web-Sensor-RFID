@@ -1,8 +1,8 @@
-import type { Config } from "tailwindcss";
+import type {Config} from "tailwindcss";
 
 const config: Config = {
   daisyui: {
-    themes: [ 'corporate', "synthwave",'garden','forest', ],
+    themes: ['corporate', "synthwave", 'garden', 'forest',],
   },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +10,23 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+
+    container: {
+
+
+      padding: {
+        // DEFAULT: '1rem',
+        // sm: '2rem',
+        md: '1rem',
+        // lg: '2rem',
+        // xl: '5rem',
+        // '2xl': '6rem',
+      },
+      // maxWidth: {
+      //   md: '1000px'
+      // },
+    },
+
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -18,6 +35,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [ require( "daisyui" ) ],
+  plugins: [require("daisyui")],
 };
 export default config;

@@ -15,8 +15,8 @@ export default function Page({searchParams: {page}}: PageProps) {
   )
 
   if (isLoading) return <Loading/>
-
-  if (isError || !data) return <h1>Error</h1>
+  if (isError) return <h1>Error</h1>
+  if (!data) return <h1>Data Error</h1>
 
   return <UserTable data={data}/>
 

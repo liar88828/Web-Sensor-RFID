@@ -21,7 +21,7 @@ export default function Navbar() {
             <Sidebar/>
             <button
               onClick={() => router.back()}
-              className="btn btn-neutral "
+              className="btn btn-neutral btn-response"
               // sm:btn-md btn-sm
             >Back
             </button>
@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="navbar-end">
           <div className="flex-none">
             <ul className="menu menu-horizontal px-1">
-              <li><a>Link</a></li>
+              {/*<li><a>Link</a></li>*/}
               <li>
                 <details>
                   <summary>

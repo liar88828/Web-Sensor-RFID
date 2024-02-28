@@ -2,10 +2,10 @@
 import React from 'react'
 import {useGetID} from "@/hook/useFetch";
 import Loading from "@/components/elements/Loading";
-import {SensorProfile, TableSensorProfile} from "@/app/(auth)/profile/components/SensorProfile";
-import RecordProfile from "@/app/(auth)/profile/components/RecordProfile";
+import {SensorProfile, TableSensorProfile} from "@/app/(sites)/user/profile/components/SensorProfile";
+import RecordProfile from "@/app/(sites)/user/profile/components/RecordProfile";
 import {DataProfile} from "@/interface/profile/example1";
-import {AnggotaProfile} from "@/app/(auth)/profile/components/AnggotaProfile";
+import {AnggotaProfile} from "@/app/(sites)/user/profile/components/AnggotaProfile";
 import {AnggotaTableProfile} from "@/components/tabels/basic/anggotaTableProfile";
 
 

@@ -15,7 +15,7 @@ interface ISensorProfile {
 export function SensorProfile({id, children}: ISensorProfile) {
 
   return (
-    <div className="bg-white p-3 shadow-lg rounded  ">
+    <div className="bg-white p-3 shadow-lg rounded border-t-4 border-red-400 ">
 
       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
         <span className="text-green-500"><Icon icon="mdi:paper-outline"/></span>
@@ -51,7 +51,7 @@ export function TableSensorProfile({data: {user}}: { data: DataProfile }) {
   }, [])
 
   return (
-    <div className="overflow-x-auto bg-base-100 rounded shadow">
+    <div className="overflow-x-auto bg-base-100 rounded shadow ">
       <table className="table table-zebra static">
         {/* head */}
         <thead>
