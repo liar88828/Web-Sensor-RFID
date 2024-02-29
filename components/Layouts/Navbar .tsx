@@ -1,31 +1,22 @@
 'use client'
 
 import Link from 'next/link';
-// import Link from 'next/link'
 import Sidebar from './Sidebar';
 import {usePathname, useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import React from "react";
 
 export default function Navbar() {
-  const {data: session} = useSession()
+
   const pathName = usePathname()
   const path = pathName.split('/',)
-  const router = useRouter()
+
   return (
     <section className="fixed top-2 left-2 right-2">
 
       <div className="navbar bg-base-100 rounded-lg ">
         <div className="navbar-start">
-          <div className="flex flex-row gap-2">
-            <Sidebar/>
-            <button
-              onClick={() => router.back()}
-              className="btn btn-neutral btn-response"
-              // sm:btn-md btn-sm
-            >Back
-            </button>
-          </div>
+          <LeftNavbar/>
         </div>
 
         <div className="navbar-center">
@@ -33,35 +24,65 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end">
-          <div className="flex-none">
-            <ul className="menu menu-horizontal px-1">
-              {/*<li><a>Link</a></li>*/}
-              <li>
-                <details>
-                  <summary>
-                    Auth
-                  </summary>
-                  <ul className="p-2 bg-base-100 rounded-t-none">
-                    {/* <li><a>Link 1</a></li> */}
-                    {!session ? (
-                      <>
-                        <li><Link href={'/login'}>Login </Link></li>
-                        <li><Link href={'/register'}>Register </Link></li>
-                      </>
-                    ) : (
-                      <>
-                        <li><Link href={'/profile'}>Profile</Link></li>
-                        <li><Link href={'/logout'}>Logout</Link></li>
-                      </>
-                    )}
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          </div>
+          <RightNavbar/>
         </div>
       </div>
     </section>
 
+  )
+}
+
+function LeftNavbar() {
+  const router = useRouter()
+  return (
+    <div className="flex flex-row gap-2">
+      <Sidebar/>
+      <button
+        onClick={() => router.back()}
+        className="btn btn-neutral btn-response"
+        // sm:btn-md btn-sm
+      >Back
+      </button>
+    </div>
+  );
+}
+
+function RightNavbar() {
+  const {data: session} = useSession()
+  return (
+    <div className="flex-none">
+      <ul className="menu menu-horizontal px-1">
+        {/*<li><a>Link</a></li>*/}
+        <li>
+          <details>
+            <summary>
+              Auth
+            </summary>
+            <ul className="p-2 bg-base-100 rounded-t-none">
+              {/* <li><a>Link 1</a></li> */}
+              {!session ? (
+                <>
+                  <li><Link href={'/login'}>Login </Link></li>
+                  <li><Link href={'/register'}>Register </Link></li>
+                </>
+              ) : (
+                <>
+                  <li><Link href={'/profile'}>Profile</Link></li>
+                  <li><LogoutButton/></li>
+                </>
+              )}
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function LogoutButton() {
+  return (
+    <button
+      onClick={() => signOut()}
+    >Logout</button>
   )
 }

@@ -5,7 +5,6 @@ import CredentialProvider from 'next-auth/providers/credentials'
 import {AuthOptions, NextAuthOptions} from 'next-auth';
 import {PrismaAdapter} from "@auth/prisma-adapter"
 import {PrismaClient} from "@prisma/client"
-import {validPass} from '../validator/bcrypt';
 
 const prisma = new PrismaClient()
 // @ts-ignore
@@ -45,36 +44,39 @@ export const options: AuthOptions = {
         },
       },
       //@ts-ignore
-      async authorize(credentials, req) {
-        if (!credentials) {
-          return null
-        }
+      async authorize(
+        credentials,
+        req
+      ) {
         try {
-          // console.log(credentials)
-          const user = await prisma.user.findUnique({where: {email: credentials?.email}})
-
-          // console.log(user, 'user')
-          // console.log(req.token, 'req')
-          if (user) {
-            if (!user.password) {
-              return
-            }
-            console.log('user exists')
-            const match = await validPass(credentials.password, user.password)
-            // console.log(match)
-            if (match) {
-              console.log('Good Pass')
-              //@ts-ignore
-              delete user?.password
-              //@ts-ignore
-              user.role = 'Unverified Email'
-              // console.log(user)
-
-              return {...user}
-            }
+          if (!credentials || !credentials.email) {
+            return null
           }
+
+          const res = await fetch("http://localhost:3000/api/secure/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+          });
+          if (res.status === 401) return null;
+          const user = await res.json();
+          // console.log(user)
+
+          if (user) {
+            // Any object returned will be saved in `user` property of the JWT
+            return user;
+          } else {
+            // If you return null then an error will be displayed advising the user to check their details.
+            return null;
+          }
+
+
         } catch (error) {
-          console.error(error)
 
           return null
         }
@@ -85,19 +87,13 @@ export const options: AuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
       profile(profile) {
-        // console.log('profile github', profile)
         const email: string = profile.email
         if (email.includes('liar')) {
           profile.role = 'admin'
         } else {
           profile.role = 'user'
         }
-        // console.log('profile github', profile)
-
         return {
-          // ...profile,
-          // image: profile.avatar_url,
-          // role: profile.role,
           id: profile.id,
           name: profile.name,
           email: profile.email,
@@ -119,47 +115,22 @@ export const options: AuthOptions = {
         } else {
           profile.role = 'user'
         }
-        // console.log(profile)
         return {
           id: profile.sub,
           name: `${profile.given_name} ${profile.family_name}`,
           email: profile.email,
           role: profile.role,
           image: profile.picture,
-          // image:profile.
-          // ...profile,
-          // id: profile.sub,
-          // role: userRole,
         }
       },
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
-
-    // EmailProvider( {
-    //   server: {
-    //     host: process.env.EMAIL_SERVER_HOST,
-    //     port: process.env.EMAIL_SERVER_PORT,
-    //     auth: {
-    //       user: process.env.EMAIL_SERVER_USER,
-    //       pass: process.env.EMAIL_SERVER_PASSWORD,
-    //     },
-    //   },
-    //   from  : process.env.EMAIL_FROM,
-    // } ),
-
-    // EmailProvider({
-    // 	server: process.env.EMAIL_SERVER,
-    // 	from: process.env.EMAIL_FROM,
-    // 	// maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
-    // }),
   ],
 
   callbacks: {
     async signIn({account, profile}) {
       console.log('callbacks signIn')
-      // console.log(account, 'account')
-      // console.log(profile, 'profile')
       if (account !== null) {
         if (account.provider === 'credentials') {
           return true
@@ -167,8 +138,7 @@ export const options: AuthOptions = {
       }
       if (profile !== undefined && account !== null) {
         if (account.provider === "google" && profile.email !== undefined) {
-          console.log('google')
-          // return profile.email_verified && profile.email.endsWith("@gmail.com")
+
           return profile.email_verified && profile.email.endsWith("@gmail.com")
         }
       }
@@ -176,46 +146,37 @@ export const options: AuthOptions = {
       return false
     },
 
-    async jwt({token, user, account}) {
+    async jwt({
+                token,
+                user,
+                account
+              }) {
+      console.log('----------')
+      console.log(token, 'token')
+      console.log(user, 'user')
+      console.log(account, 'account')
+      console.log('----------')
+
       if (user) {
         token.id = user.id
       }
       if (account) {
         token.accessToken = account.access_token
       }
-
-      // console.log(trigger, 'trigger') // will get a value after a use a useSession wil
-      // console.log(session, 'session') // after update session use a useSession wil get a value
-      // console.log(token, 'token')
-      // console.log(user, 'user')
-      // console.log(account, 'account')
-      // console.log( profile, 'profile' )
       return {
         ...token,
         ...user,
       }
     },
 
-    async session({session, token, user, newSession}) {
-      // const getToken = await prisma.account.findFirst({
-      // 	where: {
-      // 		userId: user.id,
-      // 	},
-      // })
+    async session({
+                    session,
+                    token
+                  }) {
 
-      // let accessToken: string | null = null
-      // if (getToken) {
-      // 	accessToken = getToken.access_token!
-      // 	session.user.token = accessToken
-      // }
+      session.user = token as any;
+      return session;
 
-      session.user = token
-
-      // console.log(user)
-      // console.log(session)
-      // console.log(newSession)
-      // console.log(token)
-      return session
     },
   },
 

@@ -1,15 +1,17 @@
 import React from "react";
 import Container from "./container";
 
-const SectionTitle = ({title, preTitle, text, align}: {
+const SectionTitle = ({title, preTitle, text, align,id=''}: {
   title: string,
   preTitle: string,
   text: string,
-  align: string
+  align: string,
+  id?:string
 }) => {
   return (
     <Container
-      className={`flex w-full flex-col mt-4 
+      id={id}
+      className={`flex  flex-col mt-4 
       ${align === "left"
         ? ""
         : "items-center justify-center text-center"}

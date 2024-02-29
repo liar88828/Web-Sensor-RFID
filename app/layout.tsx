@@ -2,10 +2,11 @@ import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 import "./globals.css";
 import TRQuery from "@/components/provider/ReactQuery";
-import Navbar from "@/components/Layouts/Navbar ";
 import NextAuthProvider from "@/components/provider/NextAuthProvider";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import LayoutNext from "@/components/provider/LayoutNext";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -24,17 +25,9 @@ export default function RootLayout({
     <body className={inter.className}>
     <NextAuthProvider>
       <TRQuery>
-        {/* <div className="bg-red-200 p-2"> */}
-
-        <Navbar/>
-        <div
-          className="min-h-screen  bg-gradient-to-tr from-cyan-200 to-blue-100  pt-20 p-5 justify-center items-center  flex ">
-          <div className="container">
-            {children}
-          </div>
-          {/* </div> */}
-
-        </div>
+        <LayoutNext>
+          {children}
+        </LayoutNext>
         <ToastContainer/>
       </TRQuery>
     </NextAuthProvider>

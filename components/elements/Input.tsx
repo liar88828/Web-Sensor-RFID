@@ -42,11 +42,11 @@ export function InputForm (
       id={ title }
       placeholder={ ` Masukan ${ title }....` }
       { ...reg }
-      className={ " textarea-bordered textarea " }
+      className={ " textarea-bordered textarea textarea-response  " }
     />
     :
     <input
-      className={ "input input-bordered  " }
+      className={ "input  input-response input-bordered " }
       placeholder={ ` Masukan ${ title }....` }
       id={ title }
       type={ type }

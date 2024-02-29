@@ -1,0 +1,6 @@
+### for api use jwt acces token
+GET  http://localhost:3000/api/protected/jwt
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDV0MHBiejAwMDFnYTZubnU0ZndmNWQiLCJuYW1lIjoiYnJpYW4iLCJlbWFpbCI6ImJyaWFuQGdtYWlsLmNvbSIsImVtYWlsVmVyaWZpZWQiOm51bGwsImltYWdlIjpudWxsLCJub19ocCI6IjAxMjMxMjMxMjMiLCJhbGFtYXQiOiJzZW1hcmFuZyB1dGFyYSIsInJvbGUiOiJVbnZlcmlmaWVkIiwib3RwIjpudWxsLCJleHBpcmVzT3RwIjpudWxsLCJpYXQiOjE3MDkxMzE0MDcsImV4cCI6MTcwOTEzNTAwN30.svD9SN5gWOaN9MyB673MtNAn35Sx3TQh28_W39ubZo4
+
+### use next auth cannot access api
+GET  http://localhost:3000/api/protected/nextauth

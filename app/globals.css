@@ -10,6 +10,9 @@
     .input-response {
         @apply input-xs sm:input-sm md:input-md lg:input-lg;
     }
+    .textarea-response {
+        @apply textarea-xs sm:textarea-sm md:textarea-md lg:textarea-lg;
+    }
 }
 
 /*@layer base {*/

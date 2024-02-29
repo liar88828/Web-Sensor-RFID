@@ -154,6 +154,13 @@ class User {
     })
   }
 
+  async findEmail(email: string) {
+    return prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    })
+  }
 
   async create(json: IUser) {
     return prisma.user.create({

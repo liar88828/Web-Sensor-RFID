@@ -1,3 +1,4 @@
-import bcrypt from "bcrypt";
+import {compare, hash} from 'bcrypt';
 
-export const validPass = async ( user: string, db: string ) => bcrypt.compare( user, db )
+export const comparePass = async (user: string, db: string) => compare(user, db)
+export const hashed = async (password: string) => hash(password, 12);

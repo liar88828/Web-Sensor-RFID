@@ -1,12 +1,19 @@
-import React from "react";
+import React, {ReactNode} from "react";
 
-const Container = (props:any) => {
+interface IContainer {
+  className?: string;
+  children: ReactNode;
+  id?: string;
+}
+
+const Container = ({className = '', children, id = ''}: IContainer) => {
   return (
     <div
-      className={`container p-8 mx-auto xl:px-0 static ${
-        props.className ? props.className : ""
+      id={id}
+      className={`container p-8 mx-auto   static ${
+        className ? className : ""
       }`}>
-      {props.children}
+      {children}
     </div>
   );
 }

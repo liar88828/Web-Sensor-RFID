@@ -1,10 +1,8 @@
-import { JWT } from 'next-auth/jwt'
-import { NextRequestWithAuth, withAuth } from 'next-auth/middleware'
-import { NextResponse } from 'next/server'
+import {JWT} from 'next-auth/jwt'
+import {NextRequestWithAuth, withAuth} from 'next-auth/middleware'
 
 export default withAuth(
-  function middleware ( req: NextRequestWithAuth, )
-  {
+  function middleware(req: NextRequestWithAuth,) {
     // console.log(req.nextUrl.pathname)
     // console.log('test')
     // console.log(req?.nextauth.token?.role)
@@ -31,13 +29,11 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ( { req, token }: { token: JWT | null; req: any } ) =>
-      {
+      authorized: ({req, token}: { token: JWT | null; req: any }) => {
         // console.log(req)
         // console.log(token)
-        if ( req.nextUrl.pathname.startsWith( '/adminxxx' ) )
-        {
-          return token.role === 'adminxxx'
+        if (req.nextUrl.pathname.startsWith('/admin')) {
+          return token.role === 'admin'
         }
         return !!token // will remove token
       },
@@ -45,13 +41,12 @@ export default withAuth(
   },
 )
 export const config = {
-  matcher: [ '/',
-    // '/login',
-    // '/delivery/:path*',
-    // '/orderan/:path*',
-    // '/table/:path*',
-    // '/bank/:path*',
-    // '/product/:path*',
-    // '/admin/:path*'
+  matcher: [
+    // '/',
+    '/dashboard/:path*',
+    '/anggota/:path*',
+    '/sensor/:path*',
+    '/record/:path*',
+    '/user/:path*',
   ]
 }

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "./container";
-import heroImg from "@/public/img/hero.png";
+import burungMerpati from "@/public/img/burungMerpati.png";
+import Link from "next/link";
 
 
 const HeroAsset = {
@@ -10,8 +11,12 @@ const HeroAsset = {
 const Hero = () => {
   return (
     <>
-      <Container className="flex flex-wrap ">
-        <div className="flex items-center w-full lg:w-1/2">
+      <Container
+        id={'Home'}
+        className="flex flex-wrap ">
+        <div
+
+          className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
             <h1
               className="text-4xl font-bold leading-snug tracking-tight  lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
@@ -22,28 +27,23 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
-              <a
-                href="https://web3templates.com/templates/nextly-landing-page-template-for-startups"
-                target="_blank"
-                rel="noopener"
+              <Link
+                href="/register"
                 className=" btn btn-primary btn-lg text-white ">
                 Register
-              </a>
-              <a
-                href="https://github.com/web3templates/nextly-template/"
-                target="_blank"
-                rel="noopener"
-                className=" font-bold text-xl flex items-center space-x-2   ">
-
-                <span> Login</span>
-              </a>
+              </Link>
+              <Link
+                href="/login"
+                className=" font-bold text-xl   ">
+                Login
+              </Link>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-center w-full lg:w-1/2">
-          <div className="">
+          <div className="hover:drop-shadow-xl transition ease-in-out delay-150   duration-300 hover:scale-110 ">
             <Image
-              src={heroImg}
+              src={burungMerpati}
               width="616"
               height="617"
               className={"object-cover"}
@@ -54,6 +54,7 @@ const Hero = () => {
           </div>
         </div>
       </Container>
+
       <Container>
         <div className="flex flex-col justify-center">
           <div className="text-xl text-center ">

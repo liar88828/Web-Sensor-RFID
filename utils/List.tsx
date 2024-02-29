@@ -8,7 +8,7 @@ export const SlideList = [
   {
     title: 'Home',
     icon: <Icon fontSize={24} icon="material-symbols:home-outline"/>,
-    href: '/home',
+    href: '/',
   },
   {
     title: 'Dashboard',

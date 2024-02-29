@@ -1,7 +1,8 @@
-export default function Home() {
+'use client'
+import {Home} from "@/app/(sites)/home/Home";
+
+export default function Page() {
   return (
-    <div>
-      test
-    </div>
+    <Home/>
   );
 }

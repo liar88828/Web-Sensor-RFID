@@ -9,6 +9,7 @@ import {FormBody, FormLayout} from "@/components/form/FormLayout";
 import {InputForm} from "@/components/elements/Input";
 import Link from "next/link";
 import {ILogin} from "@/interface/type";
+import {toast} from "react-toastify";
 
 export function LoginForm() {
   const router = useRouter();
@@ -42,10 +43,11 @@ export function LoginForm() {
       if (!res?.error) {
         router.push('/');
       } else {
-        // setError("invalid email or password");
+        toast.error("invalid email or password");
       }
     } catch (error: any) {
       setLoading(false);
+      toast.error("invalid email or password");
       // setError(error);
     }
   }

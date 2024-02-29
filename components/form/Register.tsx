@@ -1,3 +1,4 @@
+'use client'
 import {useState} from "react";
 // import {useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
@@ -9,9 +10,12 @@ import {FormBody, FormLayout} from "@/components/form/FormLayout";
 import {InputForm} from "@/components/elements/Input";
 import Link from "next/link";
 import {IRegister} from "@/interface/type";
+import {toast} from "react-toastify";
 
+// import {}from 'react-dom'
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
 
   const {
@@ -21,11 +25,11 @@ export function RegisterForm() {
   } = useForm<IRegister>({
     resolver: zodResolver(registerSchema),
   })
-
+  console.log(errors)
   const onSubmit = async (data: IRegister) => {
-    console.log(data)
+    // console.log(data)
     try {
-      const res = await fetch(nextUrl + "/api/user",
+      const res = await fetch(nextUrl + "/api/secure/register",
         {
           method: "POST",
           body: JSON.stringify(data),
@@ -35,17 +39,22 @@ export function RegisterForm() {
         });
 
       setLoading(false);
+      // console.log(await res.json())
+
+      // @ts-ignore
+      const json = await res.json()
       if (!res.ok) {
-        // setError((await res.json()).message);
+        toast.error(json.message)
         return;
       }
-
+      toast.success(json.message)
       await signIn(undefined, {callbackUrl: "/"});
     } catch (error: any) {
+      toast.error(error.message)
+      // toast.success(data.message)
       setLoading(false);
-      // setError(error);
+      setError(error);
     }
-
   }
 
 
@@ -64,6 +73,7 @@ export function RegisterForm() {
             errors={errors}
             title={'Alamat'}
             type="textarea"
+            max={30}
             reg={register("alamat")}/>
 
 
@@ -102,12 +112,12 @@ export function RegisterForm() {
             <button
               type="submit"
               disabled={loading}
-              className={` btn  w-full ${loading ? "btn-disabled" : " btn-primary"}`}
+              className={` btn  w-full btn-response  ${loading ? "btn-disabled" : " btn-primary"}`}
             >
               {loading ? "loading..." : "Register"}
             </button>
 
-            <Link className={` btn btn-neutral w-full `} href={'/login'}>Back</Link>
+            <Link className={` btn btn-neutral w-full btn-response `} href={'/login'}>Back</Link>
 
           </div>
 

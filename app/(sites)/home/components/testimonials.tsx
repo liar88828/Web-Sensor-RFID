@@ -24,9 +24,9 @@ const testimonialAsset = [
     , 'img': 'http://localhost:3000/img/user3.jpg'
   }
 ]
-const Testimonials = () => {
+const Testimonials = ({id=''}: { id?: string }) => {
   return (
-    <Container>
+    <Container id={id}>
       <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
         {testimonialAsset.map(d => <div
             key={d.name}
@@ -53,13 +53,13 @@ const Testimonials = () => {
 function Avatar({img, title, name}: { name: string, title: string, img: string }) {
   return (
     <div className="flex items-center mt-8 space-x-3">
-      <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
-        <img
-          src={img}
-          width="40"
-          height="40"
-          alt="Avatar"
-        />
+      <div className="avatar">
+        <div className="w-24 rounded-full">
+          <img
+            src={img}
+            alt="Avatar"
+          />
+        </div>
       </div>
       <div>
         <div className="text-lg font-medium">{name}</div>

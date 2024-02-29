@@ -16,7 +16,7 @@ export async function Inputs(request: NextRequest) {
   let method = request.method
   if (page === 'undefined') page = null
   if (table === 'undefined') table = null
-  console.log(method)
+  // console.log(method)
   if (method === 'POST' ||
     method === 'PUT' ||
     method === 'PATCH') {
@@ -26,10 +26,16 @@ export async function Inputs(request: NextRequest) {
   return {id, page, table}
 }
 
+
+interface ErrorType {
+  message: string,
+  data: any
+}
+
 export async function tryCatch(fun: () => any) {
   try {
     return await fun()
-  } catch (e) {
+  } catch (e: unknown) {
 
     if (e instanceof ZodError) {
       return NextResponse.json({
@@ -72,7 +78,14 @@ export async function tryCatch(fun: () => any) {
         error: e.meta,
       }, {status: 400})
     }
+    // console.log(e)
+    // @ts-ignore
+    if (e.message) {
 
+      // @ts-ignore
+      return NextResponse.json({message: e.message}, {status: 500}
+      )
+    }
     return NextResponse.json({
       message: 'error bos',
     }, {status: 500})
