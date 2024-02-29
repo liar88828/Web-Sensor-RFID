@@ -11,10 +11,10 @@ export function anggotaToExcel(data: IAnggota[]) {
       sheet: title,
       columns: [
         {label: "ID", value: "id",},
-        {label: "Nama", value: "user.name",},
-        {label: "No HP", value: "user.no_hp",},
-        {label: "Email", value: "user.email",},
-        {label: "Alamat", value: "user.alamat",},
+        {label: "Nama", value: "lomba.name",},
+        {label: "No HP", value: "lomba.no_hp",},
+        {label: "Email", value: "lomba.email",},
+        {label: "Alamat", value: "lomba.alamat",},
         {label: "Hewan", value: "hewan",},
         {label: "Warna", value: "warna",},
         {

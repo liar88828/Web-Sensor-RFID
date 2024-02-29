@@ -6,7 +6,7 @@ import Link from "next/link";
 import {useDelete} from "@/hook/useFetch";
 import {useRQSGlobalState} from "@/hook/useGlobalState";
 import {useQueryClient} from "@tanstack/react-query";
-import Loading from "@/components/elements/Loading";
+import Loading from "@/components/elements/conditional/Loading";
 
 export function Search<T>({globalFilter, setGlobalFilter, table, excel, to, detail = false}: SearchTable<T>) {
   const queryClients = useQueryClient()

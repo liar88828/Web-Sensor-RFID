@@ -1,6 +1,6 @@
 import prisma from "@/utils/prisma/client";
 import {AnggotaRelational, IAnggotaCreate, IPages, PatchAnggotaSensor} from "@/interface/type";
-import {limitDataBase} from "@/utils/nextAdd";
+import {limitDataBase} from "@/utils/next/nextAdd";
 
 class Anggota {
   async findAll(page: number = 0) {
@@ -10,7 +10,7 @@ class Anggota {
     return prisma.anggota.findMany({
       take: limit, skip: page,
       include: {
-        id_sensor: {
+        Sensors: {
           select: {kode: true}
         },
         User: {
@@ -42,7 +42,7 @@ class Anggota {
             id: true,
             hewan: true,
             warna: true,
-            id_sensor: true
+            Sensors: true
           }
         })
 
@@ -59,8 +59,8 @@ class Anggota {
   async findDontHaveUser() {
     return prisma.anggota.findMany({
       where: {
-        id_sensor: {
 
+        Sensors: {
           every: {
             id_anggota: null
           }
@@ -82,7 +82,7 @@ class Anggota {
   }
 
   async createWithUser(id: string, json: IAnggotaCreate,) {
-    console.log(id, json, 'create with user')
+    console.log(id, json, 'create with lomba')
     return prisma.anggota.create({
       data: {
         warna: json.warna,

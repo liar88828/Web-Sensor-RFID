@@ -1,6 +1,6 @@
 'use client'
 import {useGet} from "@/hook/useFetch";
-import Loading from "@/components/elements/Loading";
+import Loading from "@/components/elements/conditional/Loading";
 import {IPages} from "@/interface/type";
 import React from 'react';
 

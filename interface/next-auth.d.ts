@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth/next'
-
-import { JWT } from 'next-auth/jwt'
-
+import {JWT} from 'next-auth/jwt'
 declare module 'next-auth/jwt' {
   type JWT = User //{ role: string }
 }
@@ -17,22 +15,23 @@ declare module 'next-auth' {
   // 		role: string
   // 	}
   // }
-  interface Profile
-  {
+  interface Profile {
     email_verified: string
     email: string
   }
 
-  interface Account
-  {
+  interface Account {
 
   }
 
-  interface Session
-  {
+  interface Session {
     user: User & {
       role: string
       accessToken: string
+      id: string,
+      name: string,
+      email: string,
+
     }
     // token: {
     // 	role: string

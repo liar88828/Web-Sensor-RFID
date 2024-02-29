@@ -1,8 +1,22 @@
 {
-  "extends": [
-    "next/core-web-vitals"
-  ],
-  "plugins": [
-    "@tanstack/query"
-  ]
+//  "extends": "next/core-web-vitals",
+  "extends": ["eslint:recommended", "next"],
+  "rules": {
+    "@next/next/no-img-element": true,
+    "@next/next/no-html-link-for-pages": true,
+//    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  },
+    "plugins": [
+      "@tanstack/query"
+    ]
 }
+
+//{
+//  "extends": [
+//    "next/core-web-vitals"
+//  ],
+//  "plugins": [
+//    "@tanstack/query"
+//  ]
+//}

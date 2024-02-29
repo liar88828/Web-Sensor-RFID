@@ -1,6 +1,6 @@
 import prisma from "@/utils/prisma/client";
 import {IUser} from "@/interface/type";
-import {limitDataBase} from "@/utils/nextAdd";
+import {limitDataBase} from "@/utils/next/nextAdd";
 
 class User {
   async findAll(page: number = 0) {
@@ -49,20 +49,20 @@ class User {
               warna: true,
               hewan: true,
               id_user: true,
-              id_sensor: {
+              Sensors: {
                 select: {
                   id: true,
                   warna: true,
                   rfid: true,
                   kode: true,
-                  id_record: true
+                  Records: true
                 }
               }
             }
           }
         },
       })
-      // console.log(user)
+      // console.log(lomba)
       if (!user) {
         return null
       }
@@ -80,7 +80,7 @@ class User {
 
       const sensor = await tx.sensor.findMany({
         include: {
-          id_record: true
+          Records: true
         },
         where: {
           id_anggota: {in: id_anggota},
@@ -115,11 +115,11 @@ class User {
 
             select: {
               id: true, id_user: true, warna: true, hewan: true,
-              id_sensor: {
+              Sensors: {
 
                 select: {
                   id: true, warna: true, rfid: true, kode: true, status: true, id_anggota: true,
-                  id_record:
+                  Records:
                     {select: {id: true, tanggal: true, id_sensor: true, lokasi: true, jamMasuk: true, Sensor: true}}
 
                 }
@@ -192,6 +192,29 @@ class User {
   async deleted(id: string) {
     return prisma.user.delete({where: {id}})
   }
+
+
+  async getUserIDForUser(id: string) {
+    return prisma.user.findUnique({
+      where: {id},
+      select: {
+        name:true,
+        no_hp:true,
+        alamat:true,
+        Anggota: {
+          select: {
+            Sensors: {
+              select: {
+                Records: true
+              }
+            }
+          }
+        }
+      }
+    })
+  }
+
 }
+
 
 export const userData = new User()

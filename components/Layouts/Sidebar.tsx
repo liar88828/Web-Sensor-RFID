@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import {Icon} from '@iconify/react/dist/iconify.js'
-import {SlideList} from "@/utils/List";
+import {SlideList} from "@/utils/asset/List";
 
 
 export default function Sidebar() {

@@ -14,7 +14,7 @@ import {IdRecord} from "@/interface/profile/example1";
 
 
 export type Method = 'POST' | 'PUT'
-export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard' | 'profile'
+export  type IPages = 'anggota' | 'sensor' | 'record' | 'user' | 'dashboard' | 'profile'|'lomba'
 export type TMethod = "PUT" | "POST" | "GET" | "DELETE" | "PATCH";
 export type PropsData = 'pagination' | 'number' | ''
 export type ISize = 'sm' | 'xs' | 'md'

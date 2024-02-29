@@ -2,7 +2,7 @@ import {keepPreviousData, useMutation, useQuery, useQueryClient} from "@tanstack
 import {IPages} from "@/interface/type";
 
 import {toast} from "react-toastify";
-import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/toApi";
+import {apiCreate, apiDelete, apiGetAll, apiGetIDWithPages, apiPatch, apiUpdate} from "@/utils/next/toApi";
 
 
 const useGet = <T>(
@@ -26,7 +26,7 @@ const useGetIDWithPages = <T>(to: IPages, id: string, page: IPages) => {
   )
 }
 
-const useGetID = <T>(to: IPages, id: string, page?: IPages) => {
+const useGetID = <T>(to: IPages, id: string, page?: IPages | string) => {
   return useQuery<T>({
       queryKey: [to, id],
       queryFn: async () => apiGetIDWithPages(to, id, page),

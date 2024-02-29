@@ -1,6 +1,6 @@
 import prisma from "@/utils/prisma/client";
 import {IRecord, IRecordCreate} from "@/interface/type";
-import {limitDataBase} from "@/utils/nextAdd";
+import {limitDataBase} from "@/utils/next/nextAdd";
 
 class Record {
   async findAll(page: number = 0) {

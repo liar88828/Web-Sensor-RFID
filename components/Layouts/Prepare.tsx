@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import Loading from "@/components/elements/Loading";
+import Loading from "@/components/elements/conditional/Loading";
 
 function Prepare({loading, error, children}: {
   loading: boolean, error: boolean, children: ReactNode

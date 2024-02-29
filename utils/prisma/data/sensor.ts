@@ -1,6 +1,6 @@
 import prisma from "@/utils/prisma/client";
 import {ISensor, ISensorCreate} from "@/interface/type";
-import {limitDataBase} from "@/utils/nextAdd";
+import {limitDataBase} from "@/utils/next/nextAdd";
 
 class Sensor {
   async findAll(page: number = 0) {

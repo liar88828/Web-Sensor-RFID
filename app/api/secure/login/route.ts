@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       email: json.email,
     },
   }) as { email: string, password: string }
-  console.log(user, 'is user')
+  console.log(user, 'is lomba')
   if (user && (await comparePass(json.password, user.password))) {
     const {password, ...userWithoutPass} = user;
     const accessToken = signJwtAccessToken(userWithoutPass);
@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
     );
 }
 
-// const {password, ...data} = user
-// console.log('user exists')
+// const {password, ...data} = lomba
+// console.log('lomba exists')
 // const match = await comparePass(credentials.password, password)
 // if (!match) {
 //   return null

@@ -17,7 +17,7 @@ export interface Anggoum {
   id_user: string
   warna: string
   hewan: string
-  id_sensor: IdSensor[]
+  Sensors: IdSensor[]
 }
 
 export interface IdSensor {
@@ -27,7 +27,7 @@ export interface IdSensor {
   kode: string,
   status: string
   id_anggota: any
-  id_record: IdRecord[]
+  Records: IdRecord[]
 }
 
 export interface IdRecord {
@@ -38,6 +38,7 @@ export interface IdRecord {
   id_sensor: string,
   Sensor: null
 }
+
 type SensorRecord = { kode: string, warna: string, rfid: string }
 
 export interface SensorNull {

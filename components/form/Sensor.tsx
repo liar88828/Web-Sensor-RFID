@@ -3,7 +3,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {sensorSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
-import {SubmitButton} from "../elements/button";
+import {SubmitButton} from "../elements/button/button";
 import {FormProps, ISensorCreate} from '@/interface/type'
 import {SelectNormal} from "@/components/elements/Select";
 

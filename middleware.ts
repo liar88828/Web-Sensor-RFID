@@ -2,7 +2,9 @@ import {JWT} from 'next-auth/jwt'
 import {NextRequestWithAuth, withAuth} from 'next-auth/middleware'
 
 export default withAuth(
-  function middleware(req: NextRequestWithAuth,) {
+  function middleware(req: NextRequestWithAuth,event,) {
+    // console.log(req,'req middleware')
+    // console.log(event,'event middleware')
     // console.log(req.nextUrl.pathname)
     // console.log('test')
     // console.log(req?.nextauth.token?.role)
@@ -30,8 +32,8 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({req, token}: { token: JWT | null; req: any }) => {
-        // console.log(req)
-        // console.log(token)
+        // console.log(req,'req middleware callbacks')
+        // console.log(token,'token middleware callbacks')
         if (req.nextUrl.pathname.startsWith('/admin')) {
           return token.role === 'admin'
         }
@@ -39,6 +41,7 @@ export default withAuth(
       },
     },
   },
+
 )
 export const config = {
   matcher: [
@@ -47,6 +50,6 @@ export const config = {
     '/anggota/:path*',
     '/sensor/:path*',
     '/record/:path*',
-    '/user/:path*',
+    '/lomba/:path*',
   ]
 }

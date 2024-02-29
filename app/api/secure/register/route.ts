@@ -4,8 +4,6 @@ import {Inputs, tryCatch} from "@/utils/next/apiAdd";
 import {hashed} from "@/utils/validator/bcrypt";
 import {registerSchema} from "@/utils/validator/zod";
 
-export async function GET(req: NextRequest) {
-}
 
 export async function POST(req: NextRequest) {
   return tryCatch(async () => {
@@ -31,7 +29,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({message: "Register Success", data: {}}, {status: 200})
 
   })
-}
-
-export async function PUT(req: NextRequest) {
 }

@@ -15,7 +15,7 @@ import {IndeterminateCheckbox} from "@/components/tabels/tanstack/option/Indeter
 import {Search} from "@/components/tabels/tanstack/option/Search";
 import {IRecord, TableProps} from "@/interface/type";
 import Table from "@/components/tabels/tanstack/option/Table";
-import {formatDate, formatTime} from "@/utils/formatIndonesia";
+import {formatDate, formatTime} from "@/utils/next/formatIndonesia";
 
 export function RecordTable({data}: TableProps<IRecord[]>) {
   const [globalFilter, setGlobalFilter] = React.useState('')

@@ -3,7 +3,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {anggotaSchema,} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
-import {SubmitButton} from "../elements/button";
+import {SubmitButton} from "../elements/button/button";
 import {FormProps, IAnggotaCreate} from '@/interface/type'
 
 export default function FormAnggota({method, defaultData, fun,}: FormProps<IAnggotaCreate>) {
@@ -28,7 +28,7 @@ export default function FormAnggota({method, defaultData, fun,}: FormProps<IAngg
         <FormBody>
 
           {/*<SelectAsync<IUser>*/}
-          {/*  to={'user'}*/}
+          {/*  to={'lomba'}*/}
           {/*  keys={'id'}*/}
           {/*  values={'name'}*/}
           {/*  title={'User'}*/}

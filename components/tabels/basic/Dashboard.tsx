@@ -1,7 +1,7 @@
 import {IDataOrang} from "@/interface/type";
 import {enableCache, Icon} from "@iconify/react";
 import React from "react";
-import {indonesianPhone} from "@/utils/formatIndonesia";
+import {indonesianPhone} from "@/utils/next/formatIndonesia";
 
 
 export function TableOrang({data}: { data: IDataOrang[] }) {

@@ -72,12 +72,12 @@ model VerificationToken {
 }
 
 model Anggota {
-  id        String   @id @default(uuid())
-  hewan     String   @db.VarChar(100)
-  warna     String   @db.VarChar(10)
-  id_user   String?
-  id_sensor Sensor[]
-  User      User?    @relation(fields: [id_user], references: [id])
+  id      String   @id @default(uuid())
+  hewan   String   @db.VarChar(100)
+  warna   String   @db.VarChar(10)
+  id_user String?
+  Sensors Sensor[]
+  User    User?    @relation(fields: [id_user], references: [id])
 }
 
 model Sensor {
@@ -87,7 +87,7 @@ model Sensor {
   status     String   @default("INVALID") @db.VarChar(10)
   warna      String   @db.VarChar(10)
   id_anggota String?
-  id_record  Record[]
+  Records    Record[]
   Anggota    Anggota? @relation(fields: [id_anggota], references: [id])
 }
 

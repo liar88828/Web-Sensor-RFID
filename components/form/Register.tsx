@@ -5,7 +5,7 @@ import {signIn} from "next-auth/react";
 import {useForm} from "react-hook-form";
 import {registerSchema} from "@/utils/validator/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {nextUrl} from "@/utils/nextAdd";
+import {nextUrl} from "@/utils/next/nextAdd";
 import {FormBody, FormLayout} from "@/components/form/FormLayout";
 import {InputForm} from "@/components/elements/Input";
 import Link from "next/link";

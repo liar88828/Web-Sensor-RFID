@@ -2,8 +2,8 @@
 import React from 'react';
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
-import {formatDate, formatTime} from "@/utils/formatIndonesia";
-import {DataRecord} from "@/app/(sites)/dashboard/components/DataRecords";
+import {formatDate, formatTime} from "@/utils/next/formatIndonesia";
+import {DataRecord} from "@/app/(sites)/(admin)/dashboard/components/DataRecords";
 import {IdRecord} from "@/interface/profile/example1";
 
 

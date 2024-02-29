@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
-import {SubmitButton} from "../elements/button";
+import {SubmitButton} from "../elements/button/button";
 import {FormProps, IUser} from "@/interface/type";
 import {userSchema} from "@/utils/validator/zod";
 

@@ -75,7 +75,7 @@ export type RequiredWithoutUndefined<T> = {
 // }
 
 // type UserWithoutUndefined = RequiredWithoutUndefined<User>;
-// const user: UserWithoutUndefined = {
+// const lomba: UserWithoutUndefined = {
 //   id: 1231231,
 //   email: "asdasda",
 //   name: "asdasda"

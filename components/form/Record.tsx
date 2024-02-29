@@ -4,7 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {recordSchema} from "@/utils/validator/zod";
 import {InputForm} from "../elements/Input";
 import {FormBody, FormButton, FormLayout} from "./FormLayout";
-import {SubmitButton} from "../elements/button";
+import {SubmitButton} from "../elements/button/button";
 import {FormProps, IRecordCreate} from '@/interface/type'
 
 export default function FormRecord({method, defaultData, fun}: FormProps<IRecordCreate>) {

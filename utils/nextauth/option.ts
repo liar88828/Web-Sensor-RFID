@@ -2,7 +2,7 @@ import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 // import EmailProvider from 'next-auth/providers/email'
 import CredentialProvider from 'next-auth/providers/credentials'
-import {AuthOptions, NextAuthOptions} from 'next-auth';
+import   {AuthOptions, NextAuthOptions} from 'next-auth';
 import {PrismaAdapter} from "@auth/prisma-adapter"
 import {PrismaClient} from "@prisma/client"
 
@@ -65,13 +65,13 @@ export const options: AuthOptions = {
           });
           if (res.status === 401) return null;
           const user = await res.json();
-          // console.log(user)
+          // console.log(lomba)
 
           if (user) {
-            // Any object returned will be saved in `user` property of the JWT
+            // Any object returned will be saved in `lomba` property of the JWT
             return user;
           } else {
-            // If you return null then an error will be displayed advising the user to check their details.
+            // If you return null then an error will be displayed advising the lomba to check their details.
             return null;
           }
 
@@ -145,17 +145,17 @@ export const options: AuthOptions = {
       console.log('callbacks signIn false')
       return false
     },
-
+//will call again because in the callbacks/event loop
     async jwt({
                 token,
                 user,
                 account
               }) {
-      console.log('----------')
-      console.log(token, 'token')
-      console.log(user, 'user')
-      console.log(account, 'account')
-      console.log('----------')
+      // console.log('----------')
+      // console.log(token, 'token')
+      // console.log(user, 'user')
+      // console.log(account, 'account')
+      // console.log('----------')
 
       if (user) {
         token.id = user.id

@@ -2,7 +2,7 @@
 import React, {PropsWithChildren} from 'react';
 import Navbar from "@/components/Layouts/Navbar ";
 import {usePathname} from "next/navigation";
-import NavbarHome from "@/app/(sites)/home/components/NavbarHome";
+import NavbarHome from "@/app/(sites)/(admin)/home/components/NavbarHome";
 
 function LayoutNext({children}: PropsWithChildren) {
   // const data = useSession()

@@ -1,5 +1,5 @@
 'use client'
-import {Home} from "@/app/(sites)/home/Home";
+import {Home} from "@/app/(sites)/(admin)/home/Home";
 
 export default function Page() {
   return (

@@ -46,8 +46,8 @@ export function AnggotaTableProfile({id, data: {user, sensorNull}}: AnggotaTable
             <td>{anggota.warna}</td>
             {/*null sensor*/}
             <td>{
-              anggota.id_sensor.length !== 0
-                ? anggota.id_sensor.map(d => d.kode)
+              anggota.Sensors.length !== 0
+                ? anggota.Sensors.map(d => d.kode)
                 : <SelectJson<ISensor>
                   size={'select-xs'}
                   onChange={(e) => {
@@ -63,7 +63,7 @@ export function AnggotaTableProfile({id, data: {user, sensorNull}}: AnggotaTable
             }</td>
             {/*--------*/}
             <td>
-              {anggota.id_sensor.length === 0
+              {anggota.Sensors.length === 0
                 ?
                 <ButtonAnggotaSimpan
                   id={id}
@@ -73,7 +73,7 @@ export function AnggotaTableProfile({id, data: {user, sensorNull}}: AnggotaTable
                 :
                 <ButtonAnggotaHapus
                   user_id={id}
-                  id={anggota.id_sensor[0].id}
+                  id={anggota.Sensors[0].id}
                 />
               }
             </td>
